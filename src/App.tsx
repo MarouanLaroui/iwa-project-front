@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { Box } from '@mui/system';
 import Navbar from './components/navbar';
 import './App.css';
 
@@ -9,7 +10,10 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <Outlet />
+      <Box marginTop="3rem">
+        <Outlet />
+      </Box>
+
     </div>
   );
 }

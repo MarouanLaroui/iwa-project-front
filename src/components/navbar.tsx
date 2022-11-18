@@ -42,7 +42,7 @@ export default function Navbar() {
         justifyContent="flex-start"
         alignItems="center"
         paddingY="20px"
-        display={{ sm: 'none', lg: 'flex' }}
+        display={{ xs: 'none', lg: 'flex' }}
         gap="20px"
       >
         <Stack direction="row" alignItems="center">
