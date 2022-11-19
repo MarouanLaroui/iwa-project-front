@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
-import InputField from '../../InputField';
+import InputField from '../../input-field';
 import jobOfferSchema from './job-offer-schema';
 import SelectField from '../../selectField';
 

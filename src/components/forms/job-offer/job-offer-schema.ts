@@ -1,6 +1,5 @@
 import * as yup from 'yup';
-
-const mandarotyField: string = 'Ce champ est obligatoire.';
+import mandarotyField from '../../../helpers/yup/messages';
 
 const jobOfferSchema = yup.object({
   startingDate: yup.date().required(mandarotyField),
