@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
-import * as yup from 'yup';
 import {
   Alert, Box, Button, Stack, Typography,
 } from '@mui/material';
 import axios, { AxiosError } from 'axios';
+import { InferType } from 'yup';
 import saveTokenInLocalStorage from '../../../database/utils/local-storage';
 import InputField from '../../input-field';
-
-const mandarotyField: string = 'Ce champ est obligatoire.';
-
-const formValidationSchema = yup.object({
-  mail: yup.string().required(mandarotyField).email(),
-  password: yup.string().required(mandarotyField).min(8),
-});
+import loginSchema from './login-schema';
 
 export default function LoginForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
+  const onSubmit = (data: InferType<typeof loginSchema>) => {
+    axios
+      .post('auth/organizer/login', data)
+      .then((response) => {
+        saveTokenInLocalStorage(response.data.access_token);
+        axios.defaults.headers.common = {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        };
+        // do something
+      })
+      .catch((err: AxiosError) => {
+        setErrorMsg(err.message);
+      });
+  };
   return (
     <Formik
       initialValues={{
         mail: '',
         password: '',
       }}
-      validationSchema={formValidationSchema}
+      validationSchema={loginSchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
-        axios
-          .post('auth/organizer/login', data)
-          .then((response) => {
-            saveTokenInLocalStorage(response.data.access_token);
-            axios.defaults.headers.common = {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            };
-            // do something
-          })
-          .catch((err: AxiosError) => {
-            setErrorMsg(err.message);
-            setSubmitting(false);
-          });
+        onSubmit(data);
+        setSubmitting(false);
       }}
     >
       {(formik) => (

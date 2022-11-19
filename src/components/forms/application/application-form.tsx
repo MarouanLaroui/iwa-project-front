@@ -3,6 +3,7 @@ import { Box, Stack } from '@mui/system';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { InferType } from 'yup';
 import axios from '../../../database/axios/axios-client';
 import InputField from '../../input-field';
 import applicationSchema from './application-schema';
@@ -15,26 +16,30 @@ export default function ApplicationForm(
   const { offerId } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
+  const onSubmit = async (data: InferType<typeof applicationSchema>) => {
+    axios
+      .post('auth/organizer/login', data)
+      .then((response) => {
+        console.log(offerId);
+        console.log(response);
+        // do something
+      })
+      .catch((err: AxiosError) => {
+        setErrorMsg(err.message);
+      });
+  };
+
   return (
     <Formik
       initialValues={{
-        mail: '',
+        message: '',
         password: '',
       }}
       validationSchema={applicationSchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
-        axios
-          .post('auth/organizer/login', data)
-          .then((response) => {
-            console.log(response);
-            console.log(offerId);
-            // do something
-          })
-          .catch((err: AxiosError) => {
-            setErrorMsg(err.message);
-            setSubmitting(false);
-          });
+        await onSubmit(data);
+        setSubmitting(false);
       }}
     >
       {(formik) => (

@@ -114,14 +114,6 @@ export default function CompanyForm() {
             >
               Sign up
             </Button>
-
-            <Stack direction="row" justifyContent="center" width="100%" paddingTop="2rem">
-
-              <div>
-                {JSON.stringify(formik)}
-              </div>
-            </Stack>
-
           </Stack>
         </Box>
       )}

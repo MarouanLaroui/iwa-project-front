@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, MenuItem, Stack,
+  Alert, Box, Button, MenuItem, Stack, Typography,
 } from '@mui/material';
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import InputField from '../../input-field';
 import jobOfferSchema from './job-offer-schema';
 import SelectField from '../../select-field';
+import CheckboxField from '../../checkbox-field';
 
 export default function JobOfferForm() {
   const [errorMsg, setErrorMsg] = useState('');
@@ -86,6 +88,13 @@ export default function JobOfferForm() {
                 type="date"
                 fullWidth
               />
+
+              <InputField
+                label="salary"
+                name="salary"
+                type="number"
+                fullWidth
+              />
             </Stack>
 
             <InputField
@@ -96,23 +105,13 @@ export default function JobOfferForm() {
               multiline
               rows={4}
             />
-
-            <Stack direction="row" spacing="20px">
-              <SelectField
-                label="driving licence"
-                name="needDrivingLicence"
-              >
-                <MenuItem value="false">mandatory</MenuItem>
-                <MenuItem value="true">not mandatory</MenuItem>
-              </SelectField>
-
-              <InputField
-                label="salary"
-                name="salary"
-                type="number"
-                fullWidth
-              />
-
+            <Stack direction="column" spacing="10px" width="100%">
+              <Stack direction="row" alignItems="center">
+                <DirectionsCarFilledOutlinedIcon />
+                <Typography variant="caption">Veichule details</Typography>
+              </Stack>
+              <CheckboxField name="needDrivingLicence" label="Is driving licence needed" />
+              <CheckboxField name="hasCompanyCar" label="Do you provide a veichule" />
             </Stack>
 
             <Button
@@ -122,6 +121,9 @@ export default function JobOfferForm() {
             >
               Se connecter
             </Button>
+            <div>
+              {JSON.stringify(formik)}
+            </div>
           </Stack>
         </Box>
       )}

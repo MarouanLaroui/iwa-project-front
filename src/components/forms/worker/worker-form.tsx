@@ -118,6 +118,7 @@ export default function WorkerForm() {
                 <CheckboxField name="hasDrivingLicence" label="I have my driving licence" />
                 <CheckboxField name="hasCar" label="I have a car" />
               </Stack>
+
               <Stack direction="column" width="50%" spacing="10px">
                 <Stack direction="row" alignItems="center">
                   <AttachFileOutlinedIcon />
@@ -139,11 +140,7 @@ export default function WorkerForm() {
               >
                 Se connecter
               </Button>
-              <div>
-                {JSON.stringify(formik)}
-              </div>
             </Stack>
-
           </Stack>
         </Box>
       )}
