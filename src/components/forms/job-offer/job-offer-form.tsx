@@ -121,9 +121,6 @@ export default function JobOfferForm() {
             >
               Se connecter
             </Button>
-            <div>
-              {JSON.stringify(formik)}
-            </div>
           </Stack>
         </Box>
       )}
