@@ -6,13 +6,13 @@ import {
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
 import InputField from '../../input-field';
-import jobOfferSchema from './job-offer-schema';
+import companySchema from './company-schema';
 import SelectField from '../../select-field';
 
-export default function JobOfferForm() {
+export default function CompanyForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof jobOfferSchema>) => {
+  const onSubmit = async (data: InferType<typeof companySchema>) => {
     axios
       .post('auth/organizer/login', data)
       .then((response) => {
@@ -27,15 +27,13 @@ export default function JobOfferForm() {
   return (
     <Formik
       initialValues={{
-        startingDate: new Date(),
-        endingDate: new Date(),
-        jobType: '',
+        name: '',
+        email: '',
+        nbOfEmployees: 1,
         description: '',
-        salary: 0,
-        needDrivingLicence: false,
-        hasCompanyCar: false,
+        sector: '',
       }}
-      validationSchema={jobOfferSchema}
+      validationSchema={companySchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
@@ -45,11 +43,11 @@ export default function JobOfferForm() {
       {(formik) => (
         <Box component={Form}>
           <Stack
-            justifyContent="center"
+            alignItems="center"
             direction="column"
             spacing="10px"
             gap="10px"
-            maxWidth="50rem"
+            maxWidth="40rem"
             minWidth="300px"
           >
             {errorMsg && (
@@ -62,66 +60,68 @@ export default function JobOfferForm() {
                 {errorMsg}
               </Alert>
             )}
-
-            <Stack direction="row" spacing="30px">
-              <SelectField
-                label="job type"
-                name="jobType"
-                placeholder="pick a type"
-              >
-                <MenuItem value="CDD">CDD</MenuItem>
-                <MenuItem value="CDI">CDI</MenuItem>
-              </SelectField>
+            <Stack direction="row" spacing="30px" width="100%">
 
               <InputField
-                label="starting date"
-                name="startingDate"
-                type="date"
+                label="name"
+                name="name"
+                type="text"
                 fullWidth
               />
 
               <InputField
-                label="ending date"
-                name="endingDate"
-                type="date"
+                label="email"
+                name="email"
+                placeholder="abc@gmail.com"
+                type="email"
+                inputMode="email"
                 fullWidth
               />
+
             </Stack>
 
-            <InputField
-              label="description"
-              name="description"
-              placeholder="Enter a description here"
-              type="text"
-              multiline
-              rows={4}
-            />
+            <Stack direction="row" spacing="30px" width="100%">
 
-            <Stack direction="row" spacing="20px">
               <SelectField
-                label="driving licence"
-                name="needDrivingLicence"
+                label="sector"
+                name="sector"
               >
-                <MenuItem value="false">mandatory</MenuItem>
-                <MenuItem value="true">not mandatory</MenuItem>
+                <MenuItem value="Aviation">Aviation</MenuItem>
+                <MenuItem value="Marouan le boss">Mystère</MenuItem>
               </SelectField>
 
               <InputField
-                label="salary"
-                name="salary"
+                label="number of Employees"
+                name="nbOfEmployees"
                 type="number"
                 fullWidth
               />
 
             </Stack>
 
+            <InputField
+              label="description"
+              name="description"
+              placeholder="Enter a message you would like the company to see"
+              multiline
+              fullWidth
+              rows={4}
+            />
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
             >
-              Se connecter
+              Sign up
             </Button>
+
+            <Stack direction="row" justifyContent="center" width="100%" paddingTop="2rem">
+
+              <div>
+                {JSON.stringify(formik)}
+              </div>
+            </Stack>
+
           </Stack>
         </Box>
       )}
