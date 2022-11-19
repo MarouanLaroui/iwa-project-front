@@ -1,41 +1,44 @@
-import React, { useState } from 'react';
+import { Alert, Button } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
-import {
-  Alert, Box, Button, Stack, Typography,
-} from '@mui/material';
-import axios, { AxiosError } from 'axios';
+import React, { useState } from 'react';
 import { InferType } from 'yup';
-import saveTokenInLocalStorage from '../../../database/utils/local-storage';
+import axios from '../../../database/axios/axios-client';
 import InputField from '../../input-field';
-import loginSchema from './login-schema';
+import applicationSchema from './application-schema';
 
-export default function LoginForm() {
+export default function ApplicationForm(
+  props:{
+    offerId: number,
+  },
+) {
+  const { offerId } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = (data: InferType<typeof loginSchema>) => {
+  const onSubmit = async (data: InferType<typeof applicationSchema>) => {
     axios
       .post('auth/organizer/login', data)
       .then((response) => {
-        saveTokenInLocalStorage(response.data.access_token);
-        axios.defaults.headers.common = {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        };
+        console.log(offerId);
+        console.log(response);
         // do something
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
       });
   };
+
   return (
     <Formik
       initialValues={{
-        mail: '',
+        message: '',
         password: '',
       }}
-      validationSchema={loginSchema}
+      validationSchema={applicationSchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
-        onSubmit(data);
+        await onSubmit(data);
         setSubmitting(false);
       }}
     >
@@ -59,27 +62,19 @@ export default function LoginForm() {
             )}
 
             <InputField
-              label="mail"
-              name="mail"
-              placeholder="abc@gmail.com"
-              type="email"
-              inputMode="email"
+              label="message"
+              name="message"
+              placeholder="Enter a message you would like the company to see"
+              multiline
+              rows={4}
             />
-            <InputField
-              label="password"
-              name="password"
-              placeholder="password"
-              type="password"
-            />
-            <Typography variant="caption" color="text.secondary">
-              Mot de passe oublié ? Cliquez ici !
-            </Typography>
+
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
             >
-              Se connecter
+              Send
             </Button>
           </Stack>
         </Box>

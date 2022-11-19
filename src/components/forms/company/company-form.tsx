@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, MenuItem, Stack, Typography,
+  Alert, Box, Button, MenuItem, Stack,
 } from '@mui/material';
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
-import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import InputField from '../../input-field';
-import jobOfferSchema from './job-offer-schema';
+import companySchema from './company-schema';
 import SelectField from '../../select-field';
-import CheckboxField from '../../checkbox-field';
 
-export default function JobOfferForm() {
+export default function CompanyForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof jobOfferSchema>) => {
+  const onSubmit = async (data: InferType<typeof companySchema>) => {
     axios
       .post('auth/organizer/login', data)
       .then((response) => {
@@ -29,15 +27,13 @@ export default function JobOfferForm() {
   return (
     <Formik
       initialValues={{
-        startingDate: new Date(),
-        endingDate: new Date(),
-        jobType: '',
+        name: '',
+        email: '',
+        nbOfEmployees: 1,
         description: '',
-        salary: 0,
-        needDrivingLicence: false,
-        hasCompanyCar: false,
+        sector: '',
       }}
-      validationSchema={jobOfferSchema}
+      validationSchema={companySchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
@@ -47,11 +43,11 @@ export default function JobOfferForm() {
       {(formik) => (
         <Box component={Form}>
           <Stack
-            justifyContent="center"
+            alignItems="center"
             direction="column"
             spacing="10px"
             gap="10px"
-            maxWidth="50rem"
+            maxWidth="40rem"
             minWidth="300px"
           >
             {errorMsg && (
@@ -64,62 +60,59 @@ export default function JobOfferForm() {
                 {errorMsg}
               </Alert>
             )}
+            <Stack direction="row" spacing="30px" width="100%">
 
-            <Stack direction="row" spacing="30px">
+              <InputField
+                label="name"
+                name="name"
+                type="text"
+                fullWidth
+              />
+
+              <InputField
+                label="email"
+                name="email"
+                placeholder="abc@gmail.com"
+                type="email"
+                inputMode="email"
+                fullWidth
+              />
+
+            </Stack>
+
+            <Stack direction="row" spacing="30px" width="100%">
+
               <SelectField
-                label="job type"
-                name="jobType"
-                placeholder="pick a type"
+                label="sector"
+                name="sector"
               >
-                <MenuItem value="CDD">CDD</MenuItem>
-                <MenuItem value="CDI">CDI</MenuItem>
+                <MenuItem value="Aviation">Aviation</MenuItem>
+                <MenuItem value="Marouan le boss">Mystère</MenuItem>
               </SelectField>
 
               <InputField
-                label="starting date"
-                name="startingDate"
-                type="date"
-                fullWidth
-              />
-
-              <InputField
-                label="ending date"
-                name="endingDate"
-                type="date"
-                fullWidth
-              />
-
-              <InputField
-                label="salary"
-                name="salary"
+                label="number of Employees"
+                name="nbOfEmployees"
                 type="number"
                 fullWidth
               />
+
             </Stack>
 
             <InputField
               label="description"
               name="description"
-              placeholder="Enter a description here"
-              type="text"
+              placeholder="Enter a message you would like the company to see"
               multiline
+              fullWidth
               rows={4}
             />
-            <Stack direction="column" spacing="10px" width="100%">
-              <Stack direction="row" alignItems="center">
-                <DirectionsCarFilledOutlinedIcon />
-                <Typography variant="caption">Veichule details</Typography>
-              </Stack>
-              <CheckboxField name="needDrivingLicence" label="Is driving licence needed" />
-              <CheckboxField name="hasCompanyCar" label="Do you provide a veichule" />
-            </Stack>
-
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
             >
-              Se connecter
+              Sign up
             </Button>
           </Stack>
         </Box>
