@@ -6,6 +6,7 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Stack } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -28,9 +29,9 @@ export default function Navbar() {
   };
 
   const pages = [
-    { name: 'Accueil', link: '' },
-    { name: 'Trouver une entreprise', link: '' },
-    { name: 'Trouver un job', link: '' },
+    { name: 'Accueil', link: '/' },
+    { name: 'Chercher une entreprise', link: '/company/search' },
+    { name: 'Chercher un job', link: '/job/search' },
   ];
 
   return (
@@ -56,14 +57,15 @@ export default function Navbar() {
         <Grid xs container direction="row" gap="10px" alignItems="center">
           {pages.map(
             (page) => (
-              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => {}}>
-                {page.name}
+
+              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => { }}>
+                <Link style={{ textDecoration: 'none' }} to={page.link}>{page.name}</Link>
               </Button>
             ),
           )}
         </Grid>
-        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>Devenir client</Button>
-        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>Se connecter</Button>
+        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>Connexion travailleur</Button>
+        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>Connexion entreprise</Button>
       </Grid>
 
       {/* Mobile navbar */}
