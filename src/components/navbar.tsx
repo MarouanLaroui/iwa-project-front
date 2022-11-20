@@ -34,8 +34,8 @@ export default function Navbar() {
 
   const pages = [
     { name: t('home'), link: HOME_ROUTE },
-    { name: t('search-job'), link: COMPANY_SEARCH_ROUTE },
-    { name: t('search-company'), link: OFFER_SEARCH_ROUTE },
+    { name: t('search-job'), link: OFFER_SEARCH_ROUTE },
+    { name: t('search-company'), link: COMPANY_SEARCH_ROUTE },
   ];
 
   const navigation = useNavigate();

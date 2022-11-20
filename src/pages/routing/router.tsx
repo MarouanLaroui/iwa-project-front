@@ -13,9 +13,10 @@ import OfferDetailsPage from '../offer-details-page';
 import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_CREATE_ROUTE,
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE, WORKER_SIGNUP_ROUTE,
-  COMPANY_SIGNUP_ROUTE, COMPANY_LOGIN_ROUTE, WORKER_LOGIN_ROUTE,
+  COMPANY_SIGNUP_ROUTE, COMPANY_LOGIN_ROUTE, WORKER_LOGIN_ROUTE, OFFER_SEARCH_ROUTE,
 } from './routes';
 import App from '../../App';
+import SearchOfferPage from '../search-offer-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path={OFFER_CREATE_ROUTE} element={<JobOfferForm />} />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route path={OFFER_APPLY_ROUTE} element={<ApplicationForm offerId={1} />} />
+      <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
       <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm />} />
       <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignupForm />} />
     </Route>,
