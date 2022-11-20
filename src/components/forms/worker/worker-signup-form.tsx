@@ -11,7 +11,7 @@ import InputField from '../../input-field';
 import workerSchema from './worker-schema';
 import CheckboxField from '../../checkbox-field';
 
-export default function WorkerForm() {
+export default function WorkerSignupForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (data: InferType<typeof workerSchema>) => {
