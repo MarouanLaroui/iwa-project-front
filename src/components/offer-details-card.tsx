@@ -7,8 +7,8 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import DescriptionIcon from '@mui/icons-material/Description';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Offer } from '../types/offer';
 import TypographyWithIcon from './typography-with-icon';
+import { Offer } from '../types/offer/Offer';
 
 type Props = {
   offer: Offer

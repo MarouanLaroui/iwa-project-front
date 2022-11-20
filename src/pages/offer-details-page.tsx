@@ -1,9 +1,10 @@
 import React from 'react';
 import OfferDetailsCard from '../components/offer-details-card';
-import { Offer } from '../types/offer';
+import { Offer } from '../types/offer/Offer';
 
 export default function LandingPage() {
   const offer: Offer = {
+    offerId: '1',
     startingDate: new Date(),
     endDate: new Date(),
     description: 'Ceci est la description',

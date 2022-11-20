@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import InputField from '../../input-field';
 import companySchema from './company-schema';
 import SelectField from '../../select-field';
+import usePost from '../../../hooks/generic/usePost';
 
 export default function CompanySignupForm() {
   const [errorMsg, setErrorMsg] = useState('');
@@ -22,6 +23,10 @@ export default function CompanySignupForm() {
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
       });
+  };
+
+  const onClickTest = () => {
+    usePost('', {});
   };
 
   return (
@@ -111,6 +116,7 @@ export default function CompanySignupForm() {
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
+              onClick={onClickTest}
             >
               Sign up
             </Button>
