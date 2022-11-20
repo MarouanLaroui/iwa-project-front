@@ -9,7 +9,7 @@ import InputField from '../../input-field';
 import companySchema from './company-schema';
 import SelectField from '../../select-field';
 
-export default function CompanyForm() {
+export default function CompanySignupForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (data: InferType<typeof companySchema>) => {

@@ -6,11 +6,15 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Stack } from '@mui/system';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_SEARCH_ROUTE } from '../pages/routing/routes';
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const { t } = useTranslation();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -29,10 +33,12 @@ export default function Navbar() {
   };
 
   const pages = [
-    { name: 'Accueil', link: '/' },
-    { name: 'Chercher une entreprise', link: '/company/search' },
-    { name: 'Chercher un job', link: '/job/search' },
+    { name: t('home'), link: HOME_ROUTE },
+    { name: t('search-job'), link: COMPANY_SEARCH_ROUTE },
+    { name: t('search-company'), link: OFFER_SEARCH_ROUTE },
   ];
+
+  const navigation = useNavigate();
 
   return (
     <>
@@ -58,14 +64,14 @@ export default function Navbar() {
           {pages.map(
             (page) => (
 
-              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => { }}>
-                <Link style={{ textDecoration: 'none' }} to={page.link}>{page.name}</Link>
+              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => { navigation(page.link); }}>
+                {page.name}
               </Button>
             ),
           )}
         </Grid>
-        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>Connexion travailleur</Button>
-        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>Connexion entreprise</Button>
+        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>{t('worker-login')}</Button>
+        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>{t('company-login')}</Button>
       </Grid>
 
       {/* Mobile navbar */}
@@ -107,9 +113,12 @@ export default function Navbar() {
             {pages.map((page) => (
               <MenuItem
                 key={page.name}
-                onClick={handleCloseNavMenu}
+                onClick={() => {
+                  navigation(page.link);
+                  handleCloseNavMenu();
+                }}
               >
-                <Typography textAlign="center">{page.name}</Typography>
+                {page.name}
               </MenuItem>
             ))}
           </Menu>
@@ -152,13 +161,13 @@ export default function Navbar() {
             <MenuItem
               onClick={handleCloseUserMenu}
             >
-              <Typography textAlign="center">Se connecter</Typography>
+              <Typography textAlign="center">{t('worker-login')}</Typography>
             </MenuItem>
 
             <MenuItem
               onClick={handleCloseUserMenu}
             >
-              <Typography textAlign="center">Devenir client</Typography>
+              <Typography textAlign="center">{t('company-login')}</Typography>
             </MenuItem>
 
           </Menu>
