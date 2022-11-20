@@ -1,4 +1,5 @@
 type Company = {
+  id: String
   name: String;
   email: String;
   employeesNumber: String;

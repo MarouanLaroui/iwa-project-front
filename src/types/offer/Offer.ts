@@ -2,6 +2,7 @@ export type ContractType = 'CDI' | 'CDD';
 export type JobType = 'FULL_TIME' | 'PARTIAL_TIME';
 
 export type Offer = {
+  offerId: String
   startingDate: Date
   endDate: Date
   description: String
