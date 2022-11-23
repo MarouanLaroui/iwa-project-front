@@ -63,8 +63,11 @@ export default function Navbar() {
         <Stack direction="row" gap="10px" alignItems="center" width="100%" justifyContent="space-between" marginLeft="20px">
           {pages.map(
             (page) => (
-
-              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => { navigation(page.link); }}>
+              <Button
+                key={`${page.name}button`}
+                sx={{ color: 'black', fontWeight: 'bold' }}
+                onClick={() => { navigation(page.link); }}
+              >
                 {page.name}
               </Button>
             ),
@@ -128,7 +131,7 @@ export default function Navbar() {
           </Menu>
         </Box>
 
-        <Grid xs container direction="row" alignItems="center" justifyContent="center">
+        <Grid item xs alignItems="center" justifyContent="center">
           <WorkOutlineIcon fontSize="large" />
           <Stack direction="column">
             <Typography variant="h4" fontWeight="bold">YourJob</Typography>
