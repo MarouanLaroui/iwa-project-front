@@ -1,12 +1,15 @@
-import { Stack } from '@mui/system';
-import React, { useState } from 'react';
-import OfferSearchBar from '../components/search-bars/offer-search-bar';
+import { Grid, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import OfferDetailsCard from '../components/offer-details-card';
 import { useFetchOffers } from '../hooks/request/offerHooks';
+import OfferSearchBar from '../components/search-bars/offer-search-bar';
 import { Offer, OfferFilters } from '../types/offer/Offer';
 
-export default function SearchOffersPage() {
+export default function SearchOfferPage() {
+  const [offers, , isLoading, error] = useFetchOffers();
+  const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
   const [filters, setFilters] = useState<OfferFilters>({});
-  const [offers,,isOffersLoading, error] = useFetchOffers();
 
   const filterOffers = (offersToFilter: Offer[]) => offersToFilter.filter((offer) => {
     if (filters.contractType && filters.contractType !== offer.contractType) return false;
@@ -14,7 +17,11 @@ export default function SearchOffersPage() {
     return true;
   });
 
-  if (isOffersLoading) {
+  useEffect(() => {
+    setFilteredOffers(filterOffers(offers));
+  }, [filters]);
+
+  if (isLoading) {
     return <div>loading</div>;
   }
 
@@ -24,12 +31,30 @@ export default function SearchOffersPage() {
   }
 
   return (
-    <Stack direction="column">
-      <div>Search company</div>
+    <Stack>
       <OfferSearchBar setFilters={setFilters} />
-      {
-          offers.length > 0 && filterOffers(offers).map((offer) => <div>{offer.offerId}</div>)
+      <Typography
+        variant="h3"
+        marginBottom={5}
+      >
+        Voici toutes nos supers offres
+
+      </Typography>
+      <Grid
+        container
+        direction="row"
+        gap={2}
+        alignItems="center"
+        justifyContent="center"
+      >
+        {
+          filteredOffers.map((offer) => (
+            <Box width={500}>
+              <OfferDetailsCard offer={offer} />
+            </Box>
+          ))
       }
+      </Grid>
     </Stack>
   );
 }
