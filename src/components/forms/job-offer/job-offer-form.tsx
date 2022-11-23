@@ -3,20 +3,23 @@ import { Form, Formik } from 'formik';
 import {
   Alert, Box, Button, MenuItem, Stack, Typography,
 } from '@mui/material';
-import { InferType } from 'yup';
-import axios, { AxiosError } from 'axios';
+// import { InferType } from 'yup';
+// import axios, { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
-import InputField from '../../input-field';
+import { AxiosError } from 'axios';
+import InputField from '../../form-fields/input-field';
 import jobOfferSchema from './job-offer-schema';
-import SelectField from '../../select-field';
-import CheckboxField from '../../checkbox-field';
+import SelectField from '../../form-fields/select-field';
+import CheckboxField from '../../form-fields/checkbox-field';
+import { ContractType, JobType } from '../../../types/offer/Offer';
+import { createOffer } from '../../../hooks/request/offerHooks';
+import OfferDTO from '../../../types/offer/OfferDTO';
 
 export default function JobOfferForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof jobOfferSchema>) => {
-    axios
-      .post('auth/organizer/login', data)
+  const onSubmit = (offerToCreate: OfferDTO) => {
+    createOffer(offerToCreate)
       .then((response) => {
         console.log(response);
         // do something
@@ -29,12 +32,16 @@ export default function JobOfferForm() {
   return (
     <Formik
       initialValues={{
+        companyId: '',
         startingDate: new Date(),
-        endingDate: new Date(),
-        jobType: '',
+        endDate: new Date(),
+        jobType: JobType.FULL_TIME,
+        contractType: ContractType.CDD,
+        title: '',
         description: '',
+        location: '',
         salary: 0,
-        needDrivingLicence: false,
+        needDrivingLicense: false,
         hasCompanyCar: false,
       }}
       validationSchema={jobOfferSchema}
@@ -110,7 +117,7 @@ export default function JobOfferForm() {
                 <DirectionsCarFilledOutlinedIcon />
                 <Typography variant="caption">Veichule details</Typography>
               </Stack>
-              <CheckboxField name="needDrivingLicence" label="Is driving licence needed" />
+              <CheckboxField name="needDrivingLicense" label="Is driving licence needed" />
               <CheckboxField name="hasCompanyCar" label="Do you provide a veichule" />
             </Stack>
 

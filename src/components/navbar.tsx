@@ -8,7 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Stack } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_SEARCH_ROUTE } from '../pages/routing/routes';
+import {
+  HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE, COMPANY_LOGIN_ROUTE,
+} from '../pages/routing/routes';
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -43,14 +45,14 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop navbar */}
-      <Grid
-        container
+      <Stack
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
         paddingY="20px"
         display={{ xs: 'none', lg: 'flex' }}
         gap="20px"
+        width="100%"
       >
         <Stack direction="row" alignItems="center">
           <WorkOutlineIcon fontSize="large" />
@@ -60,19 +62,40 @@ export default function Navbar() {
           </Stack>
         </Stack>
 
-        <Grid xs container direction="row" gap="10px" alignItems="center">
+        <Stack direction="row" gap="10px" alignItems="center" width="100%" justifyContent="space-between" marginLeft="20px">
           {pages.map(
             (page) => (
-
-              <Button key={`${page.name}button`} sx={{ color: 'black', fontWeight: 'bold' }} onClick={() => { navigation(page.link); }}>
+              <Button
+                key={`${page.name}button`}
+                sx={{ color: 'black', fontWeight: 'bold' }}
+                onClick={() => { navigation(page.link); }}
+              >
                 {page.name}
               </Button>
             ),
           )}
-        </Grid>
-        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>{t('worker-login')}</Button>
-        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>{t('company-login')}</Button>
-      </Grid>
+          <Stack direction="row" gap="30px">
+            <Button
+              variant="contained"
+              size="medium"
+              sx={{ fontWeight: 'bold' }}
+              onClick={() => navigation(WORKER_LOGIN_ROUTE)}
+            >
+              {t('worker-login')}
+            </Button>
+            <Button
+              variant="outlined"
+              size="medium"
+              sx={{ fontWeight: 'bold' }}
+              onClick={() => navigation(COMPANY_LOGIN_ROUTE)}
+            >
+              {t('company-login')}
+            </Button>
+          </Stack>
+
+        </Stack>
+
+      </Stack>
 
       {/* Mobile navbar */}
       <Grid
@@ -124,7 +147,7 @@ export default function Navbar() {
           </Menu>
         </Box>
 
-        <Grid xs container direction="row" alignItems="center" justifyContent="center">
+        <Grid item xs alignItems="center" justifyContent="center">
           <WorkOutlineIcon fontSize="large" />
           <Stack direction="column">
             <Typography variant="h4" fontWeight="bold">YourJob</Typography>
@@ -159,13 +182,19 @@ export default function Navbar() {
             onClose={handleCloseUserMenu}
           >
             <MenuItem
-              onClick={handleCloseUserMenu}
+              onClick={() => {
+                handleCloseUserMenu();
+                navigation(WORKER_LOGIN_ROUTE);
+              }}
             >
               <Typography textAlign="center">{t('worker-login')}</Typography>
             </MenuItem>
 
             <MenuItem
-              onClick={handleCloseUserMenu}
+              onClick={() => {
+                handleCloseUserMenu();
+                navigation(COMPANY_LOGIN_ROUTE);
+              }}
             >
               <Typography textAlign="center">{t('company-login')}</Typography>
             </MenuItem>

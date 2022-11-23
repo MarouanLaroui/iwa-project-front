@@ -6,8 +6,8 @@ import usePost from '../generic/usePost';
 
 const useFetchCompany = (id: string) => useFetch<Company>(`companies/${id}`);
 
-const useFetchCompanies = () => useFetchMany<Company>('companies');
+const useFetchCompanies = () => useFetchMany<Company>('companies/');
 
-const createCompanies = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies', companyToCreate);
+const createCompanies = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies/', companyToCreate);
 
 export { useFetchCompanies, useFetchCompany, createCompanies };

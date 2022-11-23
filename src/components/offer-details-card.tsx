@@ -1,12 +1,13 @@
 import {
   Box, Paper, Stack, Typography,
 } from '@mui/material';
-import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
 import BadgeIcon from '@mui/icons-material/Badge';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import DescriptionIcon from '@mui/icons-material/Description';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import TypographyWithIcon from './typography-with-icon';
 import { Offer } from '../types/offer/Offer';
 
@@ -16,8 +17,15 @@ type Props = {
 
 export default function OfferDetailsCard({ offer }: Props) {
   const { t } = useTranslation();
+
+  const navigation = useNavigate();
+
+  function onClick() {
+    navigation(`/offer/details/${offer.offerId}`);
+  }
+
   return (
-    <Box component={Paper} elevation={2} maxWidth="450px" borderRadius="5px">
+    <Box component={Paper} elevation={2} width="100%" borderRadius="5px" onClick={() => onClick()}>
       <Stack
         direction="column"
         alignItems="flex-start"
@@ -25,16 +33,19 @@ export default function OfferDetailsCard({ offer }: Props) {
         paddingY="20px"
         gap="5px"
       >
-        <Typography style={{ fontWeight: 'bold' }}>{t('offer-details')}</Typography>
+        <Typography variant="h5" style={{ fontWeight: 'bold' }}>{offer.title}</Typography>
         <Typography>{offer.description}</Typography>
-        <TypographyWithIcon text={t('contract-type', { contractType: offer.contractType })} icon={<DescriptionIcon />} />
-        <TypographyWithIcon text={t('monthly-salary', { salary: offer.salary })} icon={<MonetizationOnIcon />} />
-        {offer.hasCompanyCar && (
-          <TypographyWithIcon text={t('company-car-included')} icon={<DirectionsCarFilledIcon />} />
-        )}
-        {offer.needDrivingLicense && (
+        <Stack
+          direction="row"
+          gap="15px"
+        >
+          <TypographyWithIcon text={offer.contractType} icon={<WorkOutlineOutlinedIcon />} />
+          <TypographyWithIcon text={`${offer.salary} euros/${t('month')}`} icon={<EuroOutlinedIcon />} />
+          <TypographyWithIcon text={`${offer.location}`} icon={<LocationOnOutlinedIcon />} />
+          {offer.needDrivingLicense && (
           <TypographyWithIcon text={t('driving-license-required')} icon={<BadgeIcon />} />
-        )}
+          )}
+        </Stack>
       </Stack>
     </Box>
   );
