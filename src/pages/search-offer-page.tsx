@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import OfferDetailsCard from '../components/offer-details-card';
@@ -13,14 +13,8 @@ export default function SearchOfferPage() {
   const [filters, setFilters] = useState<OfferFilters>({});
 
   const filterOffers = (offersToFilter: Offer[]) => offersToFilter.filter((offer) => {
-    if (filters.contractType && filters.contractType !== offer.contractType) {
-      console.log('here');
-      return false;
-    }
-    if (filters.jobType && filters.jobType !== offer.jobType) {
-      console.log('here 2');
-      return false;
-    }
+    if (filters.contractType && filters.contractType !== offer.contractType) return false;
+    if (filters.jobType && filters.jobType !== offer.jobType) return false;
     return true;
   });
 
@@ -33,30 +27,22 @@ export default function SearchOfferPage() {
   }
 
   if (error) {
-    console.log(offers);
     return <div>error</div>;
   }
 
   return (
-    <Stack>
+    <Stack width="100%" gap="3rem">
       <OfferSearchBar setFilters={setFilters} />
-      <Typography
-        variant="h3"
-        marginBottom={5}
-      >
-        Voici toutes nos supers offres
-
-      </Typography>
       <Grid
         container
         direction="row"
         gap={2}
         alignItems="center"
-        justifyContent="center"
+        justifyContent="flex-start"
       >
         {
           filteredOffers.map((offer, index) => (
-            <Box width={500} key={index}>
+            <Box width={400} key={index}>
               <OfferDetailsCard offer={offer} />
             </Box>
           ))
