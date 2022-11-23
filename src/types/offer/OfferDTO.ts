@@ -1,5 +1,5 @@
 import { Offer } from './Offer';
 
-type OfferDTO = Omit<Offer, 'offerId' | 'creationDate'>;
+type OfferDTO = Omit<Offer, 'offerId' | 'creationDate' | 'ledToJob' | 'creationDate'>;
 
 export default OfferDTO;
