@@ -43,14 +43,14 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop navbar */}
-      <Grid
-        container
+      <Stack
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
         paddingY="20px"
         display={{ xs: 'none', lg: 'flex' }}
         gap="20px"
+        width="100%"
       >
         <Stack direction="row" alignItems="center">
           <WorkOutlineIcon fontSize="large" />
@@ -60,7 +60,7 @@ export default function Navbar() {
           </Stack>
         </Stack>
 
-        <Grid xs container direction="row" gap="10px" alignItems="center">
+        <Stack direction="row" gap="10px" alignItems="center" width="100%" justifyContent="space-between" marginLeft="20px">
           {pages.map(
             (page) => (
 
@@ -69,10 +69,14 @@ export default function Navbar() {
               </Button>
             ),
           )}
-        </Grid>
-        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold', color: 'F8A205' }}>{t('worker-login')}</Button>
-        <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>{t('company-login')}</Button>
-      </Grid>
+          <Stack direction="row" gap="30px">
+            <Button variant="contained" size="medium" sx={{ fontWeight: 'bold', color: 'F8A205' }}>{t('worker-login')}</Button>
+            <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>{t('company-login')}</Button>
+          </Stack>
+
+        </Stack>
+
+      </Stack>
 
       {/* Mobile navbar */}
       <Grid
