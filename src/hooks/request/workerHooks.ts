@@ -6,6 +6,6 @@ const useFetchWorker = (workerId: string) => useFetchMany<Worker>(`workers/${wor
 
 const useFetchWorkers = () => useFetchMany<Worker>('workers/');
 
-const createWorker = (workerToCreate: WorkerDTO) => usePost<WorkerDTO, Worker>('workers', workerToCreate);
+const createWorker = (workerToCreate: WorkerDTO) => usePost<WorkerDTO, Worker>('workers/', workerToCreate);
 
 export { useFetchWorker, useFetchWorkers, createWorker };

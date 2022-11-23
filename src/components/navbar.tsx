@@ -70,7 +70,7 @@ export default function Navbar() {
             ),
           )}
         </Grid>
-        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold' }}>{t('worker-login')}</Button>
+        <Button variant="contained" size="medium" sx={{ fontWeight: 'bold', color: 'F8A205' }}>{t('worker-login')}</Button>
         <Button variant="outlined" size="medium" sx={{ fontWeight: 'bold' }}>{t('company-login')}</Button>
       </Grid>
 

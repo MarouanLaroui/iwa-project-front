@@ -10,7 +10,7 @@ type Props = {
 
 export default function TypographyWithIcon({ text, icon }: Props) {
   return (
-    <Stack direction="row" justifyContent="center" gap="10px">
+    <Stack direction="row" justifyContent="center" gap="3px">
       {icon}
       <Typography>{text}</Typography>
     </Stack>

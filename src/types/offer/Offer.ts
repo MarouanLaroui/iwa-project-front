@@ -9,14 +9,17 @@ export enum JobType {
 
 export type Offer = {
   offerId: String
+  companyId: String
   startingDate: Date
   endDate: Date
+  title: String
   description: String
   contractType: ContractType
   jobType: JobType
   salary: number
   hasCompanyCar: boolean
   needDrivingLicense: boolean
+  location: String
   ledToJob: boolean
   creationDate: Date
 };
