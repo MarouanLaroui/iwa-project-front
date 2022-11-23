@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { InferType } from 'yup';
 import axios from '../../../database/axios/axios-client';
-import InputField from '../../input-field';
+import InputField from '../../form-fields/input-field';
 import applicationSchema from './application-schema';
 
 export default function ApplicationForm(

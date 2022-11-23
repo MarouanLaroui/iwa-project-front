@@ -5,9 +5,9 @@ import {
 } from '@mui/material';
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
-import InputField from '../../input-field';
+import InputField from '../../form-fields/input-field';
 import companySchema from './company-schema';
-import SelectField from '../../select-field';
+import SelectField from '../../form-fields/select-field';
 import usePost from '../../../hooks/generic/usePost';
 
 export default function CompanySignupForm() {

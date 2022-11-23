@@ -3,35 +3,36 @@ import { Form, Formik } from 'formik';
 import {
   Alert, Box, Button, MenuItem, Stack, Typography,
 } from '@mui/material';
-import { InferType } from 'yup';
-import axios, { AxiosError } from 'axios';
+// import { InferType } from 'yup';
+// import axios, { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
-import InputField from '../../input-field';
+import InputField from '../../form-fields/input-field';
 import jobOfferSchema from './job-offer-schema';
-import SelectField from '../../select-field';
-import CheckboxField from '../../checkbox-field';
+import SelectField from '../../form-fields/select-field';
+import CheckboxField from '../../form-fields/checkbox-field';
+import { JobType } from '../../../types/offer/Offer';
 
 export default function JobOfferForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof jobOfferSchema>) => {
-    axios
-      .post('auth/organizer/login', data)
-      .then((response) => {
-        console.log(response);
-        // do something
-      })
-      .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
-      });
-  };
+  // const onSubmit = async (data: InferType<typeof jobOfferSchema>) => {
+  //   axios
+  //     .post('auth/organizer/login', data)
+  //     .then((response) => {
+  //       console.log(response);
+  //       // do something
+  //     })
+  //     .catch((err: AxiosError) => {
+  //       setErrorMsg(err.message);
+  //     });
+  // };
 
   return (
     <Formik
       initialValues={{
         startingDate: new Date(),
         endingDate: new Date(),
-        jobType: '',
+        jobType: JobType.FULL_TIME,
         description: '',
         salary: 0,
         needDrivingLicence: false,
@@ -40,7 +41,7 @@ export default function JobOfferForm() {
       validationSchema={jobOfferSchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
-        await onSubmit(data);
+        // await onSubmit(und);
         setSubmitting(false);
       }}
     >

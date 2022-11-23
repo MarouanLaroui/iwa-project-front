@@ -5,8 +5,8 @@ import usePost from '../generic/usePost';
 
 const useFetchOffer = (id: string) => useFetchMany<Offer>(`offers/${id}`);
 
-const useFetchOffers = () => useFetchMany<Offer>('offers');
+const useFetchOffers = () => useFetchMany<Offer>('offers/');
 
-const createOffer = (offerToPost:OfferDTO) => usePost<OfferDTO, Offer>('offers', offerToPost);
+const createOffer = (offerToPost:OfferDTO) => usePost<OfferDTO, Offer>('offers/', offerToPost);
 
 export { useFetchOffer, useFetchOffers, createOffer };

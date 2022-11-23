@@ -11,7 +11,7 @@ export default function useFetchMany<T>(
   useEffect(() => {
     (async function () {
       axios
-        .get<T[]>(process.env.REACT_APP_IWA_API_URL + path)
+        .get<T[]>(`http://localhost:8080/${path}`)
         .then((response) => setData(response.data))
         .catch((err) => {
           setError(err);

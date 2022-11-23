@@ -1,21 +1,13 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { InputAdornment, TextField } from '@mui/material';
+import { InputAdornment, TextField, TextFieldProps } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchBar(props:{
-  label?:string,
-  placeholder?: string,
-  defaultValue?: string
-
-}) {
-  const { label, placeholder, defaultValue } = props;
+export default function SearchBar(props: TextFieldProps) {
   return (
     <TextField
       id="input-with-icon-textfield"
-      label={label}
-      defaultValue={defaultValue}
-      placeholder={placeholder}
-      fullWidth
+      {...props}
       variant="outlined"
       InputProps={{
         startAdornment: (

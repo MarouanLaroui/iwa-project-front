@@ -6,7 +6,7 @@ import {
 import axios, { AxiosError } from 'axios';
 import { InferType } from 'yup';
 import saveTokenInLocalStorage from '../../../database/utils/local-storage';
-import InputField from '../../input-field';
+import InputField from '../../form-fields/input-field';
 import loginSchema from './login-schema';
 
 export default function LoginForm() {

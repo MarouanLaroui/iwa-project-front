@@ -7,9 +7,9 @@ import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
-import InputField from '../../input-field';
+import InputField from '../../form-fields/input-field';
 import workerSchema from './worker-schema';
-import CheckboxField from '../../checkbox-field';
+import CheckboxField from '../../form-fields/checkbox-field';
 
 export default function WorkerSignupForm() {
   const [errorMsg, setErrorMsg] = useState('');
