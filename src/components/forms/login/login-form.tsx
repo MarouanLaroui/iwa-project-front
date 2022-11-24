@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, Stack, Typography,
+  Alert, Box, Button, Stack,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import InputField from '../../form-fields/input-field';
 import loginSchema from './login-schema';
 import LoginDTO from '../../../types/company/LoginDTO';
@@ -13,6 +14,7 @@ type Props = {
 
 export default function LoginForm({ onSubmit } : Props) {
   const [errorMsg, setErrorMsg] = useState('');
+  const { t } = useTranslation();
 
   return (
     <Formik
@@ -47,27 +49,24 @@ export default function LoginForm({ onSubmit } : Props) {
             )}
 
             <InputField
-              label="email"
+              label={t('email')}
               name="email"
               placeholder="abc@gmail.com"
               type="email"
               inputMode="email"
             />
             <InputField
-              label="password"
+              label={t('password')}
               name="password"
               placeholder="password"
               type="password"
             />
-            <Typography variant="caption" color="text.secondary">
-              Mot de passe oublié ? Cliquez ici !
-            </Typography>
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
             >
-              Se connecter
+              {t('login')}
             </Button>
           </Stack>
         </Box>
