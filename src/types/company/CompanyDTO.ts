@@ -1,4 +1,4 @@
-import Company from './Company';
+import { Company } from './Company';
 
 type CompanyDTO = Omit<Company, 'id'> & {
   password: string

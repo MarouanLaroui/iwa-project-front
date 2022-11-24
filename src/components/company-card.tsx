@@ -3,10 +3,16 @@ import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+// import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LoyaltyOutlinedIcon from '@mui/icons-material/LoyaltyOutlined';
+import { Company } from '../types/company/Company';
 
-export default function CompanyCard() {
+export default function CompanyCard(
+  props: {
+    company: Company
+  },
+) {
+  const { company } = props;
   return (
     <Box component={Paper} elevation={2} maxWidth="450px" borderRadius="5px">
       <Stack
@@ -16,21 +22,24 @@ export default function CompanyCard() {
         paddingY="20px"
         gap="5px"
       >
-        <Typography variant="h3" fontWeight="bold">Waalaxy</Typography>
+        <Typography variant="h3" fontWeight="bold">{company.name}</Typography>
 
         <Stack direction="row" justifyContent="center" gap="10px">
           <LoyaltyOutlinedIcon />
-          <Typography>Informatique</Typography>
+          <Typography>{company.sector}</Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="center" gap="10px">
+        {/* <Stack direction="row" justifyContent="center" gap="10px">
           <LocationOnOutlinedIcon />
-          <Typography>Avenue Nina Simone Montpellier 34000</Typography>
-        </Stack>
+          <Typography>{company.}</Typography>
+        </Stack> */}
 
         <Stack direction="row" justifyContent="center" gap="10px">
           <PeopleAltOutlinedIcon />
-          <Typography>450 salariés</Typography>
+          <Typography>
+            {company.employeesNumber}
+            salariés
+          </Typography>
         </Stack>
 
       </Stack>
