@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import {
   Box, Paper, Stack, Typography,
 } from '@mui/material';
-import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 import BadgeIcon from '@mui/icons-material/Badge';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -34,9 +33,6 @@ export default function OfferDetailsPage() {
           <Typography>{offer.description}</Typography>
           <TypographyWithIcon text={t('contract-type', { contractType: offer.contractType })} icon={<DescriptionIcon />} />
           <TypographyWithIcon text={t('monthly-salary', { salary: offer.salary })} icon={<MonetizationOnIcon />} />
-          {offer.hasCompanyCar && (
-          <TypographyWithIcon text={t('company-car-included')} icon={<DirectionsCarFilledIcon />} />
-          )}
           {offer.needDrivingLicense && (
           <TypographyWithIcon text={t('driving-license-required')} icon={<BadgeIcon />} />
           )}

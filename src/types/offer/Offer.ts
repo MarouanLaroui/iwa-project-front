@@ -10,18 +10,17 @@ export enum JobType {
 export type Offer = {
   offerId: String
   companyId: String
-  startingDate: Date
-  endDate: Date
   title: String
   description: String
+  location: String
+  creationDate: Date
+  startingDate: Date
+  endDate: Date
   contractType: ContractType
   jobType: JobType
   salary: number
-  hasCompanyCar: boolean
   needDrivingLicense: boolean
-  location: String
   ledToJob: boolean
-  creationDate: Date
 };
 
 export type OfferFilters = {

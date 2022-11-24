@@ -33,7 +33,7 @@ export default function OfferDetailsCard({ offer }: Props) {
         paddingY="20px"
         gap="5px"
       >
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>{offer.title}</Typography>
+        <Typography variant="h4" style={{ fontWeight: 'bold' }}>{offer.title}</Typography>
         <Typography>{offer.description}</Typography>
         <Stack
           direction="row"
