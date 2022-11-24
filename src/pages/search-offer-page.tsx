@@ -6,6 +6,7 @@ import OfferDetailsCard from '../components/offer-details-card';
 import { useFetchOffers } from '../hooks/request/offerHooks';
 import OfferSearchBar from '../components/search-bars/offer-search-bar';
 import { Offer, OfferFilters } from '../types/offer/Offer';
+import Loading from '../components/loading';
 
 export default function SearchOfferPage() {
   const [offers, , isLoading, error] = useFetchOffers();
@@ -28,7 +29,17 @@ export default function SearchOfferPage() {
   }, [filters, offers]);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <Grid
+        container
+        width="100%"
+        height="80vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Loading />
+      </Grid>
+    );
   }
 
   if (error) {

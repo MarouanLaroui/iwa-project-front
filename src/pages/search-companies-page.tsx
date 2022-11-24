@@ -2,6 +2,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { Key, useEffect, useState } from 'react';
 import CompanyCard from '../components/company-card';
+import Loading from '../components/loading';
 import CompanySearchBar from '../components/search-bars/company-search-bar';
 import { useFetchCompanies } from '../hooks/request/companyHooks';
 import { Company, CompanyFilters } from '../types/company/Company';
@@ -26,7 +27,17 @@ export default function SearchCompaniesPage() {
   }, [filters, companies]);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <Grid
+        container
+        width="100%"
+        height="80vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Loading />
+      </Grid>
+    );
   }
   if (error) {
     return <div>error</div>;
