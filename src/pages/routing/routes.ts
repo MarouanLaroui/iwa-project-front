@@ -11,3 +11,5 @@ export const OFFER_APPLY_ROUTE: 'offer/apply/:offerId' = 'offer/apply/:offerId';
 export const OFFER_DETAILS_ROUTE: 'offer/details/:offerId' = 'offer/details/:offerId';
 export const WORKER_PROFILE_BASE_ROUTE: '/worker/profile' = '/worker/profile';
 export const WORKER_PROFILE_ROUTE: `/${typeof WORKER_PROFILE_BASE_ROUTE}/:workerId` = `/${WORKER_PROFILE_BASE_ROUTE}/:workerId`;
+export const COMPANY_PROFILE_BASE_ROUTE: '/company/profile' = '/company/profile';
+export const COMPANY_PROFILE_ROUTE: `/${typeof COMPANY_PROFILE_BASE_ROUTE}/:companyId` = `/${COMPANY_PROFILE_BASE_ROUTE}/:companyId`;

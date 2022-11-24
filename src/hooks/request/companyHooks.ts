@@ -1,5 +1,7 @@
 import { Company } from '../../types/company/Company';
+import CompanyAuthenticated from '../../types/company/CompanyAuthenticated';
 import CompanyDTO from '../../types/company/CompanyDTO';
+import LoginDTO from '../../types/company/LoginDTO';
 import useFetchMany from '../generic/useFetchMany';
 import useFetch from '../generic/useFetchOne';
 import usePost from '../generic/usePost';
@@ -10,4 +12,8 @@ const useFetchCompanies = () => useFetchMany<Company>('companies/');
 
 const signUpCompany = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies/register', companyToCreate);
 
-export { useFetchCompanies, useFetchCompany, signUpCompany };
+const useLoginCompany = (loginDTO: LoginDTO) => usePost<LoginDTO, CompanyAuthenticated>('companies/login', loginDTO);
+
+export {
+  useFetchCompanies, useFetchCompany, signUpCompany, useLoginCompany,
+};

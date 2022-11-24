@@ -3,15 +3,15 @@ import { Stack } from '@mui/system';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function WorkerProfilePage() {
+export default function CompanyProfilePage() {
   const params = useParams();
 
   return (
     <Stack>
       <Typography>
-        Worker profile page
+        Company profile page
         {' '}
-        {params.workerId}
+        {params.companyId}
       </Typography>
     </Stack>
   );
