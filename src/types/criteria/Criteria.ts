@@ -1,4 +1,4 @@
-import { ContractType, JobType } from "../offer/Offer";
+import { ContractType, JobType } from '../offer/Offer';
 
 export type Criteria = {
   criteriaId: String

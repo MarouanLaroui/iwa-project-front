@@ -24,8 +24,8 @@ export default function CompanySearchBar(props: {
   }, [searchedName, selectedSector]);
 
   return (
-    <Stack direction="row" spacing="10px">
-      <SearchBar sx={{ width: '60%' }} onChange={(event) => setSelectedSearchedName(event.target.value)} />
+    <Stack direction="row" spacing="10px" justifyContent="center">
+      <SearchBar sx={{ width: '60%' }} onChange={(event) => setSelectedSearchedName(event.target.value)} placeholder="Search by company name" />
       <FormControl sx={{ minWidth: '120px' }}>
         <InputLabel id="contract-label">Sector</InputLabel>
         <Select label="Contrat" labelId="contract-label" defaultValue={filters.sector} onChange={(event) => setSelectedSector(event.target.value as SectorType)}>
@@ -41,7 +41,19 @@ export default function CompanySearchBar(props: {
         </Select>
       </FormControl>
 
-      <Button startIcon={<SearchIcon />} variant="contained" sx={{ paddingX: '15px' }}>Rechercher</Button>
+      <Button
+        startIcon={<SearchIcon />}
+        variant="contained"
+        sx={{ paddingX: '15px', display: { xs: 'none', md: 'flex' } }}
+      >
+        Rechercher
+      </Button>
+
+      <Button
+        startIcon={<SearchIcon />}
+        variant="contained"
+        sx={{ paddingX: '15px', display: { xs: 'flex', md: 'none' } }}
+      />
     </Stack>
   );
 }

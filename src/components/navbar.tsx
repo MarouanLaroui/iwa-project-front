@@ -49,7 +49,7 @@ export default function Navbar() {
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
-        paddingY="20px"
+        paddingTop="20px"
         display={{ xs: 'none', lg: 'flex' }}
         gap="20px"
         width="100%"
@@ -103,7 +103,7 @@ export default function Navbar() {
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
-        paddingY="20px"
+        paddingTop="10px"
         display={{ xs: 'flex', lg: 'none' }}
         gap="20px"
       >
