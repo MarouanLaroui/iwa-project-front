@@ -1,4 +1,4 @@
-import { Offer } from "../offer/Offer";
+import { Offer } from '../offer/Offer';
 
 export type Application = {
   applicationId: string;
@@ -6,5 +6,5 @@ export type Application = {
   offer: Offer;
   message: string;
   isValidatedByCompany: boolean;
-
-}
+  isValidatedByWorker: boolean;
+};

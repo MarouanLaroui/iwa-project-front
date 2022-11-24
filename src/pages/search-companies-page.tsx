@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { Key, useEffect, useState } from 'react';
 import CompanyCard from '../components/company-card';
@@ -32,18 +32,26 @@ export default function SearchCompaniesPage() {
     return <div>error</div>;
   }
   return (
-    <Stack width="100%" direction="column" gap="5rem" alignItems="center">
-      <Box width="100%" justifyContent="center">
+    <Stack width="100%" direction="column" gap="2em">
+
+      <Box width="100%" alignItems="center">
         <CompanySearchBar filters={filters} setFilters={setFilters} />
       </Box>
 
-      <Grid container gap="4rem" justifyContent="center">
+      <Stack direction="column" justifyContent="flex-start" gap="1rem">
+        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '25px', lg: '40px' } }}>Our partner companies</Typography>
+        <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
+      </Stack>
+
+      <Grid container gap="2rem" justifyContent="space-between">
         {
           filteredCompanies.map((company) => (
-            <CompanyCard
-              company={company}
-              key={company.id as Key}
-            />
+            <Box sx={{ width: { xs: '100%', lg: '315px', xl: '400px' } }}>
+              <CompanyCard
+                company={company}
+                key={company.id as Key}
+              />
+            </Box>
           ))
         }
       </Grid>

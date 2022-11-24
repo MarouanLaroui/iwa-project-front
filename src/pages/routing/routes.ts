@@ -4,6 +4,7 @@ export const WORKER_SIGNUP_ROUTE: 'worker/signup' = 'worker/signup';
 export const COMPANY_LOGIN_ROUTE: 'company/login' = 'company/login';
 export const COMPANY_SIGNUP_ROUTE: 'company/signup' = 'company/signup';
 export const COMPANY_SEARCH_ROUTE: 'company/search' = 'company/search';
+// export const COMPANY_LOGIN_ROUTE: 'company/:companyId' = 'company/:companyId';
 export const OFFER_SEARCH_ROUTE: 'offer/search' = 'offer/search';
 export const OFFER_CREATE_ROUTE: 'offer/create' = 'offer/create';
 export const OFFER_APPLY_ROUTE: 'offer/apply/:offerId' = 'offer/apply/:offerId';
