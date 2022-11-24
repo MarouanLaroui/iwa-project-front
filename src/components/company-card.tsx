@@ -3,7 +3,6 @@ import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-// import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LoyaltyOutlinedIcon from '@mui/icons-material/LoyaltyOutlined';
 import { useNavigate } from 'react-router-dom';
 import { Company } from '../types/company/Company';
@@ -47,11 +46,6 @@ export default function CompanyCard(
           <LoyaltyOutlinedIcon />
           <Typography>{company.sector}</Typography>
         </Stack>
-
-        {/* <Stack direction="row" justifyContent="center" gap="10px">
-          <LocationOnOutlinedIcon />
-          <Typography>{company.}</Typography>
-        </Stack> */}
 
         <Stack direction="row" justifyContent="center" gap="10px">
           <PeopleAltOutlinedIcon />
