@@ -3,39 +3,27 @@ import { Form, Formik } from 'formik';
 import {
   Alert, Box, Button, Stack, Typography,
 } from '@mui/material';
-import axios, { AxiosError } from 'axios';
-import { InferType } from 'yup';
-import saveTokenInLocalStorage from '../../../database/utils/local-storage';
 import InputField from '../../form-fields/input-field';
 import loginSchema from './login-schema';
+import LoginDTO from '../../../types/company/LoginDTO';
 
-export default function LoginForm() {
+type Props = {
+  onSubmit: (data: LoginDTO, setError: React.Dispatch<React.SetStateAction<string>>) => void
+};
+
+export default function LoginForm({ onSubmit } : Props) {
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = (data: InferType<typeof loginSchema>) => {
-    axios
-      .post('auth/organizer/login', data)
-      .then((response) => {
-        saveTokenInLocalStorage(response.data.access_token);
-        axios.defaults.headers.common = {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        };
-        // do something
-      })
-      .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
-      });
-  };
   return (
     <Formik
       initialValues={{
-        mail: '',
+        email: '',
         password: '',
       }}
       validationSchema={loginSchema}
       onSubmit={async (data, { setSubmitting }) => {
         setSubmitting(true);
-        onSubmit(data);
+        onSubmit(data, setErrorMsg);
         setSubmitting(false);
       }}
     >
@@ -59,8 +47,8 @@ export default function LoginForm() {
             )}
 
             <InputField
-              label="mail"
-              name="mail"
+              label="email"
+              name="email"
               placeholder="abc@gmail.com"
               type="email"
               inputMode="email"
