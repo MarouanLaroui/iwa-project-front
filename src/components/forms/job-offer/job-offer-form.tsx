@@ -11,18 +11,20 @@ import InputField from '../../form-fields/input-field';
 import jobOfferSchema from './job-offer-schema';
 import SelectField from '../../form-fields/select-field';
 import CheckboxField from '../../form-fields/checkbox-field';
-import { ContractType, JobType } from '../../../types/offer/Offer';
+import { ContractType, JobType, Offer } from '../../../types/offer/Offer';
 import { createOffer } from '../../../hooks/request/offerHooks';
 import OfferDTO from '../../../types/offer/OfferDTO';
 
-export default function JobOfferForm() {
+export default function JobOfferForm(props:{
+  onSubmitionSuccess: (createdOffer: Offer)=>void
+}) {
+  const { onSubmitionSuccess } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = (offerToCreate: OfferDTO) => {
     createOffer(offerToCreate)
       .then((response) => {
-        console.log(response);
-        // do something
+        onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
@@ -32,22 +34,20 @@ export default function JobOfferForm() {
   return (
     <Formik
       initialValues={{
-        companyId: '',
-        startingDate: new Date(),
-        endDate: new Date(),
-        jobType: JobType.FULL_TIME,
-        contractType: ContractType.CDD,
         title: '',
         description: '',
         location: '',
         salary: 0,
+        startingDate: new Date(),
+        endDate: new Date(),
+        jobType: JobType.FULL_TIME,
+        contractType: ContractType.CDD,
         needDrivingLicense: false,
-        hasCompanyCar: false,
       }}
       validationSchema={jobOfferSchema}
-      onSubmit={async (data, { setSubmitting }) => {
+      onSubmit={async (offerToCreate: OfferDTO, { setSubmitting }) => {
         setSubmitting(true);
-        await onSubmit(data);
+        await onSubmit(offerToCreate);
         setSubmitting(false);
       }}
     >

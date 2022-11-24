@@ -8,7 +8,7 @@ export enum JobType {
 }
 
 export type Offer = {
-  offerId: String
+  offerId: string
   companyId: String
   title: String
   description: String

@@ -3,26 +3,26 @@ import { Box, Stack } from '@mui/system';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import { InferType } from 'yup';
-import axios from '../../../database/axios/axios-client';
+import { createApplication } from '../../../hooks/request/applicationHooks';
+import { Application } from '../../../types/application/Application';
+import ApplicationDTO from '../../../types/application/ApplicationDTO';
+import { Offer } from '../../../types/offer/Offer';
 import InputField from '../../form-fields/input-field';
 import applicationSchema from './application-schema';
 
 export default function ApplicationForm(
   props:{
-    offerId: number,
+    offerId: Pick<Offer, 'offerId'>,
+    onSubmitionSuccess: (createdApplication: Application) => void
   },
 ) {
-  const { offerId } = props;
+  const { offerId, onSubmitionSuccess } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof applicationSchema>) => {
-    axios
-      .post('auth/organizer/login', data)
+  const onSubmit = async (formData: ApplicationDTO) => {
+    createApplication(formData, offerId)
       .then((response) => {
-        console.log(offerId);
-        console.log(response);
-        // do something
+        onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);

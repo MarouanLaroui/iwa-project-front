@@ -52,7 +52,7 @@ export default function SearchCompaniesPage() {
       </Box>
 
       <Stack direction="column" justifyContent="flex-start" gap="1rem">
-        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '25px', lg: '40px' } }}>
+        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '23px', sm: '33px', lg: '40px' } }}>
           {t('companies-page-title')}
         </Typography>
         <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
