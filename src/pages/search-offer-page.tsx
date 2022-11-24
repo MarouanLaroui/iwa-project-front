@@ -32,7 +32,7 @@ export default function SearchOfferPage() {
 
   return (
     <Stack width="100%" gap="3rem">
-      <OfferSearchBar setFilters={setFilters} />
+      <OfferSearchBar setFilters={setFilters} filters={filters} />
       <Grid
         container
         direction="row"

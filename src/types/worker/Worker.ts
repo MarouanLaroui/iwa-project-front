@@ -3,7 +3,7 @@ export type Worker = {
   firstName: String
   lastName: String
   email: String
-  description: String
-  cvLink: String
+  birthDate: Date
+  cvLink?: String
   hasDrivingLicense: boolean
 };
