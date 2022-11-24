@@ -1,8 +1,10 @@
-import axios from 'axios';
+import richAxios from '../../database/axios/axios-client';
+
+// Not really a hook so it can bypass React's hooks rules
 
 const usePost = <U, V>(
   path: string,
   dataToSend: U,
-) => axios.post<V>(process.env.REACT_APP_IWA_API_URL + path, dataToSend);
+) => richAxios.post<V>(path, dataToSend);
 
 export default usePost;
