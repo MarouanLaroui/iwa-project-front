@@ -15,17 +15,20 @@ export default function OfferSearchBar(props: {
 }) {
   const [selectedContractType, setSelectedContractType] = useState<ContractType>();
   const [selectedJobType, setSelectedJobType] = useState<JobType>();
+  const [searchedTitle, setSearchedTitle] = useState<string>('');
   const { filters, setFilters } = props;
 
   useEffect(() => {
     setFilters({
-      contractType: selectedContractType, jobType: selectedJobType,
+      title: searchedTitle,
+      contractType: selectedContractType,
+      jobType: selectedJobType,
     });
-  }, [selectedContractType, selectedJobType]);
+  }, [selectedContractType, selectedJobType, searchedTitle]);
 
   return (
     <Stack direction="row" spacing="10px">
-      <SearchBar sx={{ width: '60%' }} />
+      <SearchBar sx={{ width: '60%' }} onChange={(event) => setSearchedTitle(event.target.value)} />
       <FormControl sx={{ minWidth: '120px' }}>
         <InputLabel id="contract-label">Contract</InputLabel>
         <Select label="Contrat" labelId="contract-label" defaultValue={filters.contractType} onChange={(event) => setSelectedContractType(event.target.value as ContractType)}>

@@ -1,4 +1,4 @@
-enum SectorType {
+export enum SectorType {
   AGRICULTURE_PECHE = 'AGRICULTURE_PECHE',
   ARTS = 'ARTS',
   BANQUE_ASSURANCE_IMMOBILIER = 'BANQUE_ASSURANCE_IMMOBILIER',
@@ -10,7 +10,7 @@ enum SectorType {
   INDUSTRIE = 'INDUSTRIE',
 }
 
-type Company = {
+export type Company = {
   id: String
   name: String;
   email: String;
@@ -20,4 +20,7 @@ type Company = {
   pictureUrl?: String;
 };
 
-export default Company;
+export type CompanyFilters = {
+  companyName?: string
+  sector?: SectorType
+};

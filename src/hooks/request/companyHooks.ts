@@ -1,4 +1,4 @@
-import Company from '../../types/company/Company';
+import { Company } from '../../types/company/Company';
 import CompanyDTO from '../../types/company/CompanyDTO';
 import useFetchMany from '../generic/useFetchMany';
 import useFetch from '../generic/useFetchOne';

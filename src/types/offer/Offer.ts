@@ -24,6 +24,7 @@ export type Offer = {
 };
 
 export type OfferFilters = {
+  title?: string,
   contractType?: ContractType
   jobType?: JobType
 };
