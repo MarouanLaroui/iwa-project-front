@@ -9,3 +9,5 @@ export const OFFER_SEARCH_ROUTE: 'offer/search' = 'offer/search';
 export const OFFER_CREATE_ROUTE: 'offer/create' = 'offer/create';
 export const OFFER_APPLY_ROUTE: 'offer/apply/:offerId' = 'offer/apply/:offerId';
 export const OFFER_DETAILS_ROUTE: 'offer/details/:offerId' = 'offer/details/:offerId';
+export const WORKER_PROFILE_BASE_ROUTE: '/worker/profile' = '/worker/profile';
+export const WORKER_PROFILE_ROUTE: `/${typeof WORKER_PROFILE_BASE_ROUTE}/:workerId` = `/${WORKER_PROFILE_BASE_ROUTE}/:workerId`;

@@ -9,8 +9,8 @@ import OfferDetailsPage from '../offer-details-page';
 import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_CREATE_ROUTE,
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE, WORKER_SIGNUP_ROUTE,
-  COMPANY_SIGNUP_ROUTE, WORKER_LOGIN_ROUTE,
-  OFFER_SEARCH_ROUTE, COMPANY_DETAILS_ROUTE,
+  COMPANY_SIGNUP_ROUTE, OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
+  WORKER_PROFILE_ROUTE, COMPANY_DETAILS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CreateOfferPage from '../create-offer-page';
@@ -19,13 +19,18 @@ import CompanyDetailsPage from '../company-details-page';
 import App from '../../App';
 import SearchOfferPage from '../search-offer-page';
 import WorkerLoginPage from '../worker-login-page';
+import WorkerProfilePage from '../worker-profile-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path={HOME_ROUTE} element={<App />}>
       <Route path={HOME_ROUTE} element={<LandingPage />} />
+
+      {/* Auth */}
       <Route path={WORKER_LOGIN_ROUTE} element={<WorkerLoginPage />} />
       {/* <Route path={COMPANY_LOGIN_ROUTE} element={<LoginForm />} /> */}
+
+      <Route path={WORKER_PROFILE_ROUTE} element={<WorkerProfilePage />} />
 
       {/* Company */}
       <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignUpPage />} />
