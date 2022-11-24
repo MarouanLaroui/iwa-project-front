@@ -27,8 +27,10 @@ export default function OfferSearchBar(props: {
   }, [selectedContractType, selectedJobType, searchedTitle]);
 
   return (
-    <Stack direction="row" spacing="10px">
-      <SearchBar sx={{ width: '60%' }} onChange={(event) => setSearchedTitle(event.target.value)} />
+    <Stack direction="row" spacing="10px" justifyContent="center">
+      <SearchBar sx={{ width: '60%' }} onChange={(event) => setSearchedTitle(event.target.value)} placeholder="Search by job title" />
+
+      {/* Contract Type select */}
       <FormControl sx={{ minWidth: '120px' }}>
         <InputLabel id="contract-label">Contract</InputLabel>
         <Select label="Contrat" labelId="contract-label" defaultValue={filters.contractType} onChange={(event) => setSelectedContractType(event.target.value as ContractType)}>
@@ -44,6 +46,7 @@ export default function OfferSearchBar(props: {
         </Select>
       </FormControl>
 
+      {/* Job Type select */}
       <FormControl sx={{ minWidth: '180px' }}>
         <InputLabel id="type-label">Type</InputLabel>
         <Select label="Type" labelId="type-label" defaultValue={filters.jobType} onChange={(event) => setSelectedJobType(event.target.value as JobType)}>

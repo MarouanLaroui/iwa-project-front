@@ -25,7 +25,20 @@ export default function OfferDetailsCard({ offer }: Props) {
   }
 
   return (
-    <Box component={Paper} elevation={2} width="100%" borderRadius="5px" onClick={() => onClick()}>
+    <Box
+      component={Paper}
+      elevation={2}
+      width="100%"
+      borderRadius="5px"
+      onClick={() => onClick()}
+      sx={{
+        '&: hover': {
+          transform: 'scale(1.03)',
+          transition: 'transform .1s',
+          cursor: 'pointer',
+        },
+      }}
+    >
       <Stack
         direction="column"
         alignItems="flex-start"

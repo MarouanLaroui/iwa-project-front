@@ -1,7 +1,8 @@
 /* eslint-disable react/no-array-index-key */
-import { Grid } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import OfferDetailsCard from '../components/offer-details-card';
 import { useFetchOffers } from '../hooks/request/offerHooks';
 import OfferSearchBar from '../components/search-bars/offer-search-bar';
@@ -12,6 +13,7 @@ export default function SearchOfferPage() {
   const [offers, , isLoading, error] = useFetchOffers();
   const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
   const [filters, setFilters] = useState<OfferFilters>({});
+  const { t } = useTranslation();
 
   const filterOffers = (offersToFilter: Offer[]) => offersToFilter.filter((offer) => {
     if (filters.contractType && filters.contractType !== offer.contractType) return false;
@@ -47,20 +49,25 @@ export default function SearchOfferPage() {
   }
 
   return (
-    <Stack width="100%" gap="3rem">
-      <OfferSearchBar setFilters={setFilters} filters={filters} />
-      <Grid
-        container
-        direction="row"
-        gap={2}
-        alignItems="center"
-        justifyContent="flex-start"
-      >
+    <Stack width="100%" direction="column" gap="2em">
+
+      <Box width="100%" alignItems="center">
+        <OfferSearchBar setFilters={setFilters} filters={filters} />
+      </Box>
+
+      <Stack direction="column" justifyContent="flex-start" gap="1rem">
+        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '25px', lg: '40px' } }}>
+          {t('offer-page-title')}
+        </Typography>
+        <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
+      </Stack>
+
+      <Grid container justifyContent="space-between" spacing={3}>
         {
           filteredOffers.map((offer, index) => (
-            <Box width={400} key={index}>
+            <Grid item xs md={6} xl={4} width={400} key={index}>
               <OfferDetailsCard offer={offer} />
-            </Box>
+            </Grid>
           ))
       }
       </Grid>
