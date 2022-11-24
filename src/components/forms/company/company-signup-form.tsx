@@ -3,30 +3,30 @@ import { Form, Formik } from 'formik';
 import {
   Alert, Box, Button, MenuItem, Stack,
 } from '@mui/material';
-import { InferType } from 'yup';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import InputField from '../../form-fields/input-field';
 import companySchema from './company-schema';
 import SelectField from '../../form-fields/select-field';
-import usePost from '../../../hooks/generic/usePost';
+import CompanyDTO from '../../../types/company/CompanyDTO';
+import { Company, SectorType } from '../../../types/company/Company';
+import { signUpCompany } from '../../../hooks/request/companyHooks';
 
-export default function CompanySignupForm() {
+export default function CompanySignupForm(
+  props:{
+    onSubmitionSuccess: (createdCompany:Company)=>void
+  },
+) {
+  const { onSubmitionSuccess } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof companySchema>) => {
-    axios
-      .post('auth/organizer/login', data)
+  const onSubmit = async (companyToCreate: CompanyDTO) => {
+    signUpCompany(companyToCreate)
       .then((response) => {
-        console.log(response);
-        // do something
+        onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
       });
-  };
-
-  const onClickTest = () => {
-    usePost('', {});
   };
 
   return (
@@ -34,12 +34,14 @@ export default function CompanySignupForm() {
       initialValues={{
         name: '',
         email: '',
-        nbOfEmployees: 1,
+        password: '',
+        employeesNumber: '1',
         description: '',
-        sector: '',
+        sector: SectorType.AGRICULTURE_PECHE,
+        pictureUrl: '',
       }}
       validationSchema={companySchema}
-      onSubmit={async (data, { setSubmitting }) => {
+      onSubmit={async (data: CompanyDTO, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
         setSubmitting(false);
@@ -116,7 +118,6 @@ export default function CompanySignupForm() {
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
-              onClick={onClickTest}
             >
               Sign up
             </Button>

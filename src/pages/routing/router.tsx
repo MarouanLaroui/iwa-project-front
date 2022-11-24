@@ -2,9 +2,6 @@ import React from 'react';
 import {
   createBrowserRouter, createRoutesFromElements, Route,
 } from 'react-router-dom';
-import ApplicationForm from '../../components/forms/application/application-form';
-import CompanySignupForm from '../../components/forms/company/company-signup-form';
-import JobOfferForm from '../../components/forms/job-offer/job-offer-form';
 import LoginForm from '../../components/forms/login/login-form';
 import WorkerSignupForm from '../../components/forms/worker/worker-signup-form';
 import SearchCompaniesPage from '../search-companies-page';
@@ -17,6 +14,9 @@ import {
 } from './routes';
 import App from '../../App';
 import SearchOfferPage from '../search-offer-page';
+import ApplyToOfferPage from '../apply-to-offer-page';
+import CreateOfferPage from '../create-offer-page';
+import CompanySignUpPage from '../company-signup-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -26,12 +26,12 @@ const router = createBrowserRouter(
       {/* TODO: separate login form */}
       <Route path={COMPANY_LOGIN_ROUTE} element={<LoginForm />} />
       <Route path={WORKER_LOGIN_ROUTE} element={<LoginForm />} />
-      <Route path={OFFER_CREATE_ROUTE} element={<JobOfferForm />} />
+      <Route path={OFFER_CREATE_ROUTE} element={<CreateOfferPage />} />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
-      <Route path={OFFER_APPLY_ROUTE} element={<ApplicationForm offerId={1} />} />
+      <Route path={OFFER_APPLY_ROUTE} element={<ApplyToOfferPage />} />
       <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
       <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm />} />
-      <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignupForm />} />
+      <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignUpPage />} />
     </Route>,
   ]),
 );

@@ -8,6 +8,6 @@ const useFetchCompany = (id: string) => useFetch<Company>(`companies/${id}`);
 
 const useFetchCompanies = () => useFetchMany<Company>('companies/');
 
-const createCompanies = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies/', companyToCreate);
+const signUpCompany = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies/register', companyToCreate);
 
-export { useFetchCompanies, useFetchCompany, createCompanies };
+export { useFetchCompanies, useFetchCompany, signUpCompany };

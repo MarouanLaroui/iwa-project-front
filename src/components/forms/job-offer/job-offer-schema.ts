@@ -2,14 +2,15 @@ import * as yup from 'yup';
 import mandarotyField from '../../../helpers/yup/messages';
 
 const jobOfferSchema = yup.object({
+  title: yup.string().required(mandarotyField).min(8),
+  description: yup.string().required(mandarotyField).min(50),
+  location: yup.string().required(mandarotyField).min(3),
   startingDate: yup.date().required(mandarotyField),
   endDate: yup.date().required(mandarotyField),
   jobType: yup.string().required(mandarotyField).min(3),
-  title: yup.string().required(mandarotyField).min(50),
-  description: yup.string().required(mandarotyField).min(50),
+  contractType: yup.string().required(mandarotyField).min(3),
   salary: yup.number().required(mandarotyField).min(0),
   needDrivingLicense: yup.boolean().required(mandarotyField),
-  hasCompanyCar: yup.boolean().required(mandarotyField),
 }).test(
   'superior than starting date',
   'starting date is superior than end date',
