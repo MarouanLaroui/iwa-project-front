@@ -1,7 +1,9 @@
 import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { Key, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CompanyCard from '../components/company-card';
+import Loading from '../components/loading';
 import CompanySearchBar from '../components/search-bars/company-search-bar';
 import { useFetchCompanies } from '../hooks/request/companyHooks';
 import { Company, CompanyFilters } from '../types/company/Company';
@@ -10,6 +12,7 @@ export default function SearchCompaniesPage() {
   const [companies,,isLoading, error] = useFetchCompanies();
   const [filteredCompanies, setFilteredCompanies] = useState<Company[]>([]);
   const [filters, setFilters] = useState<CompanyFilters>({});
+  const { t } = useTranslation();
 
   const filterCompanies = (companiesToFilter: Company[]) => companiesToFilter.filter((company) => {
     if (
@@ -26,7 +29,17 @@ export default function SearchCompaniesPage() {
   }, [filters, companies]);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <Grid
+        container
+        width="100%"
+        height="80vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Loading />
+      </Grid>
+    );
   }
   if (error) {
     return <div>error</div>;
@@ -39,22 +52,25 @@ export default function SearchCompaniesPage() {
       </Box>
 
       <Stack direction="column" justifyContent="flex-start" gap="1rem">
-        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '25px', lg: '40px' } }}>Our partner companies</Typography>
+        <Typography align="left" variant="h3" sx={{ fontWeight: 600, fontSize: { xs: '25px', lg: '40px' } }}>
+          {t('companies-page-title')}
+        </Typography>
         <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
       </Stack>
 
-      <Grid container gap="2rem" justifyContent="space-between">
+      <Grid container justifyContent="space-between" spacing={3}>
         {
           filteredCompanies.map((company) => (
-            <Box sx={{ width: { xs: '100%', lg: '315px', xl: '400px' } }}>
+            <Grid item xs md={6} xl={4} width={400} key={company.id as Key}>
               <CompanyCard
                 company={company}
                 key={company.id as Key}
               />
-            </Box>
+            </Grid>
           ))
         }
       </Grid>
+
     </Stack>
 
   );
