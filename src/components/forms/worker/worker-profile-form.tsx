@@ -1,5 +1,6 @@
 import {
-  Button, Checkbox, FormControlLabel, Grid, TextField,
+  Alert,
+  Button, Grid, TextField,
 } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
@@ -7,17 +8,25 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { Form } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
+import { DefaultTFuncReturn } from 'i18next';
 import Worker from '../../../types/worker/Worker';
-import loginSchema from '../login/login-schema';
 import InputField from '../../form-fields/input-field';
+import WorkerDTO from '../../../types/worker/WorkerDTO';
+import workerSchema from './worker-schema';
+import CheckboxField from '../../form-fields/checkbox-field';
 
 type Props = {
   worker: Worker
+  onSubmit: (data: WorkerDTO,
+    setError: React.Dispatch<React.SetStateAction<string>>,
+    setSuccess: React.Dispatch<React.SetStateAction<DefaultTFuncReturn>>) => void
 };
 
-export default function WorkerProfileForm({ worker }: Props) {
+export default function WorkerProfileForm({ worker, onSubmit }: Props) {
   const { t } = useTranslation();
   const [editMode, setEditMode] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('' as DefaultTFuncReturn);
 
   return (
     <Formik
@@ -28,16 +37,36 @@ export default function WorkerProfileForm({ worker }: Props) {
         birthDate: worker.birthDate,
         hasDrivingLicense: worker.hasDrivingLicense,
       }}
-      validationSchema={loginSchema}
-      onSubmit={async (data, { setSubmitting }) => {
+      validationSchema={workerSchema}
+      onSubmit={async (data: WorkerDTO, { setSubmitting }) => {
         setSubmitting(true);
-        // TODO: call submit function
+        onSubmit(data, setErrorMsg, setSuccessMsg);
         setSubmitting(false);
       }}
     >
       {(formik) => (
         <Box component={Form} width="100%">
-          <Grid container spacing={3}>
+          {successMsg && (
+          <Alert
+            severity="success"
+            onClose={() => {
+              setSuccessMsg('');
+            }}
+          >
+            {successMsg}
+          </Alert>
+          )}
+          {errorMsg && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setErrorMsg('');
+            }}
+          >
+            {errorMsg}
+          </Alert>
+          )}
+          <Grid container spacing={3} marginBottom={3}>
             <Grid item xs={12} sm={6}>
               <InputField
                 label={t('first-name')}
@@ -74,39 +103,50 @@ export default function WorkerProfileForm({ worker }: Props) {
                 value={formik.values.birthDate}
                 onChange={(value) => { formik.setFieldValue('birthDate', value, true); }}
                   // eslint-disable-next-line react/jsx-props-no-spreading
-                renderInput={(props) => <TextField fullWidth {...props} />}
+                renderInput={(props) => <TextField name="birthDate" fullWidth {...props} />}
               />
             </Grid>
             <Grid item container justifyContent="flex-start" xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox disabled={!editMode} name="hasDrivingLicense" onChange={formik.handleChange} checked={formik.values.hasDrivingLicense} />
-                  }
-                label={t('driving-license')}
-              />
+              <CheckboxField name="hasDrivingLicense" label={t('driving-license')} />
             </Grid>
           </Grid>
           <Stack direction="row" spacing={3} justifyContent="center">
+            {!editMode
+             && (
+             <Button
+               variant="contained"
+               onClick={() => {
+                 setEditMode(true);
+               }}
+             >
+               {t('edit')}
+             </Button>
+             )}
             {editMode && (
-            <Button
-              variant="outlined"
-              onClick={() => {
-                setEditMode(false);
-                formik.resetForm();
-              }}
-            >
-              {t('cancel')}
-            </Button>
+              <>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setEditMode(false);
+                    formik.resetForm();
+                  }}
+                >
+                  {t('cancel')}
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setEditMode(false);
+                    formik.submitForm();
+                  }}
+                  disabled={formik.isSubmitting || !formik.isValid}
+                  type="submit"
+                >
+                  {t('confirm')}
+                </Button>
+              </>
             )}
-            <Button
-              variant="contained"
-              onClick={() => {
-                setEditMode(!editMode);
-              }}
-              disabled={editMode && (!formik.isValid || formik.isSubmitting)}
-            >
-              { editMode ? t('confirm') : t('edit')}
-            </Button>
+
           </Stack>
         </Box>
       )}

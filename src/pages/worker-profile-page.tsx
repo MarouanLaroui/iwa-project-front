@@ -2,12 +2,15 @@ import React from 'react';
 import { Tabs, Tab } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
+import { DefaultTFuncReturn } from 'i18next';
 import Worker from '../types/worker/Worker';
 import WorkerProfileForm from '../components/forms/worker/worker-profile-form';
 import WorkerCriteria from '../components/worker-criteria';
 import { Criteria } from '../types/criteria/Criteria';
 import { ContractType, JobType } from '../types/offer/Offer';
 import { SectorType } from '../types/company/Company';
+import WorkerDTO from '../types/worker/WorkerDTO';
+import { useUpdateWorker } from '../hooks/request/workerHooks';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
@@ -41,6 +44,20 @@ export default function WorkerProfilePage() {
     setValue(newValue);
   };
 
+  const onUpdateWorkerSubmit = async (
+    workerDTO: WorkerDTO,
+    setErrorMsg: React.Dispatch<React.SetStateAction<string>>,
+    setSuccessMsg: React.Dispatch<React.SetStateAction<DefaultTFuncReturn>>,
+  ) => {
+    useUpdateWorker(workerDTO)
+      .then(() => {
+        setSuccessMsg(t('information-successfully-updated'));
+      })
+      .catch((err) => {
+        setErrorMsg(err.response.data);
+      });
+  };
+
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '30px' }}>
@@ -49,7 +66,7 @@ export default function WorkerProfilePage() {
           <Tab label={t('search-criterias')} />
         </Tabs>
       </Box>
-      {value === 0 && <WorkerProfileForm worker={mockWorker} />}
+      {value === 0 && <WorkerProfileForm worker={mockWorker} onSubmit={onUpdateWorkerSubmit} />}
       {value === 1 && <WorkerCriteria criteria={mockCriteria} />}
     </>
   );
