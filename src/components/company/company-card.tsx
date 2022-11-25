@@ -5,8 +5,8 @@ import { Box, Stack } from '@mui/system';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import LoyaltyOutlinedIcon from '@mui/icons-material/LoyaltyOutlined';
 import { useNavigate } from 'react-router-dom';
-import { Company } from '../types/company/Company';
-import TypographyWithIcon from './typography-with-icon';
+import { Company } from '../../types/company/Company';
+import TypographyWithIcon from '../typography-with-icon';
 
 export default function CompanyCard(
   props: {

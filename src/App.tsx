@@ -10,7 +10,7 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <Box marginTop="3rem">
+      <Box marginTop="3rem" paddingBottom={10}>
         <Outlet />
       </Box>
 
