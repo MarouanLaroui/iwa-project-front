@@ -2,7 +2,7 @@ import React from 'react';
 import {
   createBrowserRouter, createRoutesFromElements, Route,
 } from 'react-router-dom';
-import WorkerSignupForm from '../../components/forms/worker/worker-signup-form';
+import WorkerSignupForm from '../../components/forms/worker/signup/worker-signup-form';
 import SearchCompaniesPage from '../search-companies-page';
 import LandingPage from '../landing-page';
 import OfferDetailsPage from '../offer-details-page';
@@ -48,7 +48,7 @@ const router = createBrowserRouter(
       <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
 
       {/* Worker */}
-      <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm />} />
+      <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm readonly />} />
 
     </Route>,
   ]),

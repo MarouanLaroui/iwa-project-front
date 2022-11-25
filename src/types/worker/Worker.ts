@@ -1,10 +1,10 @@
 type Worker = {
   id: string
-  firstName: String
-  lastName: String
-  email: String
+  firstName: string
+  lastName: string
+  email: string
   birthDate: Date
-  cvLink?: String
+  cvLink?: string
   hasDrivingLicense: boolean
 };
 

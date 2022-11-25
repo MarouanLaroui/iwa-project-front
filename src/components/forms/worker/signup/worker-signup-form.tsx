@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import {
@@ -7,11 +8,16 @@ import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
-import InputField from '../../form-fields/input-field';
+import InputField from '../../../form-fields/input-field';
 import workerSchema from './worker-schema';
-import CheckboxField from '../../form-fields/checkbox-field';
+import CheckboxField from '../../../form-fields/checkbox-field';
+import Worker from '../../../../types/worker/Worker';
 
-export default function WorkerSignupForm() {
+export default function WorkerSignupForm(props:{
+  readonly: boolean,
+  worker?: Worker
+}) {
+  const { readonly, worker } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (data: InferType<typeof workerSchema>) => {
@@ -29,14 +35,11 @@ export default function WorkerSignupForm() {
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        jobType: '',
-        birthDate: new Date(),
-        salary: 0,
-        hasCar: false,
-        hasDrivingLicence: false,
+        firstName: worker ? worker.firstName : '',
+        lastName: worker ? worker.lastName : '',
+        email: worker ? worker.email : '',
+        birthDate: worker ? worker.birthDate : new Date(),
+        hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
       }}
       validationSchema={workerSchema}
       onSubmit={async (data, { setSubmitting }) => {
@@ -74,6 +77,7 @@ export default function WorkerSignupForm() {
                 name="firstName"
                 type="text"
                 fullWidth
+                disabled={readonly}
               />
 
               <InputField
@@ -81,6 +85,7 @@ export default function WorkerSignupForm() {
                 name="lastName"
                 type="text"
                 fullWidth
+                disabled={readonly}
               />
 
             </Stack>
@@ -94,6 +99,7 @@ export default function WorkerSignupForm() {
                 type="email"
                 inputMode="email"
                 fullWidth
+                disabled={readonly}
               />
 
               <InputField
@@ -101,6 +107,7 @@ export default function WorkerSignupForm() {
                 name="birthDate"
                 type="date"
                 fullWidth
+                disabled={readonly}
               />
 
             </Stack>
@@ -115,8 +122,7 @@ export default function WorkerSignupForm() {
                   <DirectionsCarFilledOutlinedIcon />
                   <Typography variant="caption">Veichule details</Typography>
                 </Stack>
-                <CheckboxField name="hasDrivingLicence" label="I have my driving licence" />
-                <CheckboxField name="hasCar" label="I have a car" />
+                <CheckboxField name="hasDrivingLicense" label="I have my driving licence" disabled={readonly} />
               </Stack>
 
               <Stack direction="column" width="50%" spacing="10px">
@@ -124,7 +130,7 @@ export default function WorkerSignupForm() {
                   <AttachFileOutlinedIcon />
                   <Typography variant="caption">Attached files</Typography>
                 </Stack>
-                <Button variant="contained" component="label" sx={{ width: 'fit-content' }}>
+                <Button disabled={readonly} variant="contained" component="label" sx={{ width: 'fit-content' }}>
                   Upload your CV
                   <input hidden accept="image/*" type="file" />
                 </Button>
@@ -132,15 +138,21 @@ export default function WorkerSignupForm() {
 
             </Stack>
 
-            <Stack direction="row" justifyContent="center" width="100%" paddingTop="2rem">
-              <Button
-                disabled={formik.isSubmitting || !formik.isValid}
-                variant="contained"
-                type="submit"
-              >
-                Se connecter
-              </Button>
-            </Stack>
+            {
+              !readonly
+              && (
+              <Stack direction="row" justifyContent="center" width="100%" paddingTop="2rem">
+                <Button
+                  disabled={formik.isSubmitting || !formik.isValid}
+                  variant="contained"
+                  type="submit"
+                >
+                  Se connecter
+                </Button>
+              </Stack>
+              )
+}
+
           </Stack>
         </Box>
       )}
