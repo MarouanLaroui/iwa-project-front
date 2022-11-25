@@ -14,7 +14,7 @@ export type Company = {
   id: String
   name: String;
   email: String;
-  employeesNumber: String;
+  employeesNumber: number;
   description: String;
   sector: SectorType;
   pictureUrl?: String;
