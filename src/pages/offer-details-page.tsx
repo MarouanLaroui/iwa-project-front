@@ -41,7 +41,7 @@ export default function OfferDetailsPage() {
 
   if (offer && company) {
     return (
-      <Stack direction="column" gap={5} paddingBottom={10}>
+      <Stack direction="column" gap={5}>
 
         {/* header entreprise */}
         <Stack direction="row" gap={4} alignItems="center">

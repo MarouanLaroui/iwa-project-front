@@ -1,7 +1,7 @@
 import { Offer, ContractType, JobType } from '../../types/offer/Offer';
 
 const mockOffer: Offer = {
-  offerId: '',
+  offerId: 'idtest',
   companyId: '',
   title: 'Développeur fullstack',
   description: '',

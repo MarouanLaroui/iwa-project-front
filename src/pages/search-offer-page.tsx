@@ -3,7 +3,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import OfferDetailsCard from '../components/offer-details-card';
+import OfferDetailsCard from '../components/offers/offer-details-card';
 import { useFetchOffers } from '../hooks/request/offerHooks';
 import OfferSearchBar from '../components/search-bars/offer-search-bar';
 import { Offer, OfferFilters } from '../types/offer/Offer';

@@ -1,18 +1,15 @@
-import React, { ReactElement } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
-import { DefaultTFuncReturn } from 'i18next';
 
-type Props = {
-  text: string | DefaultTFuncReturn
-  icon: ReactElement
-};
-
-export default function TypographyWithIcon({ text, icon }: Props) {
+// improve any type to accept typo parameters
+export default function TypographyWithIcon(props:any) {
+  const { text, icon, ...textFieldProps } = props;
   return (
-    <Stack direction="row" justifyContent="center" gap="3px">
+    <Stack direction="row" justifyContent="center" gap="5px">
       {icon}
-      <Typography>{text}</Typography>
+      <Typography {...textFieldProps}>{text}</Typography>
     </Stack>
   );
 }

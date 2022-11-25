@@ -2,7 +2,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { Key, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import CompanyCard from '../components/company-card';
+import CompanyCard from '../components/company/company-card';
 import Loading from '../components/loading';
 import CompanySearchBar from '../components/search-bars/company-search-bar';
 import { useFetchCompanies } from '../hooks/request/companyHooks';
