@@ -43,7 +43,7 @@ export default function WorkerProfilePage() {
 
   return (
     <>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '10px' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '30px' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label={t('personal-information')} />
           <Tab label={t('search-criterias')} />
