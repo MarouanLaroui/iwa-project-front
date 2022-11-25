@@ -1,4 +1,4 @@
-export type Worker = {
+type Worker = {
   id: string
   firstName: String
   lastName: String
@@ -7,3 +7,5 @@ export type Worker = {
   cvLink?: String
   hasDrivingLicense: boolean
 };
+
+export default Worker;

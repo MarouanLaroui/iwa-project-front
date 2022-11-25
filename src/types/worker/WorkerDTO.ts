@@ -1,4 +1,4 @@
-import { Worker } from './Worker';
+import Worker from './Worker';
 
 type WorkerDTO = Omit<Worker, 'id'> & {
   password: string
