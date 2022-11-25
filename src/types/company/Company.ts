@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export enum SectorType {
   AGRICULTURE_PECHE = 'AGRICULTURE_PECHE',
   ARTS = 'ARTS',
@@ -8,6 +10,10 @@ export enum SectorType {
   HOTELLERIE_RESTAURATION = 'HOTELLERIE_RESTAURATION',
   TOURISME_LOISIRS = 'TOURISME_LOISIRS',
   INDUSTRIE = 'INDUSTRIE',
+}
+
+export function getSectorTypeTranslation(sector: SectorType) {
+  return i18next.t(`sector-type-${sector.toString().toLowerCase().replace('_', '-')}`);
 }
 
 export type Company = {
