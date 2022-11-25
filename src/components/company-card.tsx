@@ -6,6 +6,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import LoyaltyOutlinedIcon from '@mui/icons-material/LoyaltyOutlined';
 import { useNavigate } from 'react-router-dom';
 import { Company } from '../types/company/Company';
+import TypographyWithIcon from './typography-with-icon';
 
 export default function CompanyCard(
   props: {
@@ -37,24 +38,24 @@ export default function CompanyCard(
         direction="column"
         alignItems="flex-start"
         paddingX="40px"
-        paddingY="25px"
-        gap="5px"
+        paddingY="35px"
+        spacing={2}
       >
-        <Typography variant="h3" fontWeight="bold">{company.name}</Typography>
+        {/* Icon and title */}
 
-        <Stack direction="row" justifyContent="center" gap="10px">
-          <LoyaltyOutlinedIcon />
-          <Typography>{company.sector}</Typography>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Box sx={{ width: { xs: 80, md: 100 }, height: { xs: 80, md: 100 }, background: 'green' }} />
+          <Stack direction="column" alignItems="flex-start">
+            <Typography variant="h3" fontWeight="bold">{company.name}</Typography>
+            <Typography variant="caption" fontWeight="bold">Science for a better life !</Typography>
+          </Stack>
+
         </Stack>
-
-        <Stack direction="row" justifyContent="center" gap="10px">
-          <PeopleAltOutlinedIcon />
-          <Typography>
-            {company.employeesNumber}
-            salariés
-          </Typography>
+        {/* Labels and icons */}
+        <Stack direction="row" spacing={1} justifyContent="space-around" width="100%">
+          <TypographyWithIcon text={company.sector} icon={<LoyaltyOutlinedIcon />} />
+          <TypographyWithIcon text={`${company.employeesNumber} salariés`} icon={<PeopleAltOutlinedIcon />} />
         </Stack>
-
       </Stack>
     </Box>
 

@@ -35,7 +35,7 @@ export default function CompanySignupForm(
         name: '',
         email: '',
         password: '',
-        employeesNumber: '1',
+        employeesNumber: 1,
         description: '',
         sector: SectorType.AGRICULTURE_PECHE,
         pictureUrl: '',
