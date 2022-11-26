@@ -12,7 +12,7 @@ import { DefaultTFuncReturn } from 'i18next';
 import Worker from '../../../types/worker/Worker';
 import InputField from '../../form-fields/input-field';
 import WorkerDTO from '../../../types/worker/WorkerDTO';
-import workerSchema from './worker-schema';
+import workerSchema from './signup/worker-schema';
 import CheckboxField from '../../form-fields/checkbox-field';
 
 type Props = {
@@ -107,7 +107,7 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
               />
             </Grid>
             <Grid item container justifyContent="flex-start" xs={12}>
-              <CheckboxField disabled={!editMode} name="hasDrivingLicense" label={t('driving-license')} />
+              <CheckboxField checked={formik.values.hasDrivingLicense} onChange={formik.handleChange} disabled={!editMode} name="hasDrivingLicense" label={t('driving-license')} />
             </Grid>
           </Grid>
           <Stack direction="row" spacing={3} justifyContent="center">

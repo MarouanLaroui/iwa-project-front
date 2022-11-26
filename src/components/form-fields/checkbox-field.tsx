@@ -16,7 +16,6 @@ export default function CheckboxField(props: CheckboxProps & FieldHookConfig<str
         <Checkbox
           {...props}
           {...field}
-          defaultChecked
         />
     )}
       label={label}
