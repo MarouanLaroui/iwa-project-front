@@ -9,6 +9,6 @@ const useFetchApplication = (id: string) => useFetch<Application>(`applications/
 
 const useFetchApplications = () => useFetchMany<Application>('applications/');
 
-const createApplication = (applicationDTO: ApplicationDTO, offerId: Pick<Offer, 'offerId'>) => usePost<ApplicationDTO, Application>(`offers/${offerId}/applications/`, applicationDTO);
+const createApplication = (applicationDTO: ApplicationDTO, offerData: Pick<Offer, 'offerId'>) => usePost<ApplicationDTO, Application>(`offers/${offerData.offerId}/applications/`, applicationDTO);
 
 export { useFetchApplication, useFetchApplications, createApplication };

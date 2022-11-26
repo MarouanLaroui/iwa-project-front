@@ -1,5 +1,6 @@
+/* eslint-disable react/require-default-props */
 import { Alert, Button } from '@mui/material';
-import { Box, Stack } from '@mui/system';
+import { Stack } from '@mui/system';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
@@ -13,16 +14,19 @@ import applicationSchema from './application-schema';
 export default function ApplicationForm(
   props:{
     offerId: Pick<Offer, 'offerId'>,
-    onSubmitionSuccess: (createdApplication: Application) => void
+    isSubmitOutside?: boolean,
+    onSubmitionSuccess?: (createdApplication: Application) => void
   },
 ) {
-  const { offerId, onSubmitionSuccess } = props;
+  const { offerId, isSubmitOutside, onSubmitionSuccess } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (formData: ApplicationDTO) => {
     createApplication(formData, offerId)
       .then((response) => {
-        onSubmitionSuccess(response.data);
+        if (onSubmitionSuccess) {
+          onSubmitionSuccess(response.data);
+        }
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
@@ -33,7 +37,6 @@ export default function ApplicationForm(
     <Formik
       initialValues={{
         message: '',
-        password: '',
       }}
       validationSchema={applicationSchema}
       onSubmit={async (data, { setSubmitting }) => {
@@ -43,7 +46,7 @@ export default function ApplicationForm(
       }}
     >
       {(formik) => (
-        <Box component={Form} width="100%">
+        <Form id="applicationForm">
           <Stack
             justifyContent="center"
             direction="column"
@@ -69,6 +72,7 @@ export default function ApplicationForm(
               rows={4}
             />
 
+            {!isSubmitOutside && (
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
@@ -76,8 +80,9 @@ export default function ApplicationForm(
             >
               Send
             </Button>
+            )}
           </Stack>
-        </Box>
+        </Form>
       )}
     </Formik>
   );

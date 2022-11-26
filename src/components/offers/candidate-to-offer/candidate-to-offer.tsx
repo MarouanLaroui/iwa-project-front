@@ -12,9 +12,8 @@ export default function CandidateToOffer(props:{
   offer: Offer,
   company: Company
 }) {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const { company, offer } = props;
-  const onSubmitionSuccess = () => {};
 
   const goToPreviousStep = () => {
     setStep(() => step - 1);
@@ -42,21 +41,21 @@ export default function CandidateToOffer(props:{
 
       </Stack>
 
-      {step === 0 && <VerifyInfoStep />}
-      {step === 1
+      {step === 1 && <VerifyInfoStep />}
+      {step === 2
       && (
       <MessageStep
         offerId={{ offerId: offer.offerId }}
         companyName={{ name: company.name }}
-        onSubmissionSuccess={onSubmitionSuccess}
+        onSubmitionSuccess={() => undefined}
       />
       )}
 
       <Divider sx={{ width: '100%' }} />
       <Stack width="100%" direction="row" justifyContent="flex-end" spacing={3}>
-        {(step === 1 || step === 2) && <Button onClick={goToPreviousStep}>Précédent</Button>}
-        {(step === 0 || step === 1) && <Button variant="contained" onClick={goToNextStep}>Suivant</Button>}
-        {step === 2 && <Button variant="contained">Candidater</Button>}
+        {(step === 2) && <Button onClick={goToPreviousStep}>Précédent</Button>}
+        {(step === 1) && <Button variant="contained" onClick={goToNextStep}>Suivant</Button>}
+        {step === 2 && <Button variant="contained" type="submit" form="applicationForm">Candidater</Button>}
       </Stack>
 
     </Stack>

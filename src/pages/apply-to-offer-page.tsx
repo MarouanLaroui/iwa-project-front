@@ -12,6 +12,7 @@ export default function ApplyToOfferPage() {
 
   return (
     <ApplicationForm
+      isSubmitOutside={false}
       offerId={{ offerId: `${params.offerId}` }}
       onSubmitionSuccess={onSubmitionSuccess}
     />
