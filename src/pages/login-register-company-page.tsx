@@ -3,13 +3,13 @@ import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import WorkerLoginForm from '../components/forms/login/worker-login-form';
-import WorkerSignupForm from '../components/forms/worker/signup/worker-signup-form';
+import CompanySignupForm from '../components/forms/company/company-signup-form';
+import CompanyLoginForm from '../components/forms/login/company-login-form';
 import saveTokenInLocalStorage from '../database/utils/local-storage';
-import WorkerAuthenticated from '../types/worker/WorkerAuthenticated';
-import { COMPANY_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes';
+import CompanyAuthenticated from '../types/company/CompanyAuthenticated';
+import { WORKER_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes';
 
-export default function WorkerLoginRegisterPage() {
+export default function CompanyLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -18,9 +18,9 @@ export default function WorkerLoginRegisterPage() {
     setTabNumber(newValue);
   };
 
-  const onRegisterSuccess = (worker: WorkerAuthenticated) => {
-    saveTokenInLocalStorage(worker.authorizationToken);
-    navigate(`${WORKER_PROFILE_BASE_ROUTE}/${worker.id}`);
+  const onRegisterSuccess = (company: CompanyAuthenticated) => {
+    saveTokenInLocalStorage(company.authorizationToken);
+    navigate(`${WORKER_PROFILE_BASE_ROUTE}/${company.id}`);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function WorkerLoginRegisterPage() {
         tabNumber === 0 && (
           <Stack direction="row" width="100%" justifyContent="center">
             <Box width={{ xs: '100%', sm: '500px' }}>
-              <WorkerLoginForm />
+              <CompanyLoginForm />
             </Box>
           </Stack>
 
@@ -45,9 +45,8 @@ export default function WorkerLoginRegisterPage() {
         tabNumber === 1 && (
           <Stack direction="row" width="100%" justifyContent="center">
             <Box width={{ xs: '100%', sm: '500px' }}>
-              <WorkerSignupForm
-                onSubmissionSuccess={onRegisterSuccess}
-                readonly={false}
+              <CompanySignupForm
+                onSubmitionSuccess={onRegisterSuccess}
               />
             </Box>
           </Stack>
@@ -56,10 +55,10 @@ export default function WorkerLoginRegisterPage() {
 
       <Stack direction="row" spacing={1}>
         <Typography>
-          {t('are-you-a-company')}
+          {t('are-you-looking-for-a-job')}
         </Typography>
 
-        <Link to={COMPANY_LOGIN_ROUTE}>{`${t('click-here')!}`}</Link>
+        <Link to={WORKER_LOGIN_ROUTE}>{`${t('click-here') !}`}</Link>
       </Stack>
     </Stack>
   );

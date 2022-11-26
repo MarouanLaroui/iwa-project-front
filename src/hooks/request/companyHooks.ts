@@ -10,7 +10,7 @@ const useFetchCompany = (id: string) => useFetch<Company>(`companies/${id}`);
 
 const useFetchCompanies = () => useFetchMany<Company>('companies/');
 
-const signUpCompany = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, Company>('companies/register', companyToCreate);
+const signUpCompany = (companyToCreate: CompanyDTO) => usePost<CompanyDTO, CompanyAuthenticated>('companies/register', companyToCreate);
 
 const useLoginCompany = (loginDTO: LoginDTO) => usePost<LoginDTO, CompanyAuthenticated>('companies/login', loginDTO);
 

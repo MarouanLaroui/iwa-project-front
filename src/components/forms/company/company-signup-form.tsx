@@ -4,19 +4,22 @@ import {
   Alert, Box, Button, MenuItem, Stack,
 } from '@mui/material';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'react-i18next';
 import InputField from '../../form-fields/input-field';
 import companySchema from './company-schema';
 import SelectField from '../../form-fields/select-field';
 import CompanyDTO from '../../../types/company/CompanyDTO';
-import { Company, SectorType } from '../../../types/company/Company';
+import { SectorType } from '../../../types/company/Company';
 import { signUpCompany } from '../../../hooks/request/companyHooks';
+import CompanyAuthenticated from '../../../types/company/CompanyAuthenticated';
 
 export default function CompanySignupForm(
   props:{
-    onSubmitionSuccess: (createdCompany:Company)=>void
+    onSubmitionSuccess: (createdCompany:CompanyAuthenticated)=>void
   },
 ) {
   const { onSubmitionSuccess } = props;
+  const { t } = useTranslation();
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (companyToCreate: CompanyDTO) => {
@@ -70,35 +73,50 @@ export default function CompanySignupForm(
             <Stack direction="row" spacing="30px" width="100%">
 
               <InputField
-                label="name"
+                label={t('name')}
                 name="name"
                 type="text"
                 fullWidth
               />
 
-              <InputField
-                label="email"
-                name="email"
-                placeholder="abc@gmail.com"
-                type="email"
-                inputMode="email"
-                fullWidth
-              />
+              <SelectField
+                label={t('sector')}
+                name="sector"
+              >
+                {
+                  Object.keys(SectorType).map(
+                    (sectorType) => (
+                      <MenuItem value={sectorType} key={sectorType}>
+                        {sectorType}
+                      </MenuItem>
+                    ),
+                  )
+                }
+              </SelectField>
 
             </Stack>
 
+            <InputField
+              label="email"
+              name="email"
+              placeholder="abc@gmail.com"
+              type="email"
+              inputMode="email"
+              fullWidth
+            />
+
             <Stack direction="row" spacing="30px" width="100%">
 
-              <SelectField
-                label="sector"
-                name="sector"
-              >
-                <MenuItem value="Aviation">Aviation</MenuItem>
-                <MenuItem value="Marouan le boss">Mystère</MenuItem>
-              </SelectField>
+              <InputField
+                label={t('password')}
+                name="password"
+                placeholder="Ac6Qj@v"
+                type="password"
+                fullWidth
+              />
 
               <InputField
-                label="number of Employees"
+                label={t('number-of-employees')}
                 name="nbOfEmployees"
                 type="number"
                 fullWidth
@@ -119,7 +137,7 @@ export default function CompanySignupForm(
               variant="contained"
               type="submit"
             >
-              Sign up
+              {t('sign-up')}
             </Button>
           </Stack>
         </Box>
