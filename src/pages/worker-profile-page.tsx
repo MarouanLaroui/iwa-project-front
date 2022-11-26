@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import WorkerProfileForm from '../components/forms/worker/worker-profile-form';
 import WorkerCriteria from '../components/worker-criteria';
-import WorkerDTO from '../types/worker/WorkerDTO';
 import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
 import mockCriteria from '../database/mock/mockCriteria';
 import AlertContext from '../context/alert-context';
+import WorkerUpdateDTO from '../types/worker/WorkerUpdateDTO';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
@@ -32,9 +32,9 @@ export default function WorkerProfilePage() {
   };
 
   const onUpdateWorkerSubmit = async (
-    workerDTO: WorkerDTO,
+    workerUpdateDTO: WorkerUpdateDTO,
   ) => {
-    useUpdateWorker(workerDTO)
+    useUpdateWorker(workerUpdateDTO)
       .then(() => {
         setSuccessMessage(t('information-successfully-updated'));
       })

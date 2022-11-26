@@ -9,13 +9,13 @@ import { Form } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
 import Worker from '../../../types/worker/Worker';
 import InputField from '../../form-fields/input-field';
-import WorkerDTO from '../../../types/worker/WorkerDTO';
 import workerSchema from './signup/worker-schema';
 import CheckboxField from '../../form-fields/checkbox-field';
+import WorkerUpdateDTO from '../../../types/worker/WorkerUpdateDTO';
 
 type Props = {
   worker: Worker
-  onSubmit: (data: WorkerDTO) => void
+  onSubmit: (data: WorkerUpdateDTO) => void
 };
 
 export default function WorkerProfileForm({ worker, onSubmit }: Props) {
@@ -32,7 +32,7 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
         hasDrivingLicense: worker.hasDrivingLicense,
       }}
       validationSchema={workerSchema}
-      onSubmit={async (data: WorkerDTO, { setSubmitting }) => {
+      onSubmit={async (data: WorkerUpdateDTO, { setSubmitting }) => {
         setSubmitting(true);
         onSubmit(data);
         setSubmitting(false);
