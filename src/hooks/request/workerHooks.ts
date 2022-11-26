@@ -8,10 +8,10 @@ const useFetchWorker = (workerId: string) => useFetchMany<Worker>(`workers/${wor
 
 const useFetchWorkers = () => useFetchMany<Worker>('workers/');
 
-const useCreateWorker = (workerToCreate: WorkerDTO) => usePost<WorkerDTO, Worker>('workers/register', workerToCreate);
+const registerWorker = (workerToCreate: WorkerDTO) => usePost<WorkerDTO, WorkerAuthenticated>('workers/register', workerToCreate);
 
 const useLoginWorker = (loginDTO: LoginDTO) => usePost<LoginDTO, WorkerAuthenticated>('workers/login', loginDTO);
 
 export {
-  useFetchWorker, useFetchWorkers, useCreateWorker, useLoginWorker,
+  useFetchWorker, useFetchWorkers, registerWorker, useLoginWorker,
 };

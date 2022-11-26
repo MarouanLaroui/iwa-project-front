@@ -4,28 +4,29 @@ import { Form, Formik } from 'formik';
 import {
   Alert, Box, Button, Divider, Stack, Typography,
 } from '@mui/material';
-import { InferType } from 'yup';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import InputField from '../../../form-fields/input-field';
 import workerSchema from './worker-schema';
 import CheckboxField from '../../../form-fields/checkbox-field';
 import Worker from '../../../../types/worker/Worker';
+import { registerWorker } from '../../../../hooks/request/workerHooks';
+import WorkerDTO from '../../../../types/worker/WorkerDTO';
+import WorkerAuthenticated from '../../../../types/worker/WorkerAuthenticated';
 
 export default function WorkerSignupForm(props:{
+  onSubmissionSuccess? : (worker: WorkerAuthenticated)=> void,
   readonly: boolean,
   worker?: Worker
 }) {
-  const { readonly, worker } = props;
+  const { readonly, worker, onSubmissionSuccess } = props;
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (data: InferType<typeof workerSchema>) => {
-    axios
-      .post('auth/organizer/login', data)
+  const onSubmit = async (workerToCreate: WorkerDTO) => {
+    registerWorker(workerToCreate)
       .then((response) => {
-        console.log(response);
-        // do something
+        if (onSubmissionSuccess) onSubmissionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
         setErrorMsg(err.message);
@@ -35,14 +36,15 @@ export default function WorkerSignupForm(props:{
   return (
     <Formik
       initialValues={{
-        firstName: worker ? worker.firstName : '',
-        lastName: worker ? worker.lastName : '',
+        firstname: worker ? worker.firstname : '',
+        lastname: worker ? worker.lastname : '',
         email: worker ? worker.email : '',
+        password: '',
         birthDate: worker ? worker.birthDate : new Date(),
         hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
       }}
       validationSchema={workerSchema}
-      onSubmit={async (data, { setSubmitting }) => {
+      onSubmit={async (data: WorkerDTO, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
         setSubmitting(false);
@@ -70,11 +72,11 @@ export default function WorkerSignupForm(props:{
             )}
 
             <Typography variant="caption">Your personal infos</Typography>
-            <Stack direction="row" spacing="30px" width="100%">
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
 
               <InputField
                 label="firstname"
-                name="firstName"
+                name="firstname"
                 type="text"
                 fullWidth
                 disabled={readonly}
@@ -82,7 +84,7 @@ export default function WorkerSignupForm(props:{
 
               <InputField
                 label="lastname"
-                name="lastName"
+                name="lastname"
                 type="text"
                 fullWidth
                 disabled={readonly}
@@ -90,14 +92,23 @@ export default function WorkerSignupForm(props:{
 
             </Stack>
 
-            <Stack direction="row" spacing="30px" width="100%">
+            <InputField
+              label="email"
+              name="email"
+              placeholder="abc@gmail.com"
+              type="email"
+              inputMode="email"
+              fullWidth
+              disabled={readonly}
+            />
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
 
               <InputField
-                label="email"
-                name="email"
-                placeholder="abc@gmail.com"
-                type="email"
-                inputMode="email"
+                label="password"
+                name="password"
+                placeholder="X82@.c"
+                type="password"
                 fullWidth
                 disabled={readonly}
               />
@@ -147,7 +158,7 @@ export default function WorkerSignupForm(props:{
                   variant="contained"
                   type="submit"
                 >
-                  Se connecter
+                  S&apos;inscrire
                 </Button>
               </Stack>
               )

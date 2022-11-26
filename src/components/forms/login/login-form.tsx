@@ -34,7 +34,7 @@ export default function LoginForm({ onSubmit } : Props) {
           <Stack
             justifyContent="center"
             direction="column"
-            spacing="10px"
+            spacing={3}
             width="100%"
           >
             {errorMsg && (

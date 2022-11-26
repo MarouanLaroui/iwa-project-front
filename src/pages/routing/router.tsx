@@ -2,13 +2,12 @@ import React from 'react';
 import {
   createBrowserRouter, createRoutesFromElements, Route,
 } from 'react-router-dom';
-import WorkerSignupForm from '../../components/forms/worker/signup/worker-signup-form';
 import SearchCompaniesPage from '../search-companies-page';
 import LandingPage from '../landing-page';
 import OfferDetailsPage from '../offer-details-page';
 import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_CREATE_ROUTE,
-  OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE, WORKER_SIGNUP_ROUTE,
+  OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE,
   COMPANY_SIGNUP_ROUTE, OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
   WORKER_PROFILE_ROUTE, COMPANY_DETAILS_ROUTE, COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_ROUTE,
 } from './routes';
@@ -18,10 +17,10 @@ import CompanySignUpPage from '../company-signup-page';
 import CompanyDetailsPage from '../company-details-page';
 import App from '../../App';
 import SearchOfferPage from '../search-offer-page';
-import WorkerLoginPage from '../worker-login-page';
 import WorkerProfilePage from '../worker-profile-page';
 import CompanyLoginPage from '../company-login-page';
 import CompanyProfilePage from '../company-profile-page';
+import LoginRegisterPage from '../login-register-worker-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -29,10 +28,8 @@ const router = createBrowserRouter(
       <Route path={HOME_ROUTE} element={<LandingPage />} />
 
       {/* Auth */}
-      <Route path={WORKER_LOGIN_ROUTE} element={<WorkerLoginPage />} />
+      <Route path={WORKER_LOGIN_ROUTE} element={<LoginRegisterPage />} />
       <Route path={COMPANY_LOGIN_ROUTE} element={<CompanyLoginPage />} />
-
-      <Route path={WORKER_PROFILE_ROUTE} element={<WorkerProfilePage />} />
 
       {/* Company */}
       <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignUpPage />} />
@@ -48,7 +45,7 @@ const router = createBrowserRouter(
       <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
 
       {/* Worker */}
-      <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm readonly />} />
+      <Route path={WORKER_PROFILE_ROUTE} element={<WorkerProfilePage />} />
 
     </Route>,
   ]),

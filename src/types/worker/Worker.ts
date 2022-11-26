@@ -1,7 +1,7 @@
 type Worker = {
   id: string
-  firstName: string
-  lastName: string
+  firstname: string
+  lastname: string
   email: string
   birthDate: Date
   cvLink?: string
