@@ -1,3 +1,4 @@
+import { SectorType } from '../company/Company';
 import { ContractType, JobType } from '../offer/Offer';
 
 export type Criteria = {
@@ -5,7 +6,7 @@ export type Criteria = {
   workerId: String
   contractType: ContractType
   jobType: JobType
-  sector: String
+  sector: SectorType
   salaryExpectation: number
   startingDate: Date
   endDate: Date
