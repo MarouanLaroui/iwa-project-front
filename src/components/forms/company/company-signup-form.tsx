@@ -77,26 +77,41 @@ export default function CompanySignupForm(
                 fullWidth
               />
 
-              <InputField
-                label="email"
-                name="email"
-                placeholder="abc@gmail.com"
-                type="email"
-                inputMode="email"
-                fullWidth
-              />
-
-            </Stack>
-
-            <Stack direction="row" spacing="30px" width="100%">
-
               <SelectField
                 label="sector"
                 name="sector"
               >
-                <MenuItem value="Aviation">Aviation</MenuItem>
-                <MenuItem value="Marouan le boss">Mystère</MenuItem>
+                {
+                  Object.keys(SectorType).map(
+                    (sectorType) => (
+                      <MenuItem value={sectorType} key={sectorType}>
+                        {sectorType}
+                      </MenuItem>
+                    ),
+                  )
+                }
               </SelectField>
+
+            </Stack>
+
+            <InputField
+              label="email"
+              name="email"
+              placeholder="abc@gmail.com"
+              type="email"
+              inputMode="email"
+              fullWidth
+            />
+
+            <Stack direction="row" spacing="30px" width="100%">
+
+              <InputField
+                label="password"
+                name="password"
+                placeholder="Ac6Qj@v"
+                type="password"
+                fullWidth
+              />
 
               <InputField
                 label="number of Employees"
