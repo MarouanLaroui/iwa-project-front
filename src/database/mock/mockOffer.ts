@@ -12,7 +12,7 @@ const mockOffer: Offer = {
   contractType: ContractType.CDD,
   jobType: JobType.PARTIAL_TIME,
   salary: 3000,
-  needDrivingLicense: true,
+  needDrivingLicence: true,
   ledToJob: false,
 };
 

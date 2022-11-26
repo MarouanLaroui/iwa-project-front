@@ -19,7 +19,7 @@ export type Offer = {
   contractType: ContractType
   jobType: JobType
   salary: number
-  needDrivingLicense: boolean
+  needDrivingLicence: boolean
   ledToJob: boolean
 };
 

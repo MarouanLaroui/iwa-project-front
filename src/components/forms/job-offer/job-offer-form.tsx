@@ -42,7 +42,7 @@ export default function JobOfferForm(props:{
         endDate: new Date(),
         jobType: JobType.FULL_TIME,
         contractType: ContractType.CDD,
-        needDrivingLicense: false,
+        needDrivingLicence: false,
       }}
       validationSchema={jobOfferSchema}
       onSubmit={async (offerToCreate: OfferDTO, { setSubmitting }) => {
@@ -72,27 +72,67 @@ export default function JobOfferForm(props:{
               </Alert>
             )}
 
-            <Stack direction="row" spacing="30px">
-              <SelectField
-                label="job type"
-                name="jobType"
-                placeholder="pick a type"
-              >
-                <MenuItem value="CDD">CDD</MenuItem>
-                <MenuItem value="CDI">CDI</MenuItem>
-              </SelectField>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing="30px">
+              <Stack direction="row" spacing="30px" width="100%">
+                <SelectField
+                  label="job type"
+                  name="jobType"
+                  placeholder="pick a type"
+                  fullWidth
+                >
+                  {
+                    Object.keys(JobType).map(
+                      (jobType) => (
+                        <MenuItem value={jobType} key={jobType}>
+                          {jobType}
+                        </MenuItem>
+                      ),
+                    )
+                  }
+                </SelectField>
 
-              <InputField
-                label="starting date"
-                name="startingDate"
-                type="date"
-                fullWidth
-              />
+                <SelectField
+                  label="contract type"
+                  name="contractType"
+                  placeholder="pick a type"
+                  fullWidth
+                >
+                  {
+                    Object.keys(ContractType).map(
+                      (contractType) => (
+                        <MenuItem value={contractType} key={contractType}>
+                          {contractType}
+                        </MenuItem>
+                      ),
+                    )
+                  }
+                </SelectField>
 
+              </Stack>
+              <Stack direction="row" spacing="30px" width="100%">
+                <InputField
+                  label="starting date"
+                  name="startingDate"
+                  type="date"
+                  fullWidth
+                />
+
+                <InputField
+                  label="ending date"
+                  name="endingDate"
+                  type="date"
+                  fullWidth
+                />
+              </Stack>
+
+            </Stack>
+
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing="30px">
               <InputField
-                label="ending date"
-                name="endingDate"
-                type="date"
+                label="title"
+                name="title"
+                placeholder="Enter a title here"
+                type="text"
                 fullWidth
               />
 
@@ -100,7 +140,14 @@ export default function JobOfferForm(props:{
                 label="salary"
                 name="salary"
                 type="number"
-                fullWidth
+
+              />
+
+              <InputField
+                label="location"
+                name="location"
+                placeholder="Enter a location here"
+                type="text"
               />
             </Stack>
 
@@ -117,8 +164,7 @@ export default function JobOfferForm(props:{
                 <DirectionsCarFilledOutlinedIcon />
                 <Typography variant="caption">Veichule details</Typography>
               </Stack>
-              <CheckboxField name="needDrivingLicense" label="Is driving licence needed" />
-              <CheckboxField name="hasCompanyCar" label="Do you provide a veichule" />
+              <CheckboxField name="needDrivingLicence" label="Is driving licence needed" />
             </Stack>
 
             <Button

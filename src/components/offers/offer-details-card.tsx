@@ -55,7 +55,7 @@ export default function OfferDetailsCard({ offer }: Props) {
           <TypographyWithIcon text={offer.contractType} icon={<WorkOutlineOutlinedIcon />} />
           <TypographyWithIcon text={`${offer.salary} euros/${t('month')}`} icon={<EuroOutlinedIcon />} />
           <TypographyWithIcon text={`${offer.location}`} icon={<LocationOnOutlinedIcon />} />
-          {offer.needDrivingLicense && (
+          {offer.needDrivingLicence && (
           <TypographyWithIcon text={t('driving-license-required')} icon={<BadgeIcon />} />
           )}
         </Stack>
