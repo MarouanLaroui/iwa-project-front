@@ -7,6 +7,7 @@ import {
 import { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
+import { useTranslation } from 'react-i18next';
 import InputField from '../../../form-fields/input-field';
 import workerSchema from './worker-schema';
 import CheckboxField from '../../../form-fields/checkbox-field';
@@ -21,6 +22,7 @@ export default function WorkerSignupForm(props:{
   worker?: Worker
 }) {
   const { readonly, worker, onSubmissionSuccess } = props;
+  const { t } = useTranslation();
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = async (workerToCreate: WorkerDTO) => {
@@ -71,7 +73,7 @@ export default function WorkerSignupForm(props:{
               </Alert>
             )}
 
-            <Typography variant="caption">Your personal infos</Typography>
+            <Typography variant="caption">{t('your-personal-infos')}</Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
 
               <InputField
@@ -105,7 +107,7 @@ export default function WorkerSignupForm(props:{
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
 
               <InputField
-                label="password"
+                label={t('password')}
                 name="password"
                 placeholder="X82@.c"
                 type="password"
@@ -114,7 +116,7 @@ export default function WorkerSignupForm(props:{
               />
 
               <InputField
-                label="birth Date"
+                label={t('birth-date')}
                 name="birthDate"
                 type="date"
                 fullWidth
@@ -125,13 +127,13 @@ export default function WorkerSignupForm(props:{
 
             <Divider variant="middle" style={{ width: '100%' }} />
 
-            <Typography variant="caption">Your job infos</Typography>
+            <Typography variant="caption">{t('your-job-info')}</Typography>
 
             <Stack direction="row" spacing="20px" width="100%">
               <Stack direction="column" width="50%">
                 <Stack direction="row" alignItems="center">
                   <DirectionsCarFilledOutlinedIcon />
-                  <Typography variant="caption">Veichule details</Typography>
+                  <Typography variant="caption">{t('vehicle-details')}</Typography>
                 </Stack>
                 <CheckboxField name="hasDrivingLicense" label="I have my driving licence" disabled={readonly} />
               </Stack>
@@ -139,10 +141,10 @@ export default function WorkerSignupForm(props:{
               <Stack direction="column" width="50%" spacing="10px">
                 <Stack direction="row" alignItems="center">
                   <AttachFileOutlinedIcon />
-                  <Typography variant="caption">Attached files</Typography>
+                  <Typography variant="caption">{t('attached-files')}</Typography>
                 </Stack>
                 <Button disabled={readonly} variant="contained" component="label" sx={{ width: 'fit-content' }}>
-                  Upload your CV
+                  {t('upload-your-cv')}
                   <input hidden accept="image/*" type="file" />
                 </Button>
               </Stack>
@@ -158,7 +160,7 @@ export default function WorkerSignupForm(props:{
                   variant="contained"
                   type="submit"
                 >
-                  S&apos;inscrire
+                  {t('sign-up')}
                 </Button>
               </Stack>
               )

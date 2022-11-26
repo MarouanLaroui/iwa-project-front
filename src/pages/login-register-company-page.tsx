@@ -1,6 +1,7 @@
 import { Tab, Tabs, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import CompanySignupForm from '../components/forms/company/company-signup-form';
 import CompanyLoginForm from '../components/forms/login/company-login-form';
@@ -10,6 +11,7 @@ import { WORKER_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes'
 
 export default function CompanyLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleTabChange = (event: React.SyntheticEvent, newValue:number) => {
@@ -24,8 +26,8 @@ export default function CompanyLoginRegisterPage() {
   return (
     <Stack direction="column" alignItems="center" spacing={5} width="100%">
       <Tabs value={tabNumber} onChange={handleTabChange} aria-label="basic tabs example">
-        <Tab label="Se connecter" />
-        <Tab label="S'inscrire" />
+        <Tab label={`${t('login')}`} />
+        <Tab label={`${t('register')}`} />
       </Tabs>
 
       {
@@ -53,10 +55,10 @@ export default function CompanyLoginRegisterPage() {
 
       <Stack direction="row" spacing={1}>
         <Typography>
-          Vous cherchez un emploi ?
+          {t('are-you-looking-for-a-job')}
         </Typography>
 
-        <Link to={WORKER_LOGIN_ROUTE}>cliquez ici</Link>
+        <Link to={WORKER_LOGIN_ROUTE}>{`${t('click-here') !}`}</Link>
       </Stack>
     </Stack>
   );
