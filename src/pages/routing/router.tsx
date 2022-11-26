@@ -18,9 +18,9 @@ import CompanyDetailsPage from '../company-details-page';
 import App from '../../App';
 import SearchOfferPage from '../search-offer-page';
 import WorkerProfilePage from '../worker-profile-page';
-import CompanyLoginPage from '../company-login-page';
 import CompanyProfilePage from '../company-profile-page';
-import LoginRegisterPage from '../login-register-worker-page';
+import WorkerLoginRegisterPage from '../login-register-worker-page';
+import CompanyLoginRegisterPage from '../login-register-company-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -28,8 +28,8 @@ const router = createBrowserRouter(
       <Route path={HOME_ROUTE} element={<LandingPage />} />
 
       {/* Auth */}
-      <Route path={WORKER_LOGIN_ROUTE} element={<LoginRegisterPage />} />
-      <Route path={COMPANY_LOGIN_ROUTE} element={<CompanyLoginPage />} />
+      <Route path={WORKER_LOGIN_ROUTE} element={<WorkerLoginRegisterPage />} />
+      <Route path={COMPANY_LOGIN_ROUTE} element={<CompanyLoginRegisterPage />} />
 
       {/* Company */}
       <Route path={COMPANY_SIGNUP_ROUTE} element={<CompanySignUpPage />} />

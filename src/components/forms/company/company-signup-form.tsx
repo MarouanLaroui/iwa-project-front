@@ -8,12 +8,13 @@ import InputField from '../../form-fields/input-field';
 import companySchema from './company-schema';
 import SelectField from '../../form-fields/select-field';
 import CompanyDTO from '../../../types/company/CompanyDTO';
-import { Company, SectorType } from '../../../types/company/Company';
+import { SectorType } from '../../../types/company/Company';
 import { signUpCompany } from '../../../hooks/request/companyHooks';
+import CompanyAuthenticated from '../../../types/company/CompanyAuthenticated';
 
 export default function CompanySignupForm(
   props:{
-    onSubmitionSuccess: (createdCompany:Company)=>void
+    onSubmitionSuccess: (createdCompany:CompanyAuthenticated)=>void
   },
 ) {
   const { onSubmitionSuccess } = props;
