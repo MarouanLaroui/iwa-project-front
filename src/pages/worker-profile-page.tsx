@@ -1,33 +1,33 @@
-import React from 'react';
-import { Tabs, Tab } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Tabs, Tab, Alert, Typography,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import { DefaultTFuncReturn } from 'i18next';
-import Worker from '../types/worker/Worker';
+import { useParams } from 'react-router-dom';
 import WorkerProfileForm from '../components/forms/worker/worker-profile-form';
 import WorkerCriteria from '../components/worker-criteria';
 import { Criteria } from '../types/criteria/Criteria';
 import { ContractType, JobType } from '../types/offer/Offer';
 import { SectorType } from '../types/company/Company';
 import WorkerDTO from '../types/worker/WorkerDTO';
-import { useUpdateWorker } from '../hooks/request/workerHooks';
+import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
-  // const params = useParams();
+  const params = useParams();
 
   const [value, setValue] = React.useState(0);
+  const [localErrorMsg, setLocalErrorMsg] = useState('');
 
-  const mockWorker: Worker = {
-    id: 'abc-123',
-    firstName: 'Ruby',
-    lastName: 'Georget',
-    email: 'ruby@gmail.com',
-    birthDate: new Date('2000-05-24'),
-    cvLink: undefined,
-    hasDrivingLicense: true,
-  };
+  const [worker, loading, error] = useFetchWorker(params.workerId!);
 
+  if (error) {
+    setLocalErrorMsg(error.message);
+  }
+
+  // TODO: GET CRITERIA FROM REQUEST
   const mockCriteria: Criteria = {
     criteriaId: 'abc-123',
     workerId: 'abc-123',
@@ -58,16 +58,34 @@ export default function WorkerProfilePage() {
       });
   };
 
+  if (worker) {
+    return (
+      <>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '30px' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label={t('personal-information')} />
+            <Tab label={t('search-criterias')} />
+          </Tabs>
+        </Box>
+        {value === 0 && <WorkerProfileForm worker={worker!} onSubmit={onUpdateWorkerSubmit} />}
+        {value === 1 && <WorkerCriteria criteria={mockCriteria} />}
+      </>
+    );
+  }
+
   return (
     <>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '30px' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label={t('personal-information')} />
-          <Tab label={t('search-criterias')} />
-        </Tabs>
-      </Box>
-      {value === 0 && <WorkerProfileForm worker={mockWorker} onSubmit={onUpdateWorkerSubmit} />}
-      {value === 1 && <WorkerCriteria criteria={mockCriteria} />}
+      {loading && <Typography variant="h1">LOADING</Typography>}
+      {localErrorMsg && (
+      <Alert
+        severity="error"
+        onClose={() => {
+          setLocalErrorMsg('');
+        }}
+      >
+        {localErrorMsg}
+      </Alert>
+      )}
     </>
   );
 }

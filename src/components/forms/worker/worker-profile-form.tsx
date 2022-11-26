@@ -31,8 +31,8 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
   return (
     <Formik
       initialValues={{
-        firstName: worker.firstName,
-        lastName: worker.lastName,
+        firstname: worker.firstname,
+        lastname: worker.lastname,
         email: worker.email,
         birthDate: worker.birthDate,
         hasDrivingLicense: worker.hasDrivingLicense,
@@ -66,11 +66,11 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
             {errorMsg}
           </Alert>
           )}
-          <Grid container spacing={3} marginBottom={3}>
+          <Grid container spacing={3} marginY={1}>
             <Grid item xs={12} sm={6}>
               <InputField
                 label={t('first-name')}
-                name="firstName"
+                name="firstname"
                 type="text"
                 fullWidth
                 disabled={!editMode}
@@ -81,7 +81,7 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
             <Grid item xs={12} sm={6}>
               <InputField
                 label={t('last-name')}
-                name="lastName"
+                name="lastname"
                 type="text"
                 fullWidth
                 disabled={!editMode}
@@ -107,7 +107,7 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
               />
             </Grid>
             <Grid item container justifyContent="flex-start" xs={12}>
-              <CheckboxField name="hasDrivingLicense" label={t('driving-license')} />
+              <CheckboxField disabled={!editMode} name="hasDrivingLicense" label={t('driving-license')} />
             </Grid>
           </Grid>
           <Stack direction="row" spacing={3} justifyContent="center">
