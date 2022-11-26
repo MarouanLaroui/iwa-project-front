@@ -59,7 +59,7 @@ export default function WorkerLoginRegisterPage() {
           {t('are-you-a-company')}
         </Typography>
 
-        <Link to={COMPANY_LOGIN_ROUTE}>{`${t('click-here')!}`}</Link>
+        <Link to={`/${COMPANY_LOGIN_ROUTE}`}>{`${t('click-here')!}`}</Link>
       </Stack>
     </Stack>
   );
