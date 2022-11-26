@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button, Grid, TextField,
 } from '@mui/material';
 import { Box, Stack } from '@mui/system';
@@ -8,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { Form } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
-import { DefaultTFuncReturn } from 'i18next';
 import Worker from '../../../types/worker/Worker';
 import InputField from '../../form-fields/input-field';
 import WorkerDTO from '../../../types/worker/WorkerDTO';
@@ -17,16 +15,12 @@ import CheckboxField from '../../form-fields/checkbox-field';
 
 type Props = {
   worker: Worker
-  onSubmit: (data: WorkerDTO,
-    setError: React.Dispatch<React.SetStateAction<string>>,
-    setSuccess: React.Dispatch<React.SetStateAction<DefaultTFuncReturn>>) => void
+  onSubmit: (data: WorkerDTO) => void
 };
 
 export default function WorkerProfileForm({ worker, onSubmit }: Props) {
   const { t } = useTranslation();
   const [editMode, setEditMode] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [successMsg, setSuccessMsg] = useState('' as DefaultTFuncReturn);
 
   return (
     <Formik
@@ -40,32 +34,12 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
       validationSchema={workerSchema}
       onSubmit={async (data: WorkerDTO, { setSubmitting }) => {
         setSubmitting(true);
-        onSubmit(data, setErrorMsg, setSuccessMsg);
+        onSubmit(data);
         setSubmitting(false);
       }}
     >
       {(formik) => (
         <Box component={Form} width="100%">
-          {successMsg && (
-          <Alert
-            severity="success"
-            onClose={() => {
-              setSuccessMsg('');
-            }}
-          >
-            {successMsg}
-          </Alert>
-          )}
-          {errorMsg && (
-          <Alert
-            severity="error"
-            onClose={() => {
-              setErrorMsg('');
-            }}
-          >
-            {errorMsg}
-          </Alert>
-          )}
           <Grid container spacing={3} marginY={1}>
             <Grid item xs={12} sm={6}>
               <InputField
