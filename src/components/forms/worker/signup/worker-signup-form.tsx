@@ -13,8 +13,8 @@ import workerSchema from './worker-schema';
 import CheckboxField from '../../../form-fields/checkbox-field';
 import Worker from '../../../../types/worker/Worker';
 import { registerWorker } from '../../../../hooks/request/workerHooks';
-import WorkerDTO from '../../../../types/worker/WorkerDTO';
 import WorkerAuthenticated from '../../../../types/worker/WorkerAuthenticated';
+import WorkerCreateDTO from '../../../../types/worker/WorkerCreateDTO';
 
 export default function WorkerSignupForm(props:{
   onSubmissionSuccess? : (worker: WorkerAuthenticated)=> void,
@@ -25,7 +25,7 @@ export default function WorkerSignupForm(props:{
   const { t } = useTranslation();
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = async (workerToCreate: WorkerDTO) => {
+  const onSubmit = async (workerToCreate: WorkerCreateDTO) => {
     registerWorker(workerToCreate)
       .then((response) => {
         if (onSubmissionSuccess) onSubmissionSuccess(response.data);
@@ -46,7 +46,7 @@ export default function WorkerSignupForm(props:{
         hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
       }}
       validationSchema={workerSchema}
-      onSubmit={async (data: WorkerDTO, { setSubmitting }) => {
+      onSubmit={async (data: WorkerCreateDTO, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
         setSubmitting(false);
