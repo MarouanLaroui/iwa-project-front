@@ -1,16 +1,18 @@
 import { Tab, Tabs, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import WorkerLoginForm from '../components/forms/login/worker-login-form';
 import WorkerSignupForm from '../components/forms/worker/signup/worker-signup-form';
-import saveTokenInLocalStorage from '../database/utils/local-storage';
+import UserContext from '../context/user-context';
+import { onUserAuthenticated } from '../helpers/user-helper';
 import WorkerAuthenticated from '../types/worker/WorkerAuthenticated';
 import { COMPANY_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes';
 
 export default function WorkerLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
+  const { setUserId } = useContext(UserContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ export default function WorkerLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (worker: WorkerAuthenticated) => {
-    saveTokenInLocalStorage(worker.authorizationToken);
+    onUserAuthenticated(worker, setUserId);
     navigate(`${WORKER_PROFILE_BASE_ROUTE}/${worker.id}`);
   };
 

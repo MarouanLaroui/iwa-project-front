@@ -1,16 +1,18 @@
 import { Tab, Tabs, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import CompanySignupForm from '../components/forms/company/company-signup-form';
 import CompanyLoginForm from '../components/forms/login/company-login-form';
-import saveTokenInLocalStorage from '../database/utils/local-storage';
 import CompanyAuthenticated from '../types/company/CompanyAuthenticated';
-import { WORKER_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes';
+import UserContext from '../context/user-context';
+import { COMPANY_PROFILE_BASE_ROUTE, WORKER_LOGIN_ROUTE } from './routing/routes';
+import { onUserAuthenticated } from '../helpers/user-helper';
 
 export default function CompanyLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
+  const { setUserId } = useContext(UserContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -19,8 +21,8 @@ export default function CompanyLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (company: CompanyAuthenticated) => {
-    saveTokenInLocalStorage(company.authorizationToken);
-    navigate(`${WORKER_PROFILE_BASE_ROUTE}/${company.id}`);
+    onUserAuthenticated(company, setUserId);
+    navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${company.id}`);
   };
 
   return (

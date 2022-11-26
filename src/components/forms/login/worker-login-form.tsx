@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import saveTokenInLocalStorage from '../../../database/utils/local-storage';
+import UserContext from '../../../context/user-context';
+import { onUserAuthenticated } from '../../../helpers/user-helper';
 import { useLoginWorker } from '../../../hooks/request/workerHooks';
 import { WORKER_PROFILE_BASE_ROUTE } from '../../../pages/routing/routes';
 import LoginDTO from '../../../types/company/LoginDTO';
@@ -8,6 +9,7 @@ import LoginForm from './login-form';
 
 export default function WorkerLoginForm() {
   const navigate = useNavigate();
+  const { setUserId } = useContext(UserContext);
 
   const onSubmit = async (
     loginDTO: LoginDTO,
@@ -15,7 +17,7 @@ export default function WorkerLoginForm() {
   ) => {
     useLoginWorker(loginDTO)
       .then((response) => {
-        saveTokenInLocalStorage(response.data.authorizationToken);
+        onUserAuthenticated(response.data, setUserId);
         navigate(`${WORKER_PROFILE_BASE_ROUTE}/${response.data.id}`);
       })
       .catch((err) => {

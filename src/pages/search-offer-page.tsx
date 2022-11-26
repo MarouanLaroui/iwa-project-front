@@ -8,6 +8,7 @@ import { useFetchOffers } from '../hooks/request/offerHooks';
 import OfferSearchBar from '../components/search-bars/offer-search-bar';
 import { Offer, OfferFilters } from '../types/offer/Offer';
 import Loading from '../components/loading';
+import filterOfferByFilter from '../helpers/offer-helper';
 
 export default function SearchOfferPage() {
   const [offers, , isLoading, error] = useFetchOffers();
@@ -15,19 +16,8 @@ export default function SearchOfferPage() {
   const [filters, setFilters] = useState<OfferFilters>({});
   const { t } = useTranslation();
 
-  const filterOffers = (offersToFilter: Offer[]) => offersToFilter.filter((offer) => {
-    if (filters.contractType && filters.contractType !== offer.contractType) return false;
-    if (filters.jobType && filters.jobType !== offer.jobType) return false;
-    if (
-      filters.title
-      && !offer.title.toLowerCase().trim().startsWith(filters.title.toLowerCase())) {
-      return false;
-    }
-    return true;
-  });
-
   useEffect(() => {
-    setFilteredOffers(filterOffers(offers));
+    setFilteredOffers(filterOfferByFilter(offers, filters));
   }, [filters, offers]);
 
   if (isLoading) {
