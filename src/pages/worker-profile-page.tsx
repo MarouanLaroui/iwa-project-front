@@ -4,22 +4,22 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import WorkerProfileForm from '../components/forms/worker/worker-profile-form';
 import WorkerCriteria from '../components/worker-criteria';
 import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
 import mockCriteria from '../database/mock/mockCriteria';
 import AlertContext from '../context/alert-context';
 import WorkerUpdateDTO from '../types/worker/WorkerUpdateDTO';
+import useAuth from '../hooks/context/useAuth';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
-  const params = useParams();
+  const { workerId } = useAuth();
   const { setErrorMessage, setSuccessMessage } = useContext(AlertContext);
 
   const [value, setValue] = React.useState(0);
 
-  const [worker, loading, error] = useFetchWorker(params.workerId!);
+  const [worker, loading, error] = useFetchWorker(workerId!);
 
   if (error) {
     setErrorMessage(error.message);
