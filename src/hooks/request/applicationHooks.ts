@@ -23,7 +23,6 @@ function useFetchApplicationsForOfferId(offerId: string):
   setError(applicationsError);
 
   const applicationsFull: ApplicationFull[] | undefined = [];
-
   applications.forEach((application) => {
     const { workerId } = application;
     richAxios
@@ -31,21 +30,11 @@ function useFetchApplicationsForOfferId(offerId: string):
       .then((response) => ({
         ...application,
         worker: response.data,
-      }))
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => setLoading(false));
-    // const [worker, workerLoading, workerError] = useFetchWorker(workerId);
-    // setLoading(workerLoading);
-    // setError(workerError);
-    // if (!worker) {
-    //   setError(new Error('At least one worker could not be loaded for applications list.'));
-    // }
-    // return {
-    //   ...application,
-    //   worker: worker!,
-    // };
+      }));
+    // .catch((err) => {
+    //   setError(err);
+    // })
+    // .finally(() => setLoading(false));
   });
 
   setData(applicationsFull);

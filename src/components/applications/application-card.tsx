@@ -55,7 +55,7 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
           <Button sx={{ width: 'fit-content' }}>
-            Accepter candidature
+            {t('accept-application')}
           </Button>
         </Stack>
       </Stack>

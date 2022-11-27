@@ -57,7 +57,17 @@ export default function SearchOfferPage() {
       <Grid container justifyContent="space-between" spacing={3}>
         {
           filteredOffers.map((offer, index) => (
-            <Grid item xs md={6} xl={4} width={400} key={index}>
+            <Grid
+              onClick={() => {
+                navigate(`/offer/details/${offer.offerId}`);
+              }}
+              item
+              xs
+              md={6}
+              xl={4}
+              width={400}
+              key={index}
+            >
               <OfferDetailsCard
                 offer={offer}
                 onClick={() => {

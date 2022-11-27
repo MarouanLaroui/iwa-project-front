@@ -1,6 +1,7 @@
-import { Divider } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Divider, Paper, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ApplicationFull from '../../types/application/ApplicationFull';
 import ApplicationCard from './application-card';
 
@@ -9,17 +10,27 @@ type ApplicationListProps = {
 };
 
 export default function ApplicationList({ applications }: ApplicationListProps) {
+  const { t } = useTranslation();
   return (
-    <Stack>
-      {applications.map((application, index) => (
-        <>
-          <ApplicationCard
-            key={application.applicationId}
-            application={application}
-          />
-          {index !== (applications.length - 1) && <Divider sx={{ marginY: 1 }} />}
-        </>
-      ))}
-    </Stack>
+    <Box
+      component={Paper}
+      elevation={2}
+      justifyContent="flex-start"
+      padding={2}
+    >
+      <Stack direction="column" alignItems="flex-start">
+
+        <Typography variant="h4" fontWeight="bold">{applications.length > 0 ? t('applications') : ('applications-empty')}</Typography>
+        {applications.map((application, index) => (
+          <>
+            <ApplicationCard
+              key={application.applicationId}
+              application={application}
+            />
+            {index !== (applications.length - 1) && <Divider sx={{ marginY: 1 }} />}
+          </>
+        ))}
+      </Stack>
+    </Box>
   );
 }
