@@ -1,4 +1,4 @@
-import { Application } from './Application';
+import Application from './Application';
 
 type ApplicationDTO = Pick<Application, 'message'>;
 

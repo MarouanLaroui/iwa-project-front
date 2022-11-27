@@ -6,7 +6,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import useAlert from '../../../hooks/context/useAlert';
 import { createApplication } from '../../../hooks/request/applicationHooks';
-import { Application } from '../../../types/application/Application';
+import Application from '../../../types/application/Application';
 import ApplicationDTO from '../../../types/application/ApplicationDTO';
 import { Offer } from '../../../types/offer/Offer';
 import InputField from '../../form-fields/input-field';

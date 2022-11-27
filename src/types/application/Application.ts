@@ -1,6 +1,6 @@
 import { Offer } from '../offer/Offer';
 
-export type Application = {
+type Application = {
   applicationId: string;
   workerId: string;
   offer: Offer;
@@ -8,3 +8,5 @@ export type Application = {
   isValidatedByCompany: boolean;
   isValidatedByWorker: boolean;
 };
+
+export default Application;

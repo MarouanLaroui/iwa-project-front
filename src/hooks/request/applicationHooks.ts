@@ -1,7 +1,7 @@
 import useFetchMany from '../generic/useFetchMany';
 import usePost from '../generic/usePost';
 import useFetch from '../generic/useFetchOne';
-import { Application } from '../../types/application/Application';
+import Application from '../../types/application/Application';
 import ApplicationDTO from '../../types/application/ApplicationDTO';
 import { Offer } from '../../types/offer/Offer';
 

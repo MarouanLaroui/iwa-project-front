@@ -5,7 +5,7 @@ const mockWorker : Worker = {
   firstname: 'Marouan',
   lastname: 'Laroui',
   email: 'marouanlaroui2000@gmail.com',
-  birthDate: new Date('22/05/2000'),
+  birthDate: new Date('2000-05-22'),
   hasDrivingLicense: false,
 };
 
