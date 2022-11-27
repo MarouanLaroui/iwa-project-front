@@ -41,7 +41,12 @@ const router = createBrowserRouter(
       <Route path={COMPANY_PROFILE_ROUTE} element={<CompanyProfilePage />} />
 
       {/* Offer */}
-      <Route path={OFFER_CREATE_ROUTE} element={<CreateOfferPage />} />
+      <Route
+        path={OFFER_CREATE_ROUTE}
+        element={
+          <CompanyProtectedRoute><CreateOfferPage /></CompanyProtectedRoute>
+        }
+      />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route
         path={OFFER_APPLY_ROUTE}

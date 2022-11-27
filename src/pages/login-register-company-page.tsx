@@ -22,7 +22,7 @@ export default function CompanyLoginRegisterPage() {
 
   const onRegisterSuccess = (company: CompanyAuthenticated) => {
     onCompanyAuthenticated(company, setCompanyId, setWorkerId);
-    navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${company.id}`);
+    navigate(`${COMPANY_PROFILE_BASE_ROUTE}`);
   };
 
   return (

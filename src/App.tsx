@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { Alert } from '@mui/material';
 import { DefaultTFuncReturn } from 'i18next';
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/navbar';
 import AlertContext, { AlertContextType } from './context/alert-context';
 import UserContext, { UserContextType } from './context/user-context';
 import { refreshUserInfoFromStorage } from './helpers/user-helper';

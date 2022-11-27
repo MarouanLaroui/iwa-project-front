@@ -22,7 +22,7 @@ export default function WorkerLoginRegisterPage() {
 
   const onRegisterSuccess = (worker: WorkerAuthenticated) => {
     onWorkerAuthenticated(worker, setCompanyId, setWorkerId);
-    navigate(`${WORKER_PROFILE_BASE_ROUTE}/${worker.id}`);
+    navigate(`${WORKER_PROFILE_BASE_ROUTE}`);
   };
 
   return (
