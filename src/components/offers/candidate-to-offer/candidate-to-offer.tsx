@@ -29,6 +29,7 @@ export default function CandidateToOffer(props:{
       spacing={2}
       padding={3}
       alignItems="center"
+      justifyContent="center"
     >
       <Typography variant="h5" width="100%" align="left">{`Postuler chez ${company.name}`}</Typography>
 
@@ -52,6 +53,7 @@ export default function CandidateToOffer(props:{
       )}
 
       <Divider sx={{ width: '100%' }} />
+
       <Stack width="100%" direction="row" justifyContent="flex-end" spacing={3}>
         {(step === 2) && <Button onClick={goToPreviousStep}>Précédent</Button>}
         {(step === 1) && <Button variant="contained" onClick={goToNextStep}>Suivant</Button>}

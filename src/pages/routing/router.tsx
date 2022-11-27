@@ -6,14 +6,13 @@ import SearchCompaniesPage from '../search-companies-page';
 import LandingPage from '../landing-page';
 import OfferDetailsPage from '../offer-details-page';
 import {
-  HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_CREATE_ROUTE,
+  HOME_ROUTE, COMPANY_SEARCH_ROUTE,
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE,
   OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
   WORKER_PROFILE_ROUTE, COMPANY_DETAILS_ROUTE,
   COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_ROUTE, WORKER_SIGNUP_ROUTE, MY_OFFERS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
-import CreateOfferPage from '../create-offer-page';
 import CompanyDetailsPage from '../company-details-page';
 import App from '../../App';
 import SearchOfferPage from '../search-offer-page';
@@ -41,12 +40,6 @@ const router = createBrowserRouter(
       <Route path={COMPANY_PROFILE_ROUTE} element={<CompanyProfilePage />} />
 
       {/* Offer */}
-      <Route
-        path={OFFER_CREATE_ROUTE}
-        element={
-          <CompanyProtectedRoute><CreateOfferPage /></CompanyProtectedRoute>
-        }
-      />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route
         path={OFFER_APPLY_ROUTE}
