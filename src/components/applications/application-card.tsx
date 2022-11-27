@@ -2,8 +2,10 @@ import { Cancel, CheckCircle, PendingActions } from '@mui/icons-material';
 import {
   Box, Button, Stack, Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import AlertContext from '../../context/alert-context';
+import { acceptApplicationByCompany } from '../../hooks/request/applicationHooks';
 import ApplicationFull from '../../types/application/ApplicationFull';
 import TypographyWithIcon from '../typography-with-icon';
 
@@ -24,6 +26,7 @@ function ApplicationStatus({ application }: ApplicationCardProps) {
 }
 
 export default function ApplicationCard({ application }: ApplicationCardProps) {
+  const { setErrorMessage, setSuccessMessage } = useContext(AlertContext);
   const { t } = useTranslation();
   const { worker } = application;
   return (
@@ -54,7 +57,14 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
-          <Button sx={{ width: 'fit-content' }}>
+          <Button
+            sx={{ width: 'fit-content' }}
+            onClick={() => {
+              acceptApplicationByCompany(application.applicationId)
+                .then(() => setSuccessMessage(t('application-accepted')))
+                .catch((err) => setErrorMessage(err.message));
+            }}
+          >
             {t('accept-application')}
           </Button>
         </Stack>
