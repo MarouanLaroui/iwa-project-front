@@ -8,7 +8,7 @@ import CompanyLoginForm from '../components/forms/login/company-login-form';
 import CompanyAuthenticated from '../types/company/CompanyAuthenticated';
 import UserContext from '../context/user-context';
 import { COMPANY_PROFILE_BASE_ROUTE, WORKER_LOGIN_ROUTE } from './routing/routes';
-import { onUserAuthenticated } from '../helpers/user-helper';
+import { onCompanyAuthenticated } from '../helpers/user-helper';
 
 export default function CompanyLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
@@ -21,7 +21,7 @@ export default function CompanyLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (company: CompanyAuthenticated) => {
-    onUserAuthenticated(company, setCompanyId);
+    onCompanyAuthenticated(company, setCompanyId);
     navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${company.id}`);
   };
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../../context/user-context';
-import { onUserAuthenticated } from '../../../helpers/user-helper';
+import { onWorkerAuthenticated } from '../../../helpers/user-helper';
 import { useLoginWorker } from '../../../hooks/request/workerHooks';
 import { WORKER_PROFILE_BASE_ROUTE } from '../../../pages/routing/routes';
 import LoginDTO from '../../../types/company/LoginDTO';
@@ -17,7 +17,7 @@ export default function WorkerLoginForm() {
   ) => {
     useLoginWorker(loginDTO)
       .then((response) => {
-        onUserAuthenticated(response.data, setWorkerId);
+        onWorkerAuthenticated(response.data, setWorkerId);
         navigate(`${WORKER_PROFILE_BASE_ROUTE}/${response.data.id}`);
       })
       .catch((err) => {

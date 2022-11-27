@@ -2,20 +2,37 @@ import saveTokenInLocalStorage from '../database/utils/local-storage';
 import CompanyAuthenticated from '../types/company/CompanyAuthenticated';
 import WorkerAuthenticated from '../types/worker/WorkerAuthenticated';
 
-const onUserAuthenticated = (
-  authenticatedCompany: CompanyAuthenticated | WorkerAuthenticated,
-  setUserId: React.Dispatch<React.SetStateAction<string | null>>,
+const onCompanyAuthenticated = (
+  authenticatedCompany: CompanyAuthenticated,
+  setCompanyId: React.Dispatch<React.SetStateAction<string | null>>,
 ) => {
-  setUserId(authenticatedCompany.id);
+  setCompanyId(authenticatedCompany.id);
   saveTokenInLocalStorage(authenticatedCompany.authorizationToken);
-  localStorage.setItem('id', authenticatedCompany.id);
+  localStorage.setItem('companyId', authenticatedCompany.id);
+};
+
+const onWorkerAuthenticated = (
+  authenticatedWorker: WorkerAuthenticated,
+  setWorkerId: React.Dispatch<React.SetStateAction<string | null>>,
+) => {
+  setWorkerId(authenticatedWorker.id);
+  saveTokenInLocalStorage(authenticatedWorker.authorizationToken);
+  localStorage.setItem('workerId', authenticatedWorker.id);
 };
 
 const refreshUserInfoFromStorage = (
-  setUserId: React.Dispatch<React.SetStateAction<string | null>>,
+  setWorkerId: React.Dispatch<React.SetStateAction<string | null>>,
+  setCompanyId: React.Dispatch<React.SetStateAction<string | null>>,
 ) => {
-  const id = localStorage.getItem('id');
-  setUserId(id);
+  const workerId = localStorage.getItem('workerId');
+  if (workerId) {
+    setWorkerId(workerId);
+  }
+
+  const companyId = localStorage.getItem('companyId');
+  if (companyId) {
+    setCompanyId(companyId);
+  }
 };
 
-export { onUserAuthenticated, refreshUserInfoFromStorage };
+export { onCompanyAuthenticated, onWorkerAuthenticated, refreshUserInfoFromStorage };

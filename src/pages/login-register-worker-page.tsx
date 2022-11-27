@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import WorkerLoginForm from '../components/forms/login/worker-login-form';
 import WorkerSignupForm from '../components/forms/worker/signup/worker-signup-form';
 import UserContext from '../context/user-context';
-import { onUserAuthenticated } from '../helpers/user-helper';
+import { onWorkerAuthenticated } from '../helpers/user-helper';
 import WorkerAuthenticated from '../types/worker/WorkerAuthenticated';
 import { COMPANY_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes';
 
@@ -21,7 +21,7 @@ export default function WorkerLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (worker: WorkerAuthenticated) => {
-    onUserAuthenticated(worker, setWorkerId);
+    onWorkerAuthenticated(worker, setWorkerId);
     navigate(`${WORKER_PROFILE_BASE_ROUTE}/${worker.id}`);
   };
 
