@@ -36,6 +36,7 @@ export default function CompanyOfferList(
 
   const onOfferCreation = (createdOffer: Offer) => {
     setOffers([...offers, createdOffer]);
+    setCreateOfferModalOpened(false);
   };
 
   if (isOffersLoading) {
@@ -95,10 +96,19 @@ export default function CompanyOfferList(
               </Typography>
               <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
             </Stack>
+            <Stack direction="row">
+              <Box width="100%" alignItems="center">
+                <MyOffersSearchBar setFilters={setFilters} />
+              </Box>
+              <Button
+                variant="contained"
+                onClick={() => setCreateOfferModalOpened(true)}
+                startIcon={<AddOutlinedIcon />}
+              >
+                {t('create-offer')}
 
-            <Box width="100%" alignItems="center">
-              <MyOffersSearchBar setFilters={setFilters} />
-            </Box>
+              </Button>
+            </Stack>
 
             <Grid container justifyContent="space-between" spacing={3}>
               {

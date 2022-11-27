@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Button, LinearProgress, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
 import { ContractType, JobType, Offer } from '../../../types/offer/Offer';
 import OfferDTO from '../../../types/offer/OfferDTO';
@@ -34,7 +34,14 @@ export default function MultiStepJobOfferForm(props:{
   };
 
   return (
-    <Stack width="100%" spacing={5}>
+    <Stack width="100%" spacing={2}>
+      <Stack width="100%" direction="row" alignItems="center" spacing={2}>
+        <Box width="90%">
+          <LinearProgress variant="determinate" value={step * 50} />
+        </Box>
+        <Typography>{`${step * 50}%`}</Typography>
+
+      </Stack>
       {
         step === 1 && (
         <JobOfferFormFirstStep
@@ -55,7 +62,7 @@ export default function MultiStepJobOfferForm(props:{
       )
     }
 
-      <Stack width="100%" direction="row" justifyContent="flex-end" spacing={3}>
+      <Stack width="100%" direction="row" justifyContent="flex-end" spacing={3} paddingTop={3}>
         {(step === 2) && <Button onClick={goToPreviousStep}>Précédent</Button>}
         {(step === 1) && <Button type="submit" form="create-offer-form" variant="contained">Suivant</Button>}
         {step === 2 && <Button variant="contained" type="submit" form="create-offer-form">Candidater</Button>}
