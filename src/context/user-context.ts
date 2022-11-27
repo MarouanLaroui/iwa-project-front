@@ -1,13 +1,17 @@
 import { createContext } from 'react';
 
 export interface UserContextType {
-  userId: string | null,
-  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+  workerId: string | null,
+  companyId: string | null,
+  setWorkerId: React.Dispatch<React.SetStateAction<string | null>>;
+  setCompanyId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const UserContext = createContext<UserContextType>({
-  userId: null,
-  setUserId: () => { },
+  workerId: null,
+  companyId: null,
+  setWorkerId: () => { },
+  setCompanyId: () => { },
 });
 
 export default UserContext;

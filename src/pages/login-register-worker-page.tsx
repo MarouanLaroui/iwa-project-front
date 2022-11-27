@@ -12,7 +12,7 @@ import { COMPANY_LOGIN_ROUTE, WORKER_PROFILE_BASE_ROUTE } from './routing/routes
 
 export default function WorkerLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
-  const { setUserId } = useContext(UserContext);
+  const { setWorkerId } = useContext(UserContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export default function WorkerLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (worker: WorkerAuthenticated) => {
-    onUserAuthenticated(worker, setUserId);
+    onUserAuthenticated(worker, setWorkerId);
     navigate(`${WORKER_PROFILE_BASE_ROUTE}/${worker.id}`);
   };
 

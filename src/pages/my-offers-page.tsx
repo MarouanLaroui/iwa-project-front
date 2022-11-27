@@ -7,7 +7,7 @@ export default function MyOfferPage() {
   return (
     <Stack width="100%" direction="column" gap="2em">
       <UserContext.Consumer>
-        {(value) => value.userId && <CompanyOfferList companyData={{ id: value.userId }} />}
+        {(value) => value.companyId && <CompanyOfferList companyData={{ id: value.companyId }} />}
       </UserContext.Consumer>
 
     </Stack>

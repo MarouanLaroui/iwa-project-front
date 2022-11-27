@@ -12,7 +12,8 @@ import UserContext, { UserContextType } from './context/user-context';
 import { refreshUserInfoFromStorage } from './helpers/user-helper';
 
 function App() {
-  const [userId, setUserId] = useState<string | null>(null);
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const [workerId, setWorkerId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState('' as DefaultTFuncReturn);
   const [successMessage, setSuccessMessage] = useState('' as DefaultTFuncReturn);
 
@@ -22,17 +23,15 @@ function App() {
   }), [setErrorMessage, setSuccessMessage]);
 
   const userContext = useMemo<UserContextType>(() => ({
-    userId,
-    setUserId,
-  }), [userId, setUserId]);
+    workerId,
+    companyId,
+    setWorkerId,
+    setCompanyId,
+  }), [workerId, workerId, setWorkerId, setWorkerId]);
 
   useEffect(() => {
-    refreshUserInfoFromStorage(setUserId);
+    refreshUserInfoFromStorage(setWorkerId);
   }, []);
-
-  useEffect(() => {
-    console.log('userId', userId);
-  }, [userId]);
 
   return (
     <AlertContext.Provider value={alertContext}>
