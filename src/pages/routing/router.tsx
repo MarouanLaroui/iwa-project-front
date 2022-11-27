@@ -9,9 +9,10 @@ import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE,
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE,
   OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
-  COMPANY_DETAILS_ROUTE,
-  COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_BASE_ROUTE, WORKER_SIGNUP_ROUTE,
-  MY_OFFERS_ROUTE, WORKER_PROFILE_BASE_ROUTE,
+  COMPANY_PROFILE_BASE_ROUTE,
+  MY_OFFERS_ROUTE, WORKER_PROFILE_BASE_ROUTE, COMPANY_DETAILS_ROUTE,
+  COMPANY_LOGIN_ROUTE, WORKER_SIGNUP_ROUTE,
+  MY_OFFER_DETAILS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CompanyDetailsPage from '../company-details-page';
@@ -25,6 +26,7 @@ import WorkerSignupForm from '../../components/forms/worker/signup/worker-signup
 import MyOfferPage from '../my-offers-page';
 import CompanyProtectedRoute from './company-route';
 import WorkerProtectedRoute from './worker-route';
+import MyOfferDetailsPage from '../my-offer-details-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -41,6 +43,12 @@ const router = createBrowserRouter(
       <Route path={COMPANY_PROFILE_BASE_ROUTE} element={<CompanyProfilePage />} />
 
       {/* Offer */}
+      <Route
+        path={MY_OFFER_DETAILS_ROUTE}
+        element={
+          <CompanyProtectedRoute><MyOfferDetailsPage /></CompanyProtectedRoute>
+        }
+      />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route
         path={OFFER_APPLY_ROUTE}

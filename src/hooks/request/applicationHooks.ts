@@ -1,14 +1,59 @@
+import { useState } from 'react';
 import useFetchMany from '../generic/useFetchMany';
 import usePost from '../generic/usePost';
 import useFetch from '../generic/useFetchOne';
 import Application from '../../types/application/Application';
 import ApplicationDTO from '../../types/application/ApplicationDTO';
 import { Offer } from '../../types/offer/Offer';
+import ApplicationFull from '../../types/application/ApplicationFull';
+import richAxios from '../../database/axios/axios-client';
+import Worker from '../../types/worker/Worker';
 
 const useFetchApplication = (id: string) => useFetch<Application>(`applications/${id}`);
 
-const useFetchApplications = () => useFetchMany<Application>('applications/');
+function useFetchApplicationsForOfferId(offerId: string):
+[ApplicationFull[] | undefined, boolean, Error | undefined] {
+  const [data, setData] = useState<ApplicationFull[] | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | undefined>(undefined);
+
+  // useEffect(() => {
+  const [applications, , applicationsLoading, applicationsError] = useFetchMany<Application>(`applications/findByOfferId/${offerId}`);
+  setLoading(applicationsLoading);
+  setError(applicationsError);
+
+  const applicationsFull: ApplicationFull[] | undefined = [];
+
+  applications.forEach((application) => {
+    const { workerId } = application;
+    richAxios
+      .get<Worker>(`workers/${workerId}`)
+      .then((response) => ({
+        ...application,
+        worker: response.data,
+      }))
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => setLoading(false));
+    // const [worker, workerLoading, workerError] = useFetchWorker(workerId);
+    // setLoading(workerLoading);
+    // setError(workerError);
+    // if (!worker) {
+    //   setError(new Error('At least one worker could not be loaded for applications list.'));
+    // }
+    // return {
+    //   ...application,
+    //   worker: worker!,
+    // };
+  });
+
+  setData(applicationsFull);
+  // });
+
+  return [data, loading, error];
+}
 
 const createApplication = (applicationDTO: ApplicationDTO, offerData: Pick<Offer, 'offerId'>) => usePost<ApplicationDTO, Application>(`offers/${offerData.offerId}/applications/`, applicationDTO);
 
-export { useFetchApplication, useFetchApplications, createApplication };
+export { useFetchApplication, useFetchApplicationsForOfferId, createApplication };

@@ -17,8 +17,10 @@ const mockApplicationFull: ApplicationFull = {
   worker: mockWorker,
   offer: mockOffer,
   message: 'Je veux un travail dans votre entreprise svp',
-  isValidatedByCompany: true,
-  isValidatedByWorker: true,
+  isValidatedByCompany: false,
+  isValidatedByWorker: false,
 };
 
-export { mockApplication, mockApplicationFull };
+const mockApplicationList = [mockApplicationFull, mockApplicationFull, mockApplicationFull];
+
+export { mockApplication, mockApplicationFull, mockApplicationList };

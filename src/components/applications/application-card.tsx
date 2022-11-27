@@ -20,7 +20,7 @@ function ApplicationStatus({ application }: ApplicationCardProps) {
     }
     return <TypographyWithIcon sx={{ color: 'orange' }} text={t('company-accepted')} icon={<PendingActions sx={{ color: 'orange' }} />} />;
   }
-  return <TypographyWithIcon sx={{ color: 'red' }} text={t('not-accepted')} icon={<Cancel sx={{ color: 'red' }} />} />;
+  return <TypographyWithIcon sx={{ color: 'gray' }} text={t('not-accepted')} icon={<Cancel sx={{ color: 'gray' }} />} />;
 }
 
 export default function ApplicationCard({ application }: ApplicationCardProps) {
