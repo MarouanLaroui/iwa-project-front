@@ -6,7 +6,7 @@ type Props = {
   children: JSX.Element;
 };
 
-export default function WorkerProtectedRoute({ children }: Props) {
+export default function CompanyProtectedRoute({ children }: Props) {
   const { companyId } = useAuth();
 
   if (!companyId) {
