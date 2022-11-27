@@ -99,7 +99,7 @@ export default function OfferDetailsPage() {
                   />
                   <TypographyWithIcon text={`${offer.salary} euros/${t('month')}`} icon={<EuroOutlinedIcon />} />
                   <TypographyWithIcon text={`${offer.location}`} icon={<LocationOnOutlinedIcon />} />
-                  {offer.needDrivingLicense && (
+                  {offer.needDrivingLicence && (
                     <TypographyWithIcon text={t('driving-license-required')} icon={<BadgeOutlinedIcon />} />
                   )}
                   <TypographyWithIcon

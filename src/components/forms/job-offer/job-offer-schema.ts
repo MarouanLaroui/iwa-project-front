@@ -10,7 +10,7 @@ const jobOfferSchema = yup.object({
   jobType: yup.string().required(mandarotyField).min(3),
   contractType: yup.string().required(mandarotyField).min(3),
   salary: yup.number().required(mandarotyField).min(0),
-  needDrivingLicense: yup.boolean().required(mandarotyField),
+  needDrivingLicence: yup.boolean().required(mandarotyField),
 }).test(
   'superior than starting date',
   'starting date is superior than end date',

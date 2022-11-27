@@ -51,7 +51,7 @@ export default function LastOfferMobile(props:{
                     align="left"
                     sx={{ fontSize: '15px' }}
                   />
-                  {offer.needDrivingLicense && (
+                  {offer.needDrivingLicence && (
                     <TypographyWithIcon
                       text={t('driving-license-required')}
                       align="left"
