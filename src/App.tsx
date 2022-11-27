@@ -27,7 +27,7 @@ function App() {
     companyId,
     setWorkerId,
     setCompanyId,
-  }), [workerId, workerId, companyId, setCompanyId]);
+  }), [workerId, setWorkerId, companyId, setCompanyId]);
 
   useEffect(() => {
     refreshUserInfoFromStorage(setWorkerId, setCompanyId);

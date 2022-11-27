@@ -5,19 +5,27 @@ import WorkerAuthenticated from '../types/worker/WorkerAuthenticated';
 const onCompanyAuthenticated = (
   authenticatedCompany: CompanyAuthenticated,
   setCompanyId: React.Dispatch<React.SetStateAction<string | null>>,
+  setWorkerId: React.Dispatch<React.SetStateAction<string | null>>,
 ) => {
-  setCompanyId(authenticatedCompany.id);
   saveTokenInLocalStorage(authenticatedCompany.authorizationToken);
+  setCompanyId(authenticatedCompany.id);
   localStorage.setItem('companyId', authenticatedCompany.id);
+
+  setWorkerId(null);
+  localStorage.removeItem('workerId');
 };
 
 const onWorkerAuthenticated = (
   authenticatedWorker: WorkerAuthenticated,
+  setCompanyId: React.Dispatch<React.SetStateAction<string | null>>,
   setWorkerId: React.Dispatch<React.SetStateAction<string | null>>,
 ) => {
   setWorkerId(authenticatedWorker.id);
   saveTokenInLocalStorage(authenticatedWorker.authorizationToken);
   localStorage.setItem('workerId', authenticatedWorker.id);
+
+  setCompanyId(null);
+  localStorage.removeItem('companyId');
 };
 
 const refreshUserInfoFromStorage = (

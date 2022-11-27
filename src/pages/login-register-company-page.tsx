@@ -12,7 +12,7 @@ import { onCompanyAuthenticated } from '../helpers/user-helper';
 
 export default function CompanyLoginRegisterPage() {
   const [tabNumber, setTabNumber] = useState(0);
-  const { setCompanyId } = useContext(UserContext);
+  const { setCompanyId, setWorkerId } = useContext(UserContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export default function CompanyLoginRegisterPage() {
   };
 
   const onRegisterSuccess = (company: CompanyAuthenticated) => {
-    onCompanyAuthenticated(company, setCompanyId);
+    onCompanyAuthenticated(company, setCompanyId, setWorkerId);
     navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${company.id}`);
   };
 

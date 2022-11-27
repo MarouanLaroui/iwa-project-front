@@ -9,7 +9,7 @@ import LoginForm from './login-form';
 
 export default function WorkerLoginForm() {
   const navigate = useNavigate();
-  const { setWorkerId } = useContext(UserContext);
+  const { setWorkerId, setCompanyId } = useContext(UserContext);
 
   const onSubmit = async (
     loginDTO: LoginDTO,
@@ -17,7 +17,7 @@ export default function WorkerLoginForm() {
   ) => {
     useLoginWorker(loginDTO)
       .then((response) => {
-        onWorkerAuthenticated(response.data, setWorkerId);
+        onWorkerAuthenticated(response.data, setCompanyId, setWorkerId);
         navigate(`${WORKER_PROFILE_BASE_ROUTE}/${response.data.id}`);
       })
       .catch((err) => {
