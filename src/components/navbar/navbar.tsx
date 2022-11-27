@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import {
   Button, Grid, IconButton, Menu, MenuItem, Typography,
@@ -8,15 +9,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Stack } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  HOME_ROUTE, COMPANY_SEARCH_ROUTE, OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE, COMPANY_LOGIN_ROUTE,
-} from '../pages/routing/routes';
+import useAuth from '../../hooks/context/useAuth';
+import { workerAccountPages, workerPages } from './pages/worker-pages';
+import { companyAccountPages, companyPages } from './pages/company-pages';
+import { baseAccountPages, basePages } from './pages/base-pages';
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
+  const { workerId, companyId } = useAuth();
   const { t } = useTranslation();
+
+  const getPages = () => {
+    if (workerId) return workerPages;
+    if (companyId) return companyPages;
+    return basePages;
+  };
+
+  const getAccountPages = () => {
+    if (workerId) return workerAccountPages;
+    if (companyId) return companyAccountPages;
+    return baseAccountPages;
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -33,12 +47,6 @@ export default function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const pages = [
-    { name: t('home'), link: HOME_ROUTE },
-    { name: t('search-job'), link: OFFER_SEARCH_ROUTE },
-    { name: t('search-company'), link: COMPANY_SEARCH_ROUTE },
-  ];
 
   const navigation = useNavigate();
 
@@ -63,38 +71,32 @@ export default function Navbar() {
         </Stack>
 
         <Stack direction="row" gap="10px" alignItems="center" width="100%" justifyContent="space-between" marginLeft="20px">
-          {pages.map(
+          {getPages().map(
             (page) => (
               <Button
-                key={`${page.name}button`}
+                key={`${page.nameKey}button`}
                 sx={{ color: 'black', fontWeight: 'bold' }}
                 onClick={() => { navigation(page.link); }}
               >
-                {page.name}
+                {t(`${page.nameKey}`)}
               </Button>
             ),
           )}
           <Stack direction="row" gap="30px">
-            <Button
-              variant="contained"
-              size="medium"
-              sx={{ fontWeight: 'bold' }}
-              onClick={() => navigation(WORKER_LOGIN_ROUTE)}
-            >
-              {t('worker-login')}
-            </Button>
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{ fontWeight: 'bold' }}
-              onClick={() => navigation(COMPANY_LOGIN_ROUTE)}
-            >
-              {t('company-login')}
-            </Button>
+            {
+              getAccountPages().map((page) => (
+                <Button
+                  variant="contained"
+                  size="medium"
+                  sx={{ fontWeight: 'bold' }}
+                  onClick={() => navigation(page.link)}
+                >
+                  {t(`${page.nameKey}`)}
+                </Button>
+              ))
+            }
           </Stack>
-
         </Stack>
-
       </Stack>
 
       {/* Mobile navbar */}
@@ -133,15 +135,15 @@ export default function Navbar() {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
           >
-            {pages.map((page) => (
+            {getPages().map((page) => (
               <MenuItem
-                key={page.name}
+                key={page.nameKey}
                 onClick={() => {
                   navigation(page.link);
                   handleCloseNavMenu();
                 }}
               >
-                {page.name}
+                {t(`${page.nameKey}`)}
               </MenuItem>
             ))}
           </Menu>
@@ -181,27 +183,32 @@ export default function Navbar() {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <MenuItem
-              onClick={() => {
-                handleCloseUserMenu();
-                navigation(WORKER_LOGIN_ROUTE);
-              }}
-            >
-              <Typography textAlign="center">{t('worker-login')}</Typography>
-            </MenuItem>
-
-            <MenuItem
-              onClick={() => {
-                handleCloseUserMenu();
-                navigation(COMPANY_LOGIN_ROUTE);
-              }}
-            >
-              <Typography textAlign="center">{t('company-login')}</Typography>
-            </MenuItem>
-
+            {
+              getAccountPages().map((page) => (
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    navigation(page.link);
+                  }}
+                >
+                  <Typography textAlign="center">
+                    {t(`${page.nameKey}`)}
+                  </Typography>
+                </MenuItem>
+              ))
+            }
+            {
+              (companyId || workerId) && (
+                <MenuItem
+                  onClick={() => {
+                  }}
+                >
+                  Déconnexion
+                </MenuItem>
+              )
+            }
           </Menu>
         </Box>
-
       </Grid>
     </>
 

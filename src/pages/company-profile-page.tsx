@@ -1,17 +1,17 @@
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import useAuth from '../hooks/context/useAuth';
 
 export default function CompanyProfilePage() {
-  const params = useParams();
+  const { companyId } = useAuth();
 
   return (
     <Stack>
       <Typography>
         Company profile page
         {' '}
-        {params.companyId}
+        {companyId}
       </Typography>
     </Stack>
   );

@@ -23,6 +23,8 @@ import WorkerLoginRegisterPage from '../login-register-worker-page';
 import CompanyLoginRegisterPage from '../login-register-company-page';
 import WorkerSignupForm from '../../components/forms/worker/signup/worker-signup-form';
 import MyOfferPage from '../my-offers-page';
+import CompanyProtectedRoute from './company-route';
+import WorkerProtectedRoute from './worker-route';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -39,15 +41,39 @@ const router = createBrowserRouter(
       <Route path={COMPANY_PROFILE_ROUTE} element={<CompanyProfilePage />} />
 
       {/* Offer */}
-      <Route path={OFFER_CREATE_ROUTE} element={<CreateOfferPage />} />
+      <Route
+        path={OFFER_CREATE_ROUTE}
+        element={
+          <CompanyProtectedRoute><CreateOfferPage /></CompanyProtectedRoute>
+        }
+      />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
-      <Route path={OFFER_APPLY_ROUTE} element={<ApplyToOfferPage />} />
+      <Route
+        path={OFFER_APPLY_ROUTE}
+        element={(
+          <WorkerProtectedRoute>
+            <ApplyToOfferPage />
+          </WorkerProtectedRoute>
+        )}
+      />
       <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
-      <Route path={MY_OFFERS_ROUTE} element={<MyOfferPage />} />
+      <Route
+        path={MY_OFFERS_ROUTE}
+        element={
+          <CompanyProtectedRoute><MyOfferPage /></CompanyProtectedRoute>
+        }
+      />
 
       {/* Worker */}
       <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm readonly />} />
-      <Route path={WORKER_PROFILE_ROUTE} element={<WorkerProfilePage />} />
+      <Route
+        path={WORKER_PROFILE_ROUTE}
+        element={(
+          <WorkerProtectedRoute>
+            <WorkerProfilePage />
+          </WorkerProtectedRoute>
+      )}
+      />
 
     </Route>,
   ]),
