@@ -10,7 +10,7 @@ import {
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE,
   OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
   WORKER_PROFILE_ROUTE, COMPANY_DETAILS_ROUTE,
-  COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_ROUTE, WORKER_SIGNUP_ROUTE,
+  COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_ROUTE, WORKER_SIGNUP_ROUTE, MY_OFFERS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CreateOfferPage from '../create-offer-page';
@@ -22,6 +22,7 @@ import CompanyProfilePage from '../company-profile-page';
 import WorkerLoginRegisterPage from '../login-register-worker-page';
 import CompanyLoginRegisterPage from '../login-register-company-page';
 import WorkerSignupForm from '../../components/forms/worker/signup/worker-signup-form';
+import MyOfferPage from '../my-offers-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route path={OFFER_APPLY_ROUTE} element={<ApplyToOfferPage />} />
       <Route path={OFFER_SEARCH_ROUTE} element={<SearchOfferPage />} />
+      <Route path={MY_OFFERS_ROUTE} element={<MyOfferPage />} />
 
       {/* Worker */}
       <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm readonly />} />

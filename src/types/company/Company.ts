@@ -17,7 +17,7 @@ export function getSectorTypeTranslation(sector: SectorType) {
 }
 
 export type Company = {
-  id: String
+  id: string
   name: String;
   email: String;
   employeesNumber: number;
