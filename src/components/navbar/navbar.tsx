@@ -19,9 +19,15 @@ export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const {
-    workerId, companyId,
+    workerId, companyId, setWorkerId, setCompanyId,
   } = useAuth();
   const { t } = useTranslation();
+
+  const logout = () => {
+    setWorkerId(null);
+    setCompanyId(null);
+    removeAuthFromStorage();
+  };
 
   const getPages = () => {
     if (workerId) return workerPages;
@@ -203,9 +209,7 @@ export default function Navbar() {
             {
               (companyId || workerId) && (
                 <MenuItem
-                  onClick={() => {
-                    removeAuthFromStorage();
-                  }}
+                  onClick={logout}
                 >
                   Déconnexion
                 </MenuItem>
