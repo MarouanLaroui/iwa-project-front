@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import {
   Box, Button, Divider, Stack, Typography,
@@ -16,18 +16,25 @@ import { registerWorker } from '../../../../hooks/request/workerHooks';
 import WorkerAuthenticated from '../../../../types/worker/WorkerAuthenticated';
 import WorkerCreateDTO from '../../../../types/worker/WorkerCreateDTO';
 import useAlert from '../../../../hooks/context/useAlert';
+import UploadField from '../../../form-fields/upload-field';
+import uploadFile from '../../../../hooks/request/fileHooks';
 
 export default function WorkerSignupForm(props:{
   onSubmissionSuccess? : (worker: WorkerAuthenticated)=> void,
   readonly: boolean,
   worker?: Worker
 }) {
+  const [cv, setCV] = useState<File | null>(null);
   const { readonly, worker, onSubmissionSuccess } = props;
   const { t } = useTranslation();
   const { setError } = useAlert();
 
   const onSubmit = async (workerToCreate: WorkerCreateDTO) => {
-    registerWorker(workerToCreate)
+    const cvLink = cv ? await (await uploadFile(cv)).data.url : '';
+
+    registerWorker(
+      { ...workerToCreate, cvLink },
+    )
       .then((response) => {
         if (onSubmissionSuccess) onSubmissionSuccess(response.data);
       })
@@ -45,6 +52,7 @@ export default function WorkerSignupForm(props:{
         password: '',
         birthDate: worker ? worker.birthDate : new Date(),
         hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
+        cvLink: '',
       }}
       validationSchema={workerSchema}
       onSubmit={async (data: WorkerCreateDTO, { setSubmitting }) => {
@@ -134,10 +142,7 @@ export default function WorkerSignupForm(props:{
                   <AttachFileOutlinedIcon />
                   <Typography variant="caption">{t('attached-files')}</Typography>
                 </Stack>
-                <Button disabled={readonly} variant="contained" component="label" sx={{ width: 'fit-content' }}>
-                  {t('upload-your-cv')}
-                  <input hidden accept="image/*" type="file" />
-                </Button>
+                <UploadField setFile={setCV} file={cv} />
               </Stack>
 
             </Stack>
