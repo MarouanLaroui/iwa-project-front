@@ -1,12 +1,11 @@
 import * as yup from 'yup';
-import mandarotyField from '../../../helpers/yup/messages';
+import mandarotyField from '../../../../helpers/yup/messages';
 
 const jobOfferSchema = yup.object({
-  title: yup.string().required(mandarotyField).min(8),
-  description: yup.string().required(mandarotyField).min(50),
   location: yup.string().required(mandarotyField).min(3),
   startingDate: yup.date().required(mandarotyField),
   endDate: yup.date().required(mandarotyField),
+
   jobType: yup.string().required(mandarotyField).min(3),
   contractType: yup.string().required(mandarotyField).min(3),
   salary: yup.number().required(mandarotyField).min(0),
