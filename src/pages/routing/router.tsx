@@ -9,8 +9,9 @@ import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE,
   OFFER_DETAILS_ROUTE, OFFER_APPLY_ROUTE,
   OFFER_SEARCH_ROUTE, WORKER_LOGIN_ROUTE,
-  WORKER_PROFILE_ROUTE, COMPANY_DETAILS_ROUTE,
-  COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_ROUTE, WORKER_SIGNUP_ROUTE, MY_OFFERS_ROUTE,
+  COMPANY_DETAILS_ROUTE,
+  COMPANY_LOGIN_ROUTE, COMPANY_PROFILE_BASE_ROUTE, WORKER_SIGNUP_ROUTE,
+  MY_OFFERS_ROUTE, WORKER_PROFILE_BASE_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CompanyDetailsPage from '../company-details-page';
@@ -37,7 +38,7 @@ const router = createBrowserRouter(
       {/* Company */}
       <Route path={COMPANY_SEARCH_ROUTE} element={<SearchCompaniesPage />} />
       <Route path={COMPANY_DETAILS_ROUTE} element={<CompanyDetailsPage />} />
-      <Route path={COMPANY_PROFILE_ROUTE} element={<CompanyProfilePage />} />
+      <Route path={COMPANY_PROFILE_BASE_ROUTE} element={<CompanyProfilePage />} />
 
       {/* Offer */}
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
@@ -60,7 +61,7 @@ const router = createBrowserRouter(
       {/* Worker */}
       <Route path={WORKER_SIGNUP_ROUTE} element={<WorkerSignupForm readonly />} />
       <Route
-        path={WORKER_PROFILE_ROUTE}
+        path={WORKER_PROFILE_BASE_ROUTE}
         element={(
           <WorkerProtectedRoute>
             <WorkerProfilePage />
