@@ -11,15 +11,15 @@ import LoginForm from './login-form';
 export default function CompanyLoginForm() {
   const navigate = useNavigate();
   const { setCompanyId, setWorkerId } = useContext(UserContext);
+  const { setError } = useAlert();
 
   const onSubmit = async (
     loginDTO: LoginDTO,
   ) => {
-    const { setError } = useAlert();
     useLoginCompany(loginDTO)
       .then((response) => {
         onCompanyAuthenticated(response.data, setCompanyId, setWorkerId);
-        navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${response.data.id}`);
+        navigate(`${COMPANY_PROFILE_BASE_ROUTE}`);
       })
       .catch((err) => {
         setError(err);

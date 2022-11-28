@@ -5,6 +5,7 @@ import {
 import { AxiosError } from 'axios';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import AlertContext from '../../context/alert-context';
 import { acceptApplicationByCompany } from '../../hooks/request/applicationHooks';
 import ApplicationFull from '../../types/application/ApplicationFull';
@@ -71,6 +72,12 @@ export default function ApplicationCard({ applicationFull }: ApplicationCardProp
             }}
           >
             {t('accept-application')}
+          </Button>
+        </Stack>
+
+        <Stack>
+          <Button variant="contained" startIcon={<DownloadOutlinedIcon />} href={worker.cvLink}>
+            {t('download')}
           </Button>
         </Stack>
       </Stack>
