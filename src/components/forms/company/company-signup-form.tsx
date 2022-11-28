@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, MenuItem, Stack,
+  Box, Button, MenuItem, Stack,
 } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import CompanyDTO from '../../../types/company/CompanyDTO';
 import { SectorType } from '../../../types/company/Company';
 import { signUpCompany } from '../../../hooks/request/companyHooks';
 import CompanyAuthenticated from '../../../types/company/CompanyAuthenticated';
+import useAlert from '../../../hooks/context/useAlert';
 
 export default function CompanySignupForm(
   props:{
@@ -20,7 +21,7 @@ export default function CompanySignupForm(
 ) {
   const { onSubmitionSuccess } = props;
   const { t } = useTranslation();
-  const [errorMsg, setErrorMsg] = useState('');
+  const { setError } = useAlert();
 
   const onSubmit = async (companyToCreate: CompanyDTO) => {
     signUpCompany(companyToCreate)
@@ -28,7 +29,7 @@ export default function CompanySignupForm(
         onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
+        setError(err);
       });
   };
 
@@ -60,16 +61,6 @@ export default function CompanySignupForm(
             maxWidth="40rem"
             minWidth="300px"
           >
-            {errorMsg && (
-              <Alert
-                severity="error"
-                onClose={() => {
-                  setErrorMsg('');
-                }}
-              >
-                {errorMsg}
-              </Alert>
-            )}
             <Stack direction="row" spacing="30px" width="100%">
 
               <InputField

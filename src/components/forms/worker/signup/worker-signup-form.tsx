@@ -1,8 +1,8 @@
 /* eslint-disable react/require-default-props */
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, Divider, Stack, Typography,
+  Box, Button, Divider, Stack, Typography,
 } from '@mui/material';
 import { AxiosError } from 'axios';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
@@ -15,6 +15,7 @@ import Worker from '../../../../types/worker/Worker';
 import { registerWorker } from '../../../../hooks/request/workerHooks';
 import WorkerAuthenticated from '../../../../types/worker/WorkerAuthenticated';
 import WorkerCreateDTO from '../../../../types/worker/WorkerCreateDTO';
+import useAlert from '../../../../hooks/context/useAlert';
 
 export default function WorkerSignupForm(props:{
   onSubmissionSuccess? : (worker: WorkerAuthenticated)=> void,
@@ -23,7 +24,7 @@ export default function WorkerSignupForm(props:{
 }) {
   const { readonly, worker, onSubmissionSuccess } = props;
   const { t } = useTranslation();
-  const [errorMsg, setErrorMsg] = useState('');
+  const { setError } = useAlert();
 
   const onSubmit = async (workerToCreate: WorkerCreateDTO) => {
     registerWorker(workerToCreate)
@@ -31,7 +32,7 @@ export default function WorkerSignupForm(props:{
         if (onSubmissionSuccess) onSubmissionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
+        setError(err);
       });
   };
 
@@ -62,16 +63,6 @@ export default function WorkerSignupForm(props:{
             maxWidth="40rem"
             minWidth="300px"
           >
-            {errorMsg && (
-              <Alert
-                severity="error"
-                onClose={() => {
-                  setErrorMsg('');
-                }}
-              >
-                {errorMsg}
-              </Alert>
-            )}
 
             <Typography variant="caption">{t('your-personal-infos')}</Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
