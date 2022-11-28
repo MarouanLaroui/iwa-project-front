@@ -6,21 +6,33 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { Alert } from '@mui/material';
 import { DefaultTFuncReturn } from 'i18next';
+import { AxiosError } from 'axios';
 import Navbar from './components/navbar/navbar';
 import AlertContext, { AlertContextType } from './context/alert-context';
 import UserContext, { UserContextType } from './context/user-context';
-import { refreshUserInfoFromStorage } from './helpers/user-helper';
+import { refreshUserInfoFromStorage, removeAuthFromStorage } from './helpers/user-helper';
 
 function App() {
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [workerId, setWorkerId] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState('' as DefaultTFuncReturn);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+  const [error, setError] = useState < AxiosError | null>(null);
   const [successMessage, setSuccessMessage] = useState('' as DefaultTFuncReturn);
 
   const alertContext = useMemo<AlertContextType>(() => ({
-    setErrorMessage,
+    setError,
     setSuccessMessage,
-  }), [setErrorMessage, setSuccessMessage]);
+  }), [setError, setSuccessMessage]);
+
+  useEffect(() => {
+    setErrorMessage(error?.message);
+    setError(null);
+    if (error?.response?.status === 401) {
+      setWorkerId(null);
+      setCompanyId(null);
+      removeAuthFromStorage();
+    }
+  }, [error]);
 
   const userContext = useMemo<UserContextType>(() => ({
     workerId,

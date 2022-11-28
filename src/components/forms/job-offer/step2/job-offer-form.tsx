@@ -16,7 +16,7 @@ export default function JobOfferFormLastStep(props:{
   onSubmitionSuccess: (createdOffer: Offer)=>void
 }) {
   const { initialOfferDTO, onSubmitionSuccess } = props;
-  const { setErrorMessage } = useAlert();
+  const { setError } = useAlert();
 
   const onSubmit = (offerToCreate: OfferDTO) => {
     createOffer(offerToCreate)
@@ -24,7 +24,7 @@ export default function JobOfferFormLastStep(props:{
         onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
-        setErrorMessage(err.message);
+        setError(err);
       });
   };
 

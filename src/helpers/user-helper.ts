@@ -43,4 +43,12 @@ const refreshUserInfoFromStorage = (
   }
 };
 
-export { onCompanyAuthenticated, onWorkerAuthenticated, refreshUserInfoFromStorage };
+const removeAuthFromStorage = () => {
+  localStorage.removeItem('companyId');
+  localStorage.removeItem('workerId');
+  localStorage.removeItem('token');
+};
+
+export {
+  onCompanyAuthenticated, onWorkerAuthenticated, refreshUserInfoFromStorage, removeAuthFromStorage,
+};

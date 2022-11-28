@@ -59,14 +59,14 @@ export default function JobOfferFormFirstStep(props:{
                 fullWidth
               >
                 {
-                    Object.keys(JobType).map(
-                      (jobType) => (
-                        <MenuItem value={jobType} key={jobType}>
-                          {jobType}
-                        </MenuItem>
-                      ),
-                    )
-                  }
+                      Object.keys(JobType).map(
+                        (jobType) => (
+                          <MenuItem value={jobType} key={jobType}>
+                            {jobType}
+                          </MenuItem>
+                        ),
+                      )
+                    }
               </SelectField>
 
               <SelectField
@@ -76,14 +76,14 @@ export default function JobOfferFormFirstStep(props:{
                 fullWidth
               >
                 {
-                    Object.keys(ContractType).map(
-                      (contractType) => (
-                        <MenuItem value={contractType} key={contractType}>
-                          {contractType}
-                        </MenuItem>
-                      ),
-                    )
-                  }
+                      Object.keys(ContractType).map(
+                        (contractType) => (
+                          <MenuItem value={contractType} key={contractType}>
+                            {contractType}
+                          </MenuItem>
+                        ),
+                      )
+                    }
               </SelectField>
 
             </Stack>
@@ -97,7 +97,7 @@ export default function JobOfferFormFirstStep(props:{
 
               <InputField
                 label="ending date"
-                name="endingDate"
+                name="endDate"
                 type="date"
                 fullWidth
               />
