@@ -4,8 +4,10 @@ import {
 import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import { useNavigate } from 'react-router-dom';
 import filterOfferByFilter from '../../helpers/offer-helper';
 import { useFetchOffersByCompany } from '../../hooks/request/offerHooks';
+import { MY_OFFER_DETAILS_BASE_ROUTE } from '../../pages/routing/routes';
 import { Company } from '../../types/company/Company';
 import { Offer, OfferFilters } from '../../types/offer/Offer';
 import Loading from '../loading';
@@ -29,6 +31,7 @@ export default function CompanyOfferList(
   const [isCreateOfferModalOpened, setCreateOfferModalOpened] = useState(false);
   const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
   const [filters, setFilters] = useState<OfferFilters>({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFilteredOffers(filterOfferByFilter(offers, filters));
@@ -110,11 +113,27 @@ export default function CompanyOfferList(
               </Button>
             </Stack>
 
+            <Box width="100%" alignItems="center">
+              <MyOffersSearchBar setFilters={setFilters} />
+            </Box>
             <Grid container justifyContent="space-between" spacing={3}>
               {
                 filteredOffers.map((offer) => (
-                  <Grid item xs md={6} xl={4} width={400} key={offer.title + offer.offerId}>
-                    <OfferDetailsCard offer={offer} />
+                  <Grid
+                    onClick={() => {
+                      navigate(`${MY_OFFER_DETAILS_BASE_ROUTE}/${offer.offerId}`);
+                    }}
+                    item
+                    xs
+                    md={6}
+                    xl={4}
+                    width={400}
+                    key={offer.title + offer.offerId}
+                  >
+                    <OfferDetailsCard
+                      offer={offer}
+                      onClick={() => navigate(`${MY_OFFER_DETAILS_BASE_ROUTE}/${offer.offerId}`)}
+                    />
                   </Grid>
                 ))
               }
@@ -122,7 +141,6 @@ export default function CompanyOfferList(
           </>
         )
       }
-
     </Stack>
 
   );

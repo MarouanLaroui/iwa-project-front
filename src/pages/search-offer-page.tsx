@@ -3,6 +3,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import OfferDetailsCard from '../components/offers/offer-details-card';
 import { useFetchOffers } from '../hooks/request/offerHooks';
 import OfferSearchBar from '../components/search-bars/offer-search-bar';
@@ -15,6 +16,7 @@ export default function SearchOfferPage() {
   const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
   const [filters, setFilters] = useState<OfferFilters>({});
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFilteredOffers(filterOfferByFilter(offers, filters));
@@ -55,8 +57,23 @@ export default function SearchOfferPage() {
       <Grid container justifyContent="space-between" spacing={3}>
         {
           filteredOffers.map((offer, index) => (
-            <Grid item xs md={6} xl={4} width={400} key={index}>
-              <OfferDetailsCard offer={offer} />
+            <Grid
+              onClick={() => {
+                navigate(`/offer/details/${offer.offerId}`);
+              }}
+              item
+              xs
+              md={6}
+              xl={4}
+              width={400}
+              key={index}
+            >
+              <OfferDetailsCard
+                offer={offer}
+                onClick={() => {
+                  navigate(`/offer/details/${offer.offerId}`);
+                }}
+              />
             </Grid>
           ))
       }

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
-import { Application } from '../../../../types/application/Application';
+import Application from '../../../../types/application/Application';
 import { Company } from '../../../../types/company/Company';
 import { Offer } from '../../../../types/offer/Offer';
 import ApplicationForm from '../../../forms/application/application-form';

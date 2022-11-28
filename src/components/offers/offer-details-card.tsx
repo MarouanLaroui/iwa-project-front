@@ -7,22 +7,16 @@ import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import TypographyWithIcon from '../typography-with-icon';
 import { Offer } from '../../types/offer/Offer';
 
-type Props = {
+type OfferDetailsCardProps = {
   offer: Offer
+  onClick: () => void
 };
 
-export default function OfferDetailsCard({ offer }: Props) {
+export default function OfferDetailsCard({ offer, onClick }: OfferDetailsCardProps) {
   const { t } = useTranslation();
-
-  const navigation = useNavigate();
-
-  function onClick() {
-    navigation(`/offer/details/${offer.offerId}`);
-  }
 
   return (
     <Box
@@ -30,7 +24,7 @@ export default function OfferDetailsCard({ offer }: Props) {
       elevation={2}
       width="100%"
       borderRadius="5px"
-      onClick={() => onClick()}
+      onClick={() => onClick}
       sx={{
         '&: hover': {
           transform: 'scale(1.03)',
