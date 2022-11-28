@@ -29,6 +29,16 @@ export default function WorkerSignupForm(props:{
   const { t } = useTranslation();
   const { setError } = useAlert();
 
+  const initialValues = {
+    firstname: worker ? worker.firstname : '',
+    lastname: worker ? worker.lastname : '',
+    email: worker ? worker.email : '',
+    password: '',
+    birthDate: worker ? worker.birthDate : new Date(),
+    hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
+    cvLink: worker ? worker.cvLink : '',
+  };
+
   const onSubmit = async (workerToCreate: WorkerCreateDTO) => {
     const cvLink = cv ? await (await uploadFile(cv)).data.url : '';
 
@@ -45,15 +55,7 @@ export default function WorkerSignupForm(props:{
 
   return (
     <Formik
-      initialValues={{
-        firstname: worker ? worker.firstname : '',
-        lastname: worker ? worker.lastname : '',
-        email: worker ? worker.email : '',
-        password: '',
-        birthDate: worker ? worker.birthDate : new Date(),
-        hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
-        cvLink: '',
-      }}
+      initialValues={initialValues}
       validationSchema={workerSchema}
       onSubmit={async (data: WorkerCreateDTO, { setSubmitting }) => {
         setSubmitting(true);

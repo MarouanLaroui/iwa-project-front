@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
+import useAuth from '../../../hooks/context/useAuth';
 import { Company } from '../../../types/company/Company';
 import { Offer } from '../../../types/offer/Offer';
 import MessageStep from './steps/message-step';
@@ -14,6 +15,7 @@ export default function CandidateToOffer(props:{
 }) {
   const [step, setStep] = useState(1);
   const { company, offer } = props;
+  const { workerId } = useAuth();
 
   const goToPreviousStep = () => {
     setStep(() => step - 1);
@@ -42,14 +44,18 @@ export default function CandidateToOffer(props:{
 
       </Stack>
 
-      {step === 1 && <VerifyInfoStep />}
-      {step === 2
-      && (
-      <MessageStep
-        offerId={{ offerId: offer.offerId }}
-        companyName={{ name: company.name }}
-        onSubmitionSuccess={() => undefined}
-      />
+      {workerId && (
+        <>
+          {step === 1 && <VerifyInfoStep workerData={{ id: workerId }} />}
+          {step === 2
+            && (
+              <MessageStep
+                offerId={{ offerId: offer.offerId }}
+                companyName={{ name: company.name }}
+                onSubmitionSuccess={() => undefined}
+              />
+            )}
+        </>
       )}
 
       <Divider sx={{ width: '100%' }} />

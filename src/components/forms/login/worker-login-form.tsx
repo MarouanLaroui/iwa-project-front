@@ -19,7 +19,7 @@ export default function WorkerLoginForm() {
     useLoginWorker(loginDTO)
       .then((response) => {
         onWorkerAuthenticated(response.data, setCompanyId, setWorkerId);
-        navigate(`${WORKER_PROFILE_BASE_ROUTE}/${response.data.id}`);
+        navigate(`${WORKER_PROFILE_BASE_ROUTE}`);
       })
       .catch((err) => {
         setError(err);
