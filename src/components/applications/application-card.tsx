@@ -2,7 +2,7 @@ import { Cancel, CheckCircle, PendingActions } from '@mui/icons-material';
 import {
   Box, Button, Stack, Typography,
 } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AlertContext from '../../context/alert-context';
 import { acceptApplicationByCompany } from '../../hooks/request/applicationHooks';
@@ -10,14 +10,14 @@ import ApplicationFull from '../../types/application/ApplicationFull';
 import TypographyWithIcon from '../typography-with-icon';
 
 type ApplicationCardProps = {
-  application: ApplicationFull;
+  applicationFull: ApplicationFull;
 };
 
-function ApplicationStatus({ application }: ApplicationCardProps) {
+function ApplicationStatus({ applicationFull }: ApplicationCardProps) {
   const { t } = useTranslation();
 
-  if (application.isValidatedByCompany) {
-    if (application.isValidatedByWorker) {
+  if (applicationFull.isValidatedByCompany) {
+    if (applicationFull.isValidatedByWorker) {
       return <TypographyWithIcon sx={{ color: 'green' }} text={t('fully-accepted')} icon={<CheckCircle sx={{ color: 'green' }} />} />;
     }
     return <TypographyWithIcon sx={{ color: 'orange' }} text={t('company-accepted')} icon={<PendingActions sx={{ color: 'orange' }} />} />;
@@ -25,8 +25,9 @@ function ApplicationStatus({ application }: ApplicationCardProps) {
   return <TypographyWithIcon sx={{ color: 'gray' }} text={t('not-accepted')} icon={<Cancel sx={{ color: 'gray' }} />} />;
 }
 
-export default function ApplicationCard({ application }: ApplicationCardProps) {
+export default function ApplicationCard({ applicationFull }: ApplicationCardProps) {
   const { setErrorMessage, setSuccessMessage } = useContext(AlertContext);
+  const [application, setApplication] = useState<ApplicationFull>(applicationFull);
   const { t } = useTranslation();
   const { worker } = application;
   return (
@@ -51,7 +52,7 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
             {t('born-on')}
             {worker.birthDate.toDateString().substring(3, worker.birthDate.toDateString().length)}
           </Typography>
-          <ApplicationStatus application={application} />
+          <ApplicationStatus applicationFull={application} />
           <Typography textAlign="left">
             {`"${application.message}"`}
           </Typography>
@@ -61,7 +62,10 @@ export default function ApplicationCard({ application }: ApplicationCardProps) {
             sx={{ width: 'fit-content' }}
             onClick={() => {
               acceptApplicationByCompany(application.applicationId)
-                .then(() => setSuccessMessage(t('application-accepted')))
+                .then(() => {
+                  setSuccessMessage(t('application-accepted'));
+                  setApplication({ ...application, isValidatedByCompany: true });
+                })
                 .catch((err) => setErrorMessage(err.message));
             }}
           >

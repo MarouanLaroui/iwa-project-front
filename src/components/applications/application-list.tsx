@@ -20,12 +20,12 @@ export default function ApplicationList({ applications }: ApplicationListProps) 
     >
       <Stack direction="column" alignItems="flex-start">
 
-        <Typography variant="h4" fontWeight="bold">{applications.length > 0 ? t('applications') : ('applications-empty')}</Typography>
+        <Typography variant="h4" fontWeight="bold">{applications.length > 0 ? t('applications') : t('applications-empty')}</Typography>
         {applications.map((application, index) => (
           <>
             <ApplicationCard
               key={application.applicationId}
-              application={application}
+              applicationFull={application}
             />
             {index !== (applications.length - 1) && <Divider sx={{ marginY: 1 }} />}
           </>
