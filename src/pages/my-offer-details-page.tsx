@@ -1,13 +1,13 @@
 import { CircularProgress } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, {
-  useContext, useEffect, useMemo, useState,
+  useEffect, useMemo, useState,
 } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ApplicationList from '../components/applications/application-list';
 import OfferDetailsCard from '../components/offers/offer-details-card';
-import AlertContext from '../context/alert-context';
 import richAxios from '../database/axios/axios-client';
+import useAlert from '../hooks/context/useAlert';
 import useFetchMany from '../hooks/generic/useFetchMany';
 import { useFetchOffer } from '../hooks/request/offerHooks';
 import Application from '../types/application/Application';
@@ -17,14 +17,13 @@ import { HOME_ROUTE } from './routing/routes';
 
 export default function MyOfferDetailsPage() {
   const params = useParams();
-  const { setErrorMessage } = useContext(AlertContext);
   const { offerId } = params;
   const navigate = useNavigate();
   const [applicationsFull, setApplicationsFull] = useState<ApplicationFull[]>([]);
+  const { setError } = useAlert();
 
   useEffect(() => {
     if (!offerId) {
-      setErrorMessage('No offer id in the route parameters.');
       navigate(HOME_ROUTE);
     }
   });
@@ -46,20 +45,20 @@ export default function MyOfferDetailsPage() {
         setApplicationsFull([...applicationsFull, applicationFull]);
       })
       .catch((err) => {
-        setErrorMessage(err.message);
+        setError(err);
       });
   }), [applications]);
 
   useEffect(() => {
     if (offerError) {
-      setErrorMessage(offerError.message);
+      setError(offerError);
       navigate(HOME_ROUTE);
     }
   });
 
   useEffect(() => {
     if (applicationsError) {
-      setErrorMessage(applicationsError.message);
+      setError(applicationsError);
       navigate(HOME_ROUTE);
     }
   });

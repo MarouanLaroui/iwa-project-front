@@ -2,6 +2,7 @@ import { Cancel, CheckCircle, PendingActions } from '@mui/icons-material';
 import {
   Box, Button, Stack, Typography,
 } from '@mui/material';
+import { AxiosError } from 'axios';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AlertContext from '../../context/alert-context';
@@ -26,7 +27,7 @@ function ApplicationStatus({ applicationFull }: ApplicationCardProps) {
 }
 
 export default function ApplicationCard({ applicationFull }: ApplicationCardProps) {
-  const { setErrorMessage, setSuccessMessage } = useContext(AlertContext);
+  const { setError, setSuccessMessage } = useContext(AlertContext);
   const [application, setApplication] = useState<ApplicationFull>(applicationFull);
   const { t } = useTranslation();
   const { worker } = application;
@@ -66,7 +67,7 @@ export default function ApplicationCard({ applicationFull }: ApplicationCardProp
                   setSuccessMessage(t('application-accepted'));
                   setApplication({ ...application, isValidatedByCompany: true });
                 })
-                .catch((err) => setErrorMessage(err.message));
+                .catch((err:AxiosError) => setError(err));
             }}
           >
             {t('accept-application')}
