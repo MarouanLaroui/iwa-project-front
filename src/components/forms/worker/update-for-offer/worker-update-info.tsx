@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Box, Button, Stack, Typography,
+  Box, Button, Stack, Typography,
 } from '@mui/material';
 import { InferType } from 'yup';
 import axios, { AxiosError } from 'axios';
@@ -10,9 +10,10 @@ import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import InputField from '../../../form-fields/input-field';
 import workerSchema from './worker-schema';
 import CheckboxField from '../../../form-fields/checkbox-field';
+import useAlert from '../../../../hooks/context/useAlert';
 
 export default function WorkerUpdateInfo() {
-  const [errorMsg, setErrorMsg] = useState('');
+  const { setError } = useAlert();
 
   const onSubmit = async (data: InferType<typeof workerSchema>) => {
     axios
@@ -22,7 +23,7 @@ export default function WorkerUpdateInfo() {
         // do something
       })
       .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
+        setError(err);
       });
   };
 
@@ -49,16 +50,6 @@ export default function WorkerUpdateInfo() {
             maxWidth="40rem"
             minWidth="300px"
           >
-            {errorMsg && (
-              <Alert
-                severity="error"
-                onClose={() => {
-                  setErrorMsg('');
-                }}
-              >
-                {errorMsg}
-              </Alert>
-            )}
 
             <Stack direction="row" spacing="30px" width="100%">
 

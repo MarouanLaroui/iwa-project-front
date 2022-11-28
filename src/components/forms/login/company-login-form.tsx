@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../../context/user-context';
 import { onCompanyAuthenticated } from '../../../helpers/user-helper';
+import useAlert from '../../../hooks/context/useAlert';
 import { useLoginCompany } from '../../../hooks/request/companyHooks';
 import { COMPANY_PROFILE_BASE_ROUTE } from '../../../pages/routing/routes';
 import LoginDTO from '../../../types/company/LoginDTO';
@@ -13,15 +14,15 @@ export default function CompanyLoginForm() {
 
   const onSubmit = async (
     loginDTO: LoginDTO,
-    setErrorMsg: React.Dispatch<React.SetStateAction<string>>,
   ) => {
+    const { setError } = useAlert();
     useLoginCompany(loginDTO)
       .then((response) => {
         onCompanyAuthenticated(response.data, setCompanyId, setWorkerId);
         navigate(`${COMPANY_PROFILE_BASE_ROUTE}/${response.data.id}`);
       })
       .catch((err) => {
-        setErrorMsg(err.response.data);
+        setError(err);
       });
   };
 

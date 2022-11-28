@@ -1,9 +1,10 @@
 /* eslint-disable react/require-default-props */
-import { Alert, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { Stack } from '@mui/system';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
+import useAlert from '../../../hooks/context/useAlert';
 import { createApplication } from '../../../hooks/request/applicationHooks';
 import { Application } from '../../../types/application/Application';
 import ApplicationDTO from '../../../types/application/ApplicationDTO';
@@ -19,7 +20,7 @@ export default function ApplicationForm(
   },
 ) {
   const { offerId, isSubmitOutside, onSubmitionSuccess } = props;
-  const [errorMsg, setErrorMsg] = useState('');
+  const { setError } = useAlert();
 
   const onSubmit = async (formData: ApplicationDTO) => {
     createApplication(formData, offerId)
@@ -29,7 +30,7 @@ export default function ApplicationForm(
         }
       })
       .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
+        setError(err);
       });
   };
 
@@ -53,16 +54,6 @@ export default function ApplicationForm(
             spacing="10px"
             width="100%"
           >
-            {errorMsg && (
-              <Alert
-                severity="error"
-                onClose={() => {
-                  setErrorMsg('');
-                }}
-              >
-                {errorMsg}
-              </Alert>
-            )}
 
             <InputField
               label="message"
