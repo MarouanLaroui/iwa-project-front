@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, Stack,
+  Stack,
 } from '@mui/material';
 import { AxiosError } from 'axios';
 import { createOffer } from '../../../../hooks/request/offerHooks';
@@ -9,13 +9,14 @@ import { Offer } from '../../../../types/offer/Offer';
 import OfferDTO from '../../../../types/offer/OfferDTO';
 import InputField from '../../../form-fields/input-field';
 import jobOfferSchema from './job-offer-schema';
+import useAlert from '../../../../hooks/context/useAlert';
 
 export default function JobOfferFormLastStep(props:{
   initialOfferDTO: OfferDTO,
   onSubmitionSuccess: (createdOffer: Offer)=>void
 }) {
   const { initialOfferDTO, onSubmitionSuccess } = props;
-  const [errorMsg, setErrorMsg] = useState('');
+  const { setErrorMessage } = useAlert();
 
   const onSubmit = (offerToCreate: OfferDTO) => {
     createOffer(offerToCreate)
@@ -23,7 +24,7 @@ export default function JobOfferFormLastStep(props:{
         onSubmitionSuccess(response.data);
       })
       .catch((err: AxiosError) => {
-        setErrorMsg(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -46,16 +47,6 @@ export default function JobOfferFormLastStep(props:{
           maxWidth="50rem"
           minWidth="300px"
         >
-          {errorMsg && (
-          <Alert
-            severity="error"
-            onClose={() => {
-              setErrorMsg('');
-            }}
-          >
-            {errorMsg}
-          </Alert>
-          )}
 
           <InputField
             label="title"

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Alert, MenuItem, Stack,
+  MenuItem, Stack,
 } from '@mui/material';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
@@ -20,7 +20,6 @@ export default function JobOfferFormFirstStep(props:{
   goToNextStep: ()=>void
 }) {
   const { initialOfferDTO, setOfferDTO, goToNextStep } = props;
-  const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = (offerToCreate: OfferDTO) => {
     setOfferDTO({ ...offerToCreate });
@@ -46,16 +45,6 @@ export default function JobOfferFormFirstStep(props:{
           maxWidth="50rem"
           minWidth="240px"
         >
-          {errorMsg && (
-          <Alert
-            severity="error"
-            onClose={() => {
-              setErrorMsg('');
-            }}
-          >
-            {errorMsg}
-          </Alert>
-          )}
           {/* Contract info section */}
           <Stack direction="column" spacing="30px">
             <Stack direction="row" justifyContent="flex-start">
