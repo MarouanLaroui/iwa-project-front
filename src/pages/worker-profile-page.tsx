@@ -15,14 +15,14 @@ import useAuth from '../hooks/context/useAuth';
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
   const { workerId } = useAuth();
-  const { setErrorMessage, setSuccessMessage } = useContext(AlertContext);
+  const { setError, setSuccessMessage } = useContext(AlertContext);
 
   const [value, setValue] = React.useState(0);
 
   const [worker, loading, error] = useFetchWorker(workerId!);
 
   if (error) {
-    setErrorMessage(error.message);
+    setError(error);
   }
 
   // TODO: GET CRITERIA FROM REQUEST
@@ -39,7 +39,7 @@ export default function WorkerProfilePage() {
         setSuccessMessage(t('information-successfully-updated'));
       })
       .catch((err) => {
-        setErrorMessage(err.response.data);
+        setError(err);
       });
   };
 

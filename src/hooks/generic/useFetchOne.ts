@@ -1,9 +1,10 @@
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import richAxios from '../../database/axios/axios-client';
 
 export default function useFetch<T>(
   path: string,
-): [T | undefined, boolean, Error | undefined] {
+): [T | undefined, boolean, AxiosError | undefined] {
   const [data, setData] = useState<T>(undefined as T);
   const [error, setError] = useState(undefined);
   const [loading, setLoading] = useState(true);

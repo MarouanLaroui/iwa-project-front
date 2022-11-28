@@ -13,12 +13,21 @@ import useAuth from '../../hooks/context/useAuth';
 import { workerAccountPages, workerPages } from './pages/worker-pages';
 import { companyAccountPages, companyPages } from './pages/company-pages';
 import { baseAccountPages, basePages } from './pages/base-pages';
+import { removeAuthFromStorage } from '../../helpers/user-helper';
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const { workerId, companyId } = useAuth();
+  const {
+    workerId, companyId, setWorkerId, setCompanyId,
+  } = useAuth();
   const { t } = useTranslation();
+
+  const logout = () => {
+    setWorkerId(null);
+    setCompanyId(null);
+    removeAuthFromStorage();
+  };
 
   const getPages = () => {
     if (workerId) return workerPages;
@@ -200,8 +209,7 @@ export default function Navbar() {
             {
               (companyId || workerId) && (
                 <MenuItem
-                  onClick={() => {
-                  }}
+                  onClick={logout}
                 >
                   Déconnexion
                 </MenuItem>
