@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with the project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,8 +39,22 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Env variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### REACT_APP_IWA_API_URL
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project API url.
+
+## Cloudinary env variables
+
+Documentation :
+https://cloudinary.com/documentation/react_integration
+
+### REACT_APP_CLOUDINARY_URL
+
+### REACT_APP_CLOUDINARY_API_KEY
+
+### REACT_APP_CLOUDINARY_CLOUD_NAME
+
+### REACT_APP_CLOUDINARY_API_URL
+
