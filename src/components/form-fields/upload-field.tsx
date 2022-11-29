@@ -3,37 +3,38 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 export default function UploadField(props:{
-  setFile: React.Dispatch<React.SetStateAction<File | null>>,
-  file: File | null
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
+  currentFile?: File,
+  name:string
 }) {
-  const { file, setFile } = props;
-
+  const { setFieldValue, name, currentFile } = props;
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event?.target.files?.item(0) ? event?.target.files?.item(0) : null;
-    setFile(selectedFile);
+    setFieldValue(name, event?.target.files?.item(0) ? event?.target.files?.item(0) : undefined);
   };
   return (
     <Box>
       {
-        !file && (
-        <Button variant="contained" component="label">
-          Upload your CV
-          <input hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
-        </Button>
+        !currentFile && (
+          <Button variant="contained" component="label" startIcon={<AddOutlinedIcon />}>
+            Upload new CV
+            <input name={name} hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
+          </Button>
         )
       }
 
       {
-        file && (
+        currentFile && (
           <Stack direction="column" justifyContent="center">
             <Typography>
               Current file
               {' '}
-              {file.name}
+              {currentFile.name}
             </Typography>
-            <Button variant="contained" component="label">
+            <Button variant="contained" component="label" startIcon={<EditOutlinedIcon />}>
               Change file
               <input hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
             </Button>

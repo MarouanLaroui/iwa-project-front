@@ -1,5 +1,7 @@
 import Worker from './Worker';
 
-type WorkerUpdateDTO = Omit<Worker, 'id'>;
+export type WorkerUpdateDTO = Omit<Worker, 'id'>;
 
-export default WorkerUpdateDTO;
+export type WorkerUpdateFileUploadDTO = Omit<WorkerUpdateDTO, 'cvLink'> & {
+  cvToUpload?: File
+};
