@@ -9,9 +9,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 export default function UploadField(props:{
   setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
   currentFile?: File,
-  name:string
+  name:string,
+  text:string
 }) {
-  const { setFieldValue, name, currentFile } = props;
+  const {
+    text, setFieldValue, name, currentFile,
+  } = props;
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue(name, event?.target.files?.item(0) ? event?.target.files?.item(0) : undefined);
   };
@@ -20,7 +23,7 @@ export default function UploadField(props:{
       {
         !currentFile && (
           <Button variant="contained" component="label" startIcon={<AddOutlinedIcon />}>
-            Upload new CV
+            {text}
             <input name={name} hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
           </Button>
         )

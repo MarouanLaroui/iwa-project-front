@@ -44,7 +44,13 @@ export default function CompanyCard(
         {/* Icon and title */}
 
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Box sx={{ width: { xs: 80, md: 100 }, height: { xs: 80, md: 100 }, background: 'green' }} />
+          {company.pictureUrl && (
+            (
+            <Box sx={{ maxWidth: { xs: '80px', md: '100px' }, maxHeight: { xs: '80px', md: '100px' } }}>
+              <img style={{ width: '100%', height: '100%' }} src={company.pictureUrl} alt="logo" />
+            </Box>
+            )
+          )}
           <Stack direction="column" alignItems="flex-start">
             <Typography variant="h3" fontWeight="bold">{company.name}</Typography>
             <Typography variant="caption" fontWeight="bold">Science for a better life !</Typography>
