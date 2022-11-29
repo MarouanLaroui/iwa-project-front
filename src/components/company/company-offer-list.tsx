@@ -1,10 +1,10 @@
 import {
   Box, Button, Divider, Grid, Stack, Typography,
 } from '@mui/material';
-import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import filterOfferByFilter from '../../helpers/offer-helper';
 import { useFetchOffersByCompany } from '../../hooks/request/offerHooks';
 import { MY_OFFER_DETAILS_BASE_ROUTE } from '../../pages/routing/routes';
@@ -14,6 +14,7 @@ import Loading from '../loading';
 import OfferDetailsCard from '../offers/offer-details-card';
 import MyOffersSearchBar from '../search-bars/my-offers-search-bar';
 import CreateOfferDialog from '../offers/create-offer-dialog/create-offer-dialog';
+import useAlert from '../../hooks/context/useAlert';
 
 export default function CompanyOfferList(
   props: {
@@ -31,6 +32,8 @@ export default function CompanyOfferList(
   const [isCreateOfferModalOpened, setCreateOfferModalOpened] = useState(false);
   const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
   const [filters, setFilters] = useState<OfferFilters>({});
+  const { setSuccessMessage } = useAlert();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +43,7 @@ export default function CompanyOfferList(
   const onOfferCreation = (createdOffer: Offer) => {
     setOffers([...offers, createdOffer]);
     setCreateOfferModalOpened(false);
+    setSuccessMessage(t('offer-created-msg'));
   };
 
   if (isOffersLoading) {
@@ -113,9 +117,6 @@ export default function CompanyOfferList(
               </Button>
             </Stack>
 
-            <Box width="100%" alignItems="center">
-              <MyOffersSearchBar setFilters={setFilters} />
-            </Box>
             <Grid container justifyContent="space-between" spacing={3}>
               {
                 filteredOffers.map((offer) => (

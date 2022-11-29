@@ -11,10 +11,11 @@ import VerifyInfoStep from './steps/verify-info-step';
 
 export default function CandidateToOffer(props:{
   offer: Offer,
-  company: Company
+  company: Company,
+  onSubmitionSuccess:()=>void,
 }) {
   const [step, setStep] = useState(1);
-  const { company, offer } = props;
+  const { company, offer, onSubmitionSuccess } = props;
   const { workerId } = useAuth();
 
   const goToPreviousStep = () => {
@@ -52,7 +53,7 @@ export default function CandidateToOffer(props:{
               <MessageStep
                 offerId={{ offerId: offer.offerId }}
                 companyName={{ name: company.name }}
-                onSubmitionSuccess={() => undefined}
+                onSubmitionSuccess={onSubmitionSuccess}
               />
             )}
         </>

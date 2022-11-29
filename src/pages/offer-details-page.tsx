@@ -49,7 +49,11 @@ export default function OfferDetailsPage() {
     return (
       <>
         <Dialog open={openApplyModal} onClose={() => setOpenApplyModal(false)} fullWidth>
-          <CandidateToOffer offer={offer} company={company} />
+          <CandidateToOffer
+            onSubmitionSuccess={() => { setOpenApplyModal(false); }}
+            offer={offer}
+            company={company}
+          />
         </Dialog>
         <Stack direction="column" gap={5}>
 
