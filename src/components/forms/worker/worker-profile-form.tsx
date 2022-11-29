@@ -106,7 +106,7 @@ export default function WorkerProfileForm({ worker, onSubmit }: Props) {
                   )
                 }
                 {editMode && (
-                  <UploadField name="cvToUpload" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} />
+                  <UploadField text="Upload new CV" name="cvToUpload" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} />
                 )}
 
                 <CheckboxField checked={formik.values.hasDrivingLicense} onChange={formik.handleChange} disabled={!editMode} name="hasDrivingLicense" label={t('driving-license')} />

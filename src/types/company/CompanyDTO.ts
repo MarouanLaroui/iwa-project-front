@@ -1,7 +1,9 @@
 import { Company } from './Company';
 
-type CompanyDTO = Omit<Company, 'id'> & {
+export type CompanyDTO = Omit<Company, 'id'> & {
   password: string
 };
 
-export default CompanyDTO;
+export type CompanyDTOFileUploadDTO = Omit<CompanyDTO, 'pictureUrl'> & {
+  picturToUpload?: File
+};

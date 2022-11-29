@@ -18,12 +18,12 @@ export function getSectorTypeTranslation(sector: SectorType) {
 
 export type Company = {
   id: string
-  name: String;
-  email: String;
+  name: string;
+  email: string;
   employeesNumber: number;
-  description: String;
+  description: string;
   sector: SectorType;
-  pictureUrl?: String;
+  pictureUrl?: string;
 };
 
 export type CompanyFilters = {

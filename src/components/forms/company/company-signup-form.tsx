@@ -8,11 +8,12 @@ import { useTranslation } from 'react-i18next';
 import InputField from '../../form-fields/input-field';
 import companySchema from './company-schema';
 import SelectField from '../../form-fields/select-field';
-import CompanyDTO from '../../../types/company/CompanyDTO';
 import { SectorType } from '../../../types/company/Company';
 import { signUpCompany } from '../../../hooks/request/companyHooks';
 import CompanyAuthenticated from '../../../types/company/CompanyAuthenticated';
 import useAlert from '../../../hooks/context/useAlert';
+import { CompanyDTOFileUploadDTO } from '../../../types/company/CompanyDTO';
+import UploadField from '../../form-fields/upload-field';
 
 export default function CompanySignupForm(
   props:{
@@ -23,7 +24,7 @@ export default function CompanySignupForm(
   const { t } = useTranslation();
   const { setError } = useAlert();
 
-  const onSubmit = async (companyToCreate: CompanyDTO) => {
+  const onSubmit = async (companyToCreate: CompanyDTOFileUploadDTO) => {
     signUpCompany(companyToCreate)
       .then((response) => {
         onSubmitionSuccess(response.data);
@@ -42,10 +43,10 @@ export default function CompanySignupForm(
         employeesNumber: 1,
         description: '',
         sector: SectorType.AGRICULTURE_PECHE,
-        pictureUrl: '',
+        picturToUpload: undefined,
       }}
       validationSchema={companySchema}
-      onSubmit={async (data: CompanyDTO, { setSubmitting }) => {
+      onSubmit={async (data: CompanyDTOFileUploadDTO, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
         setSubmitting(false);
@@ -97,7 +98,6 @@ export default function CompanySignupForm(
             />
 
             <Stack direction="row" spacing="30px" width="100%">
-
               <InputField
                 label={t('password')}
                 name="password"
@@ -112,7 +112,6 @@ export default function CompanySignupForm(
                 type="number"
                 fullWidth
               />
-
             </Stack>
 
             <InputField
@@ -123,6 +122,10 @@ export default function CompanySignupForm(
               fullWidth
               rows={4}
             />
+            <Stack width="100%" direction="row" justifyContent="flex-start">
+              <UploadField text="Upload company logo" currentFile={formik.values.picturToUpload} setFieldValue={formik.setFieldValue} name="picturToUpload" />
+            </Stack>
+
             <Button
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"

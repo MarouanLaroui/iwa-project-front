@@ -140,7 +140,7 @@ export default function WorkerSignupForm(props:{
                   <AttachFileOutlinedIcon />
                   <Typography variant="caption">{t('attached-files')}</Typography>
                 </Stack>
-                <UploadField currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
+                <UploadField text="Upload new CV" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
               </Stack>
 
             </Stack>
