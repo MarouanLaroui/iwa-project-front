@@ -92,8 +92,10 @@ export default function Navbar() {
             ),
           )}
           <Stack direction="row" gap="30px">
+            {/* Not connected rendering */}
             {
-              getAccountPages().map((page) => (
+              !workerId && !companyId
+              && getAccountPages().map((page) => (
                 <Button
                   key={`button-${page.nameKey}`}
                   variant="contained"
@@ -104,6 +106,61 @@ export default function Navbar() {
                   {t(`${page.nameKey}`)}
                 </Button>
               ))
+            }
+            {/* Authenticated rendering */}
+            {
+              (workerId || companyId) && (
+                <Box>
+                  <Button
+                    variant="contained"
+                    sx={{ mr: 2 }}
+                    onClick={handleOpenUserMenu}
+                    startIcon={<AccountCircle />}
+                  >
+                    My account
+                  </Button>
+                  <Menu
+                    id="user-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {
+                      getAccountPages().map((page) => (
+                        <MenuItem
+                          key={`menuitem-${page.nameKey}`}
+                          onClick={() => {
+                            handleCloseUserMenu();
+                            navigation(page.link);
+                          }}
+                        >
+                          <Typography textAlign="center">
+                            {t(`${page.nameKey}`)}
+                          </Typography>
+                        </MenuItem>
+                      ))
+                    }
+                    {
+                      (companyId || workerId) && (
+                        <MenuItem
+                          onClick={logout}
+                        >
+                          Déconnexion
+                        </MenuItem>
+                      )
+                    }
+                  </Menu>
+                </Box>
+              )
             }
           </Stack>
         </Stack>
