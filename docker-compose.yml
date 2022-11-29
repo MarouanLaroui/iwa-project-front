@@ -1,0 +1,11 @@
+services:  
+  iwa-project-ui:
+    build: .
+    ports: 
+    - 3000:3000
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    name: frontend
