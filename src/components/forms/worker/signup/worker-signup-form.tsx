@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import {
   Box, Button, Divider, Stack, Typography,
@@ -14,17 +14,16 @@ import CheckboxField from '../../../form-fields/checkbox-field';
 import Worker from '../../../../types/worker/Worker';
 import { registerWorker } from '../../../../hooks/request/workerHooks';
 import WorkerAuthenticated from '../../../../types/worker/WorkerAuthenticated';
-import WorkerCreateDTO from '../../../../types/worker/WorkerCreateDTO';
+import { WorkerCreateDTOFileUploadDTO } from '../../../../types/worker/WorkerCreateDTO';
 import useAlert from '../../../../hooks/context/useAlert';
 import UploadField from '../../../form-fields/upload-field';
-import uploadFile from '../../../../hooks/request/fileHooks';
 
 export default function WorkerSignupForm(props:{
   onSubmissionSuccess? : (worker: WorkerAuthenticated)=> void,
   readonly: boolean,
   worker?: Worker
 }) {
-  const [cv, setCV] = useState<File | null>(null);
+  // const [cv, setCV] = useState<File | null>(null);
   const { readonly, worker, onSubmissionSuccess } = props;
   const { t } = useTranslation();
   const { setError } = useAlert();
@@ -36,15 +35,11 @@ export default function WorkerSignupForm(props:{
     password: '',
     birthDate: worker ? worker.birthDate : new Date(),
     hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
-    cvLink: worker ? worker.cvLink : '',
+    cvToUpload: undefined,
   };
 
-  const onSubmit = async (workerToCreate: WorkerCreateDTO) => {
-    const cvLink = cv ? await (await uploadFile(cv)).data.url : '';
-
-    registerWorker(
-      { ...workerToCreate, cvLink },
-    )
+  const onSubmit = async (workerToCreate: WorkerCreateDTOFileUploadDTO) => {
+    registerWorker(workerToCreate)
       .then((response) => {
         if (onSubmissionSuccess) onSubmissionSuccess(response.data);
       })
@@ -57,7 +52,7 @@ export default function WorkerSignupForm(props:{
     <Formik
       initialValues={initialValues}
       validationSchema={workerSchema}
-      onSubmit={async (data: WorkerCreateDTO, { setSubmitting }) => {
+      onSubmit={async (data: WorkerCreateDTOFileUploadDTO, { setSubmitting }) => {
         setSubmitting(true);
         await onSubmit(data);
         setSubmitting(false);
@@ -65,6 +60,7 @@ export default function WorkerSignupForm(props:{
     >
       {(formik) => (
         <Box component={Form}>
+          <div>{JSON.stringify(formik)}</div>
           <Stack
             alignItems="flex-start"
             direction="column"
@@ -144,7 +140,7 @@ export default function WorkerSignupForm(props:{
                   <AttachFileOutlinedIcon />
                   <Typography variant="caption">{t('attached-files')}</Typography>
                 </Stack>
-                <UploadField setFile={setCV} file={cv} />
+                <UploadField currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
               </Stack>
 
             </Stack>

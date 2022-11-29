@@ -9,7 +9,7 @@ import WorkerCriteria from '../components/worker-criteria';
 import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
 import mockCriteria from '../database/mock/mockCriteria';
 import AlertContext from '../context/alert-context';
-import WorkerUpdateDTO from '../types/worker/WorkerUpdateDTO';
+import { WorkerUpdateDTO } from '../types/worker/WorkerUpdateDTO';
 import useAuth from '../hooks/context/useAuth';
 
 export default function WorkerProfilePage() {
