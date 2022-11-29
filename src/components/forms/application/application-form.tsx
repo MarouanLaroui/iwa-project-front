@@ -4,6 +4,7 @@ import { Stack } from '@mui/system';
 import { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import useAlert from '../../../hooks/context/useAlert';
 import { createApplication } from '../../../hooks/request/applicationHooks';
 import Application from '../../../types/application/Application';
@@ -19,12 +20,14 @@ export default function ApplicationForm(
     onSubmitionSuccess?: (createdApplication: Application) => void
   },
 ) {
+  const { t } = useTranslation();
   const { offerId, isSubmitOutside, onSubmitionSuccess } = props;
-  const { setError } = useAlert();
+  const { setSuccessMessage, setError } = useAlert();
 
   const onSubmit = async (formData: ApplicationDTO) => {
     createApplication(formData, offerId)
       .then((response) => {
+        setSuccessMessage(t('application-sent-msg'));
         if (onSubmitionSuccess) {
           onSubmitionSuccess(response.data);
         }
