@@ -95,6 +95,7 @@ export default function Navbar() {
             {
               getAccountPages().map((page) => (
                 <Button
+                  key={`button-${page.nameKey}`}
                   variant="contained"
                   size="medium"
                   sx={{ fontWeight: 'bold' }}
@@ -195,6 +196,7 @@ export default function Navbar() {
             {
               getAccountPages().map((page) => (
                 <MenuItem
+                  key={`menuitem-${page.nameKey}`}
                   onClick={() => {
                     handleCloseUserMenu();
                     navigation(page.link);
