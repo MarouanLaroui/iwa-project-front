@@ -117,9 +117,6 @@ export default function CompanyOfferList(
               </Button>
             </Stack>
 
-            <Box width="100%" alignItems="center">
-              <MyOffersSearchBar setFilters={setFilters} />
-            </Box>
             <Grid container justifyContent="space-between" spacing={3}>
               {
                 filteredOffers.map((offer) => (
