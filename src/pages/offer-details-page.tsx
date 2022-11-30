@@ -16,10 +16,12 @@ import { useFetchCompany } from '../hooks/request/companyHooks';
 import Loading from '../components/loading';
 import TypographyWithIcon from '../components/typography-with-icon';
 import CandidateToOffer from '../components/offers/candidate-to-offer/candidate-to-offer';
+import useAuth from '../hooks/context/useAuth';
 
 export default function OfferDetailsPage() {
   const params = useParams();
   const { t } = useTranslation();
+  const { workerId } = useAuth();
   const [offer, isOfferLoading, offerError] = useFetchOffer(`${params.offerId}`);
   // revoir
   const [company, isCompanyLoading, companyError] = useFetchCompany(`${offer?.companyId}`);
@@ -114,8 +116,8 @@ export default function OfferDetailsPage() {
 
               {/* Postuler */}
               <Stack direction="column" alignItems="flex-start" spacing={2}>
-                <Typography align="left">VOUS ÊTES INTÉRÉSSÉS ?</Typography>
-                <Button variant="contained" onClick={openModal}>POSTULER</Button>
+                <Typography align="left">{t('interested')}</Typography>
+                {workerId ? <Button variant="contained" onClick={openModal}>POSTULER</Button> : <Typography>{t('login-to-apply')}</Typography>}
 
               </Stack>
 
