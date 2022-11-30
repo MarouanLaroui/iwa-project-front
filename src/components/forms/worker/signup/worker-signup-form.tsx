@@ -60,7 +60,6 @@ export default function WorkerSignupForm(props:{
     >
       {(formik) => (
         <Box component={Form}>
-          <div>{JSON.stringify(formik)}</div>
           <Stack
             alignItems="flex-start"
             direction="column"

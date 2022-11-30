@@ -5,15 +5,15 @@ import {
 } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'react-i18next';
-import InputField from '../../form-fields/input-field';
+import InputField from '../../../form-fields/input-field';
 import companySchema from './company-schema';
-import SelectField from '../../form-fields/select-field';
-import { SectorType } from '../../../types/company/Company';
-import { signUpCompany } from '../../../hooks/request/companyHooks';
-import CompanyAuthenticated from '../../../types/company/CompanyAuthenticated';
-import useAlert from '../../../hooks/context/useAlert';
-import { CompanyDTOFileUploadDTO } from '../../../types/company/CompanyDTO';
-import UploadField from '../../form-fields/upload-field';
+import SelectField from '../../../form-fields/select-field';
+import { SectorType } from '../../../../types/company/Company';
+import { signUpCompany } from '../../../../hooks/request/companyHooks';
+import CompanyAuthenticated from '../../../../types/company/CompanyAuthenticated';
+import useAlert from '../../../../hooks/context/useAlert';
+import { CompanyDTOFileUploadDTO } from '../../../../types/company/CompanyDTO';
+import UploadField from '../../../form-fields/upload-field';
 
 export default function CompanySignupForm(
   props:{
@@ -123,7 +123,7 @@ export default function CompanySignupForm(
               rows={4}
             />
             <Stack width="100%" direction="row" justifyContent="flex-start">
-              <UploadField text="Upload company logo" currentFile={formik.values.picturToUpload} setFieldValue={formik.setFieldValue} name="picturToUpload" />
+              <UploadField text="Upload company logo" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} name="pictureToUpload" />
             </Stack>
 
             <Button
