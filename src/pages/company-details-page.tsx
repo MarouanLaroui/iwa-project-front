@@ -41,10 +41,10 @@ export default function CompanyDetailsPage() {
           </Box>
 
           {/* Description entreprise */}
-          <Stack direction="column" justifyContent="flex-start" spacing={2}>
+          <Stack direction="column" justifyContent="flex-start" spacing={2} width="100%">
             <Typography variant="h4" fontWeight={600} align="left" fontSize={{ xs: '20px', md: '30px' }}>Qui sont ils ?</Typography>
             <Divider variant="fullWidth" sx={{ width: '100%', background: 'black' }} />
-            <Typography fontSize={{ xs: '18px', md: '20px' }} align="left">{company.description}</Typography>
+            <Typography fontSize={{ xs: '18px', md: '20px' }} sx={{ wordWrap: 'break-word' }}>{company.description}</Typography>
           </Stack>
 
         </Stack>

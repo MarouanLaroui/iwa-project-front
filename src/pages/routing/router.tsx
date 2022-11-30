@@ -13,6 +13,7 @@ import {
   MY_OFFERS_ROUTE, WORKER_PROFILE_BASE_ROUTE, COMPANY_DETAILS_ROUTE,
   COMPANY_LOGIN_ROUTE, WORKER_SIGNUP_ROUTE,
   MY_OFFER_DETAILS_ROUTE,
+  WORKER_APPLICATIONS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CompanyDetailsPage from '../company-details-page';
@@ -27,6 +28,7 @@ import MyOfferPage from '../my-offers-page';
 import CompanyProtectedRoute from './company-route';
 import WorkerProtectedRoute from './worker-route';
 import MyOfferDetailsPage from '../my-offer-details-page';
+import WorkerApplicationPage from '../worker-application-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -75,6 +77,14 @@ const router = createBrowserRouter(
             <WorkerProfilePage />
           </WorkerProtectedRoute>
       )}
+      />
+      <Route
+        path={WORKER_APPLICATIONS_ROUTE}
+        element={(
+          <WorkerProtectedRoute>
+            <WorkerApplicationPage />
+          </WorkerProtectedRoute>
+        )}
       />
 
     </Route>,
