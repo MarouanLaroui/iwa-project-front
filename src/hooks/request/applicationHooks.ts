@@ -14,7 +14,7 @@ const createApplication = (applicationDTO: ApplicationDTO, offerData: Pick<Offer
 
 const acceptApplicationByCompany = (applicationId: string) => usePut<string, ApplicationDTO>(`applications/acceptByCompany/${applicationId}`, '');
 
-const acceptApplicationByWorker = (workerId: string) => usePut<string, ApplicationDTO>(`applications/acceptByWorker/${workerId}`, '');
+const acceptApplicationByWorker = (applicationId: string) => usePut<string, ApplicationDTO>(`applications/acceptByWorker/${applicationId}`, '');
 
 export {
   useFetchApplication, useFetchWorkerApplications,

@@ -137,7 +137,7 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
                   )
                 }
                 {editMode && (
-                  <UploadField text="Upload new CV" name="pictureToUpload" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} />
+                  <UploadField text="Upload new logo" name="pictureToUpload" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} />
                 )}
               </Stack>
             </Stack>

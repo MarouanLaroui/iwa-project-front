@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { useNavigate } from 'react-router-dom';
 import { useFetchCompany } from '../../hooks/request/companyHooks';
 import useAlert from '../../hooks/context/useAlert';
 import Application from '../../types/application/Application';
@@ -14,11 +15,16 @@ export default function ApplicationCardWorker(props:{
 }) {
   const { setError, setSuccessMessage } = useAlert();
   const { application } = props;
+  const navigate = useNavigate();
   const [company, , error] = useFetchCompany(application.offer.companyId);
 
   const acceptOffer = () => {
-    acceptApplicationByWorker(application.workerId).then(
-      () => setSuccessMessage('Offer accepted with success'),
+    acceptApplicationByWorker(application.applicationId).then(
+      () => {
+        setSuccessMessage('Offer accepted with success');
+        // reload the page
+        navigate('');
+      },
       (err) => setError(err),
     );
   };
@@ -40,11 +46,11 @@ export default function ApplicationCardWorker(props:{
           </Typography>
 
           <Stack direction="column" alignItems="flex-start" spacing={2}>
-            <Stack direction={{ xs: 'column', md: 'row' }} alignItems="center" spacing={1}>
+            <Stack direction="row" alignItems="center" spacing={1}>
               {
                 company.pictureUrl
                 && (
-                  <Box width={{ xs: '70px', md: '40px' }} height={{ xs: '50px', md: '40px' }}>
+                  <Box width={{ xs: '40px', md: '40px' }} height={{ xs: '40px', md: '40px' }}>
                     <img src={company.pictureUrl} style={{ width: '100%', height: '100%' }} alt="logo" />
                   </Box>
                 )
@@ -64,7 +70,7 @@ export default function ApplicationCardWorker(props:{
               }
 
               {
-                application.isValidatedByCompany && (
+                application.isValidatedByCompany && !application.isValidatedByWorker && (
                   <>
                     <Button variant="outlined">Decline offer</Button>
                     <Button variant="contained" onClick={acceptOffer}>Accept offer</Button>
