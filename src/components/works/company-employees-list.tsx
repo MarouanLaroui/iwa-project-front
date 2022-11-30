@@ -42,7 +42,7 @@ export default function CompanyEmployeesList() {
 
   return (
     <Stack spacing={3}>
-      { employees.map((employee) => <EmployeeCard key={employee.workId} employee={employee} />)}
+      { employees.map((employee) => <EmployeeCard key={employee.workId} employeeProp={employee} />)}
     </Stack>
   );
 }

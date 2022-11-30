@@ -11,13 +11,14 @@ import RateWorkerForm from '../forms/feedback/rate-worker-form';
 import TypographyWithIcon from '../typography-with-icon';
 
 type EmployeeCardProps = {
-  employee: Employee
+  employeeProp: Employee
 };
 
-export default function EmployeeCard({ employee }: EmployeeCardProps) {
+export default function EmployeeCard({ employeeProp }: EmployeeCardProps) {
   const { t } = useTranslation();
 
   const [isVisibleRatingModal, setIsVisibleRatingModal] = useState<boolean>(false);
+  const [employee, setEmployee] = useState<Employee>(employeeProp);
 
   const { worker } = employee;
   const { endDate } = employee;
@@ -36,7 +37,11 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
   return (
     <>
       <Dialog onClose={handleDialogClose} open={isVisibleRatingModal} fullWidth>
-        <RateWorkerForm employee={employee} setIsVisibleRatingModal={setIsVisibleRatingModal} />
+        <RateWorkerForm
+          employee={employee}
+          setIsVisibleRatingModal={setIsVisibleRatingModal}
+          setEmployee={setEmployee}
+        />
       </Dialog>
       <Box
         component={Paper}
