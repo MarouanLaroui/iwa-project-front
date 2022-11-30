@@ -14,6 +14,7 @@ import {
   COMPANY_LOGIN_ROUTE, WORKER_SIGNUP_ROUTE,
   MY_OFFER_DETAILS_ROUTE,
   WORKER_APPLICATIONS_ROUTE,
+  COMPANY_EMPLOYEES_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CompanyDetailsPage from '../company-details-page';
@@ -29,6 +30,7 @@ import CompanyProtectedRoute from './company-route';
 import WorkerProtectedRoute from './worker-route';
 import MyOfferDetailsPage from '../my-offer-details-page';
 import WorkerApplicationPage from '../worker-application-page';
+import CompanyEmployeesList from '../../components/works/company-employees-list';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -43,6 +45,7 @@ const router = createBrowserRouter(
       <Route path={COMPANY_SEARCH_ROUTE} element={<SearchCompaniesPage />} />
       <Route path={COMPANY_DETAILS_ROUTE} element={<CompanyDetailsPage />} />
       <Route path={COMPANY_PROFILE_BASE_ROUTE} element={<CompanyProfilePage />} />
+      <Route path={COMPANY_EMPLOYEES_ROUTE} element={<CompanyEmployeesList />} />
 
       {/* Offer */}
       <Route
