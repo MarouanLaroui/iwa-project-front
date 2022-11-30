@@ -1,20 +1,21 @@
+import { InsertEmoticon } from '@mui/icons-material';
 import { Button, Rating } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-router-dom';
 import FeedbackFormData from '../../../types/feedback/FeedbackFormData';
 import InputField from '../../form-fields/input-field';
+import TypographyWithIcon from '../../typography-with-icon';
 import feedbackSchema from './feedback-schema';
 
 type FeedbackGenericFormProps = {
   onSubmit: (feedbackFormData: FeedbackFormData) => void
+  receiver: string
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function FeedbackGenericForm({ onSubmit }: FeedbackGenericFormProps) {
-  const [rate, setRating] = useState<number>(4);
+export default function FeedbackGenericForm({ onSubmit, receiver }: FeedbackGenericFormProps) {
   const { t } = useTranslation();
 
   return (
@@ -24,9 +25,8 @@ export default function FeedbackGenericForm({ onSubmit }: FeedbackGenericFormPro
         message: '',
         rate: 1,
       }}
-      validateOnMount
       validationSchema={feedbackSchema}
-      onSubmit={async (feedbackFormData, { setSubmitting }) => {
+      onSubmit={(feedbackFormData, { setSubmitting }) => {
         setSubmitting(true);
         onSubmit(feedbackFormData);
         setSubmitting(false);
@@ -40,6 +40,7 @@ export default function FeedbackGenericForm({ onSubmit }: FeedbackGenericFormPro
             spacing={3}
             width="100%"
           >
+            <TypographyWithIcon text={t('currently-giving-feedback', { receiver })} icon={<InsertEmoticon />} />
             <InputField
               label={t('feedback-title')}
               name="title"
@@ -57,10 +58,9 @@ export default function FeedbackGenericForm({ onSubmit }: FeedbackGenericFormPro
             <Rating
               name="rate"
               size="large"
-              value={rate}
+              value={formik.values.rate}
               onChange={(event, newValue) => {
-                const newStateValue = newValue === null ? rate : newValue;
-                setRating(newStateValue);
+                const newStateValue = newValue === null ? formik.values.rate : newValue;
                 formik.setFieldValue('rate', newStateValue);
               }}
             />
@@ -68,6 +68,7 @@ export default function FeedbackGenericForm({ onSubmit }: FeedbackGenericFormPro
               disabled={formik.isSubmitting || !formik.isValid}
               variant="contained"
               type="submit"
+              onClick={formik.submitForm}
             >
               {t('submit')}
             </Button>
