@@ -5,5 +5,6 @@ export type WorkerCreateDTO = Omit<Worker, 'id'> & {
 };
 
 export type WorkerCreateDTOFileUploadDTO = Omit<WorkerCreateDTO, 'cvLink'> & {
-  cvToUpload?: File
+  cvToUpload?: File,
+  pictureToUpload?: File
 };
