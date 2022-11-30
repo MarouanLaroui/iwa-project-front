@@ -10,9 +10,8 @@ export default function LandingPageBanner() {
   return (
     <Stack
       direction={{ xs: 'column', lg: 'row' }}
-      width="116%"
-      marginLeft="-10%"
-      marginRight="-10%"
+      marginLeft="-9.52%"
+      marginRight="-9.52%"
       paddingX={3}
       paddingY={10}
       spacing={4}

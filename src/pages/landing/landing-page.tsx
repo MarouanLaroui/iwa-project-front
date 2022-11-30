@@ -2,12 +2,12 @@ import React, { Key } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Box, Stack } from '@mui/system';
-import LandingPageBanner from '../components/landing-page/landing-page-banner';
-import { useFetchCompanies } from '../hooks/request/companyHooks';
-import Loading from '../components/loading';
-import CompanyCard from '../components/company/company-card';
-import { useFetchOffers } from '../hooks/request/offerHooks';
-import OfferDetailsCard from '../components/offers/offer-details-card';
+import LandingPageBanner from '../../components/landing-page/landing-page-banner';
+import { useFetchCompanies } from '../../hooks/request/companyHooks';
+import Loading from '../../components/loading';
+import CompanyCard from '../../components/company/company-card';
+import { useFetchOffers } from '../../hooks/request/offerHooks';
+import OfferDetailsCard from '../../components/offers/offer-details-card';
 
 export default function LandingPage() {
   const { t } = useTranslation();

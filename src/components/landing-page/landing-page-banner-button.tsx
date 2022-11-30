@@ -13,6 +13,7 @@ export default function LandingPageButton(props:{
   const navigate = useNavigate();
   const { tKey, link } = props;
   return (
+
     <Stack
       sx={{
         background: 'white',
@@ -22,16 +23,22 @@ export default function LandingPageButton(props:{
           cursor: 'pointer',
         },
       }}
-      justifyContent="space-between"
-      direction="row"
-      alignItems="center"
-      paddingX={4}
       paddingY={2}
+      direction="row"
       width="100%"
       onClick={() => navigate(link)}
     >
-      <Typography fontWeight="bold">{t(tKey)}</Typography>
-      <ArrowForwardIosIcon />
+      <Stack
+        paddingX={4}
+        width="100%"
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography fontWeight="bold">{t(tKey)}</Typography>
+        <ArrowForwardIosIcon />
+      </Stack>
+
     </Stack>
   );
 }

@@ -3,7 +3,7 @@ import {
   createBrowserRouter, createRoutesFromElements, Route,
 } from 'react-router-dom';
 import SearchCompaniesPage from '../search-companies-page';
-import LandingPage from '../landing-page';
+// import LandingPage from '../landing/landing-page';
 import OfferDetailsPage from '../offer-details-page';
 import {
   HOME_ROUTE, COMPANY_SEARCH_ROUTE,
@@ -31,11 +31,20 @@ import WorkerProtectedRoute from './worker-route';
 import MyOfferDetailsPage from '../my-offer-details-page';
 import WorkerApplicationPage from '../worker-application-page';
 import CompanyEmployeesList from '../../components/works/company-employees-list';
+import LandingPageWorker from '../landing/landing-page-worker';
+// import LandingPageWorker from '../landing/landing-page-worker';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path={HOME_ROUTE} element={<App />}>
-      <Route path={HOME_ROUTE} element={<LandingPage />} />
+      {/* Keep this route above the public */}
+      {/* <Route
+        path={HOME_ROUTE}
+        element={
+          <WorkerProtectedRoute><LandingPageWorker /></WorkerProtectedRoute>
+        }
+      /> */}
+      <Route path={HOME_ROUTE} element={<LandingPageWorker />} />
 
       {/* Auth */}
       <Route path={WORKER_LOGIN_ROUTE} element={<WorkerLoginRegisterPage />} />
