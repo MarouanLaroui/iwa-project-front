@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, {
-  useEffect, useMemo, useState,
+  useEffect, useState,
 } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ApplicationList from '../components/applications/application-list';
@@ -31,7 +31,7 @@ export default function MyOfferDetailsPage() {
   const [offer, offerLoading, offerError] = useFetchOffer(offerId!);
   const [applications, , applicationsLoading, applicationsError] = useFetchMany<Application>(`applications/findByOfferId/${offerId}`);
 
-  useMemo(() => applications.forEach((application) => {
+  useEffect(() => applications.forEach((application) => {
     const { workerId } = application;
     richAxios
       .get<Worker>(`workers/${workerId}`)
