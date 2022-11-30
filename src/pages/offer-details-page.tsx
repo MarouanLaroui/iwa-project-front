@@ -59,7 +59,11 @@ export default function OfferDetailsPage() {
 
           {/* header entreprise */}
           <Stack direction="row" gap={4} alignItems="center">
-            <Box sx={{ width: { xs: '100px', md: '120px' }, height: { xs: '100px', md: '120px' }, background: 'green' }} />
+            { company.pictureUrl && (
+            <Box sx={{ width: { xs: '100px', md: '120px' }, height: { xs: '100px', md: '120px' } }}>
+              <img src={company.pictureUrl} alt="logo" style={{ width: '100%', height: '100%' }} />
+            </Box>
+            )}
             <Stack direction="column" alignItems="flex-start" justifyContent="center" spacing={1}>
               <Typography variant="h3" sx={{ fontSize: { xs: '33px', md: '35px', lg: '40px' } }} align="left">{`${company.name} recrute un(e) ${offer.title.toLowerCase()}!`}</Typography>
 

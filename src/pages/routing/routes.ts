@@ -18,5 +18,6 @@ export const MY_OFFER_DETAILS_ROUTE: `${typeof MY_OFFER_DETAILS_BASE_ROUTE}/:off
 export const MY_OFFERS_ROUTE: 'offer/myoffers' = 'offer/myoffers';
 
 export const WORKER_PROFILE_BASE_ROUTE: '/worker/profile' = '/worker/profile';
+export const WORKER_APPLICATIONS_ROUTE: '/worker/applications' = '/worker/applications';
 
 export const COMPANY_PROFILE_BASE_ROUTE: '/company/profile' = '/company/profile';

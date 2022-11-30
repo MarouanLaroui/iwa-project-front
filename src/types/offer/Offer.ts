@@ -9,10 +9,10 @@ export enum JobType {
 
 export type Offer = {
   offerId: string
-  companyId: String
-  title: String
-  description: String
-  location: String
+  companyId: string
+  title: string
+  description: string
+  location: string
   creationDate: Date
   startingDate: Date
   endDate: Date
