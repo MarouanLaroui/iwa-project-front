@@ -20,5 +20,6 @@ export const MY_OFFERS_ROUTE: 'offer/myoffers' = 'offer/myoffers';
 
 export const WORKER_PROFILE_BASE_ROUTE: '/worker/profile' = '/worker/profile';
 export const WORKER_APPLICATIONS_ROUTE: '/worker/applications' = '/worker/applications';
+export const WORKER_EMPLOYERS_ROUTE: 'worker/employers' = 'worker/employers';
 
 export const COMPANY_PROFILE_BASE_ROUTE: '/company/profile' = '/company/profile';

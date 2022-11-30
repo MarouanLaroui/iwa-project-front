@@ -41,7 +41,7 @@ export default function LandingPageWorker() {
 
   return (
     <Stack paddingBottom={5} direction="column" spacing={10}>
-      <LandingPageBannerWorker hasCriterias />
+      <LandingPageBannerWorker hasCriterias={!recommendedError} />
 
       {/* Workers */}
       <Stack direction="column" spacing={3}>
