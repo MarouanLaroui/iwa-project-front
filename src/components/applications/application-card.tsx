@@ -60,19 +60,22 @@ export default function ApplicationCard({ applicationFull }: ApplicationCardProp
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
-          <Button
-            sx={{ width: 'fit-content' }}
-            onClick={() => {
-              acceptApplicationByCompany(application.applicationId)
-                .then(() => {
-                  setSuccessMessage(t('application-accepted'));
-                  setApplication({ ...application, isValidatedByCompany: true });
-                })
-                .catch((err:AxiosError) => setError(err));
-            }}
-          >
-            {t('accept-application')}
-          </Button>
+          {!applicationFull.isValidatedByCompany && (
+            <Button
+              sx={{ width: 'fit-content' }}
+              onClick={() => {
+                acceptApplicationByCompany(application.applicationId)
+                  .then(() => {
+                    setSuccessMessage(t('application-accepted'));
+                    setApplication({ ...application, isValidatedByCompany: true });
+                  })
+                  .catch((err: AxiosError) => setError(err));
+              }}
+            >
+              {t('accept-application')}
+            </Button>
+          )}
+
         </Stack>
 
         <Stack>
