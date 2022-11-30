@@ -24,6 +24,7 @@ export default function CompanyCard(
       component={Paper}
       elevation={2}
       width="100%"
+      height="100%"
       borderRadius="5px"
       onClick={navigateToCompanyDetailedPage}
       sx={{
@@ -36,6 +37,7 @@ export default function CompanyCard(
     >
       <Stack
         direction="column"
+        justifyContent="center"
         alignItems="flex-start"
         paddingX="40px"
         paddingY="35px"
