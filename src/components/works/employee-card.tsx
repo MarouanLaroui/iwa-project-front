@@ -42,7 +42,7 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
           })}
           icon={<CalendarMonth />}
         />
-        {today <= endDate && <TypographyWithIcon text={t('currently-working')} icon={<MoreHoriz />} />}
+        {today <= endDate && <TypographyWithIcon text={t('employee-currently-working')} icon={<MoreHoriz />} />}
         {!employee.isRatedByCompany
           ? <Button>{t('rate-employee')}</Button>
           : <TypographyWithIcon text={t('employee-already-rated')} icon={<CheckCircle />} />}

@@ -15,6 +15,7 @@ import {
   MY_OFFER_DETAILS_ROUTE,
   WORKER_APPLICATIONS_ROUTE,
   COMPANY_EMPLOYEES_ROUTE,
+  WORKER_EMPLOYERS_ROUTE,
 } from './routes';
 import ApplyToOfferPage from '../apply-to-offer-page';
 import CompanyDetailsPage from '../company-details-page';
@@ -32,6 +33,7 @@ import MyOfferDetailsPage from '../my-offer-details-page';
 import WorkerApplicationPage from '../worker-application-page';
 import CompanyEmployeesList from '../../components/works/company-employees-list';
 import LandingWrapper from '../landing/landing-wrapper';
+import WorkerEmployersList from '../../components/works/worker-employers-list';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -47,14 +49,23 @@ const router = createBrowserRouter(
       <Route path={COMPANY_SEARCH_ROUTE} element={<SearchCompaniesPage />} />
       <Route path={COMPANY_DETAILS_ROUTE} element={<CompanyDetailsPage />} />
       <Route path={COMPANY_PROFILE_BASE_ROUTE} element={<CompanyProfilePage />} />
-      <Route path={COMPANY_EMPLOYEES_ROUTE} element={<CompanyEmployeesList />} />
+      <Route
+        path={COMPANY_EMPLOYEES_ROUTE}
+        element={(
+          <CompanyProtectedRoute>
+            <CompanyEmployeesList />
+          </CompanyProtectedRoute>
+)}
+      />
 
       {/* Offer */}
       <Route
         path={MY_OFFER_DETAILS_ROUTE}
-        element={
-          <CompanyProtectedRoute><MyOfferDetailsPage /></CompanyProtectedRoute>
-        }
+        element={(
+          <CompanyProtectedRoute>
+            <MyOfferDetailsPage />
+          </CompanyProtectedRoute>
+        )}
       />
       <Route path={OFFER_DETAILS_ROUTE} element={<OfferDetailsPage />} />
       <Route
@@ -88,6 +99,14 @@ const router = createBrowserRouter(
         element={(
           <WorkerProtectedRoute>
             <WorkerApplicationPage />
+          </WorkerProtectedRoute>
+        )}
+      />
+      <Route
+        path={WORKER_EMPLOYERS_ROUTE}
+        element={(
+          <WorkerProtectedRoute>
+            <WorkerEmployersList />
           </WorkerProtectedRoute>
         )}
       />
