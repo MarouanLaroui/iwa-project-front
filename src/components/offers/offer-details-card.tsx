@@ -23,6 +23,7 @@ export default function OfferDetailsCard({ offer, onClick }: OfferDetailsCardPro
       component={Paper}
       elevation={2}
       width="100%"
+      height="100%"
       borderRadius="5px"
       onClick={() => onClick}
       sx={{
