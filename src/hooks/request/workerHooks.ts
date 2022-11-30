@@ -36,7 +36,7 @@ const useUpdateWorker = async (workerUpdateDTO: WorkerUpdateFileUploadDTO) => {
     ...workerUpdateDTO,
     cvLink: fileUploadedUrl,
   };
-  usePut<WorkerUpdateDTO, Worker>('workers/', worker);
+  return usePut<WorkerUpdateDTO, Worker>('workers/', worker);
 };
 
 export {

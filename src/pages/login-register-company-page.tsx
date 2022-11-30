@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import CompanySignupForm from '../components/forms/company/company-signup-form';
+import CompanySignupForm from '../components/forms/company/signup/company-signup-form';
 import CompanyLoginForm from '../components/forms/login/company-login-form';
 import CompanyAuthenticated from '../types/company/CompanyAuthenticated';
 import UserContext from '../context/user-context';
