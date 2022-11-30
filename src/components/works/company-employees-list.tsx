@@ -7,7 +7,7 @@ import useAlert from '../../hooks/context/useAlert';
 import Employee from '../../types/work/Employee';
 import Worker from '../../types/worker/Worker';
 
-export default function CompanyWorksList() {
+export default function CompanyEmployeesList() {
   const { setError } = useAlert();
   const [works,, loading, error] = useFetchWorksByToken();
   const [employees, setEmployees] = useState<Employee[]>([]);

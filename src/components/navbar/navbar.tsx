@@ -79,7 +79,7 @@ export default function Navbar() {
           </Stack>
         </Stack>
 
-        <Stack direction="row" gap="10px" alignItems="center" width="100%" justifyContent="space-between" marginLeft="20px">
+        <Stack direction="row" alignItems="center" width="100%" justifyContent="space-around" marginLeft="20px">
           {getPages().map(
             (page) => (
               <Button

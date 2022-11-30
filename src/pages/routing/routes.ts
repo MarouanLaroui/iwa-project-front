@@ -7,6 +7,7 @@ export const COMPANY_SIGNUP_ROUTE: 'company/signup' = 'company/signup';
 
 export const COMPANY_SEARCH_ROUTE: 'company/search' = 'company/search';
 export const COMPANY_DETAILS_ROUTE: 'company/details/:companyId' = 'company/details/:companyId';
+export const COMPANY_EMPLOYEES_ROUTE: 'company/employees' = 'company/employees';
 
 export const OFFER_SEARCH_ROUTE: 'offer/search' = 'offer/search';
 export const OFFER_CREATE_ROUTE: 'offer/create' = 'offer/create';
