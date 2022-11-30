@@ -69,8 +69,6 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
               direction="column"
               spacing="10px"
               gap="10px"
-              maxWidth="40rem"
-              minWidth="300px"
             >
               <Stack direction="row" spacing="30px" width="100%">
 
@@ -141,7 +139,7 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
                 )}
               </Stack>
             </Stack>
-            <Stack direction="row" spacing={3} justifyContent="center">
+            <Stack direction="row" spacing={3} justifyContent="center" width="100%">
               {!editMode
                 && (
                   <Button

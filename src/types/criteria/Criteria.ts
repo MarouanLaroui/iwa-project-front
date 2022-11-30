@@ -11,4 +11,5 @@ export type Criteria = {
   startingDate: Date
   endDate: Date
   location: string
+  jobLabel: string
 };

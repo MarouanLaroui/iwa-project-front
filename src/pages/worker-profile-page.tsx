@@ -5,14 +5,13 @@ import {
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import WorkerProfileForm from '../components/forms/worker/worker-profile-form';
-import WorkerCriteria from '../components/worker-criteria';
 import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
-import mockCriteria from '../database/mock/mockCriteria';
 import AlertContext from '../context/alert-context';
 import { WorkerUpdateDTO } from '../types/worker/WorkerUpdateDTO';
 import useAuth from '../hooks/context/useAuth';
 import FeedbackCard from '../components/feedback/feedback-card';
 import mockFeedback from '../database/mock/mockFeedback';
+import CriteriaPage from './criteria-page';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
@@ -58,7 +57,7 @@ export default function WorkerProfilePage() {
               </Tabs>
             </Box>
             {value === 0 && <WorkerProfileForm worker={worker!} onSubmit={onUpdateWorkerSubmit} />}
-            {value === 1 && <WorkerCriteria criteria={mockCriteria} />}
+            {value === 1 && <CriteriaPage />}
             {value === 2 && <FeedbackCard feedback={mockFeedback} />}
           </>
           )}

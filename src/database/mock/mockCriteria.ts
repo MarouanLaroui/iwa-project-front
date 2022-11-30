@@ -12,6 +12,7 @@ const mockCriteria: Criteria = {
   startingDate: new Date('2022-12-10'),
   endDate: new Date('2023-01-10'),
   location: 'Montpellier',
+  jobLabel: 'label',
 };
 
 export default mockCriteria;

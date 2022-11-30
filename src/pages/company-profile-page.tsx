@@ -1,7 +1,7 @@
 import {
   Grid, Typography,
 } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Box, Stack } from '@mui/system';
 import { t } from 'i18next';
 import React, { useContext } from 'react';
 import CompanyProfileForm from '../components/forms/company/update/company-profile-form';
@@ -47,11 +47,16 @@ export default function CompanyProfilePage() {
     <Stack>
       {
         company && (
-        <Stack direction="column">
+        <Stack direction="column" alignItems="center" spacing={4}>
           <Typography variant="h3">{t('personal-information')}</Typography>
-          <CompanyProfileForm onSubmit={onSubmit} company={company} />
-        </Stack>
+          <Box
+            maxWidth="40rem"
+            minWidth="600px"
+          >
+            <CompanyProfileForm onSubmit={onSubmit} company={company} />
+          </Box>
 
+        </Stack>
         )
       }
     </Stack>
