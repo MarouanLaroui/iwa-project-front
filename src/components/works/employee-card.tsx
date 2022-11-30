@@ -30,8 +30,7 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
       <Stack
         direction="column"
         alignItems="flex-start"
-        paddingX="40px"
-        paddingY="35px"
+        padding="20px"
         spacing={2}
       >
         <TypographyWithIcon text={`${worker.firstname} ${worker.lastname.toUpperCase()}`} icon={<Person />} />

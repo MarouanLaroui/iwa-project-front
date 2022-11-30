@@ -42,7 +42,7 @@ export default function MyOfferDetailsPage() {
           ...application,
           worker,
         };
-        setApplicationsFull([...applicationsFull, applicationFull]);
+        setApplicationsFull((curApplicationsFull) => [...curApplicationsFull, applicationFull]);
       })
       .catch((err) => {
         setError(err);

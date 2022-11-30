@@ -1,5 +1,5 @@
-import { CircularProgress, Stack, Typography } from '@mui/material';
-import React, { useMemo, useState } from 'react';
+import { CircularProgress, Stack } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useFetchWorksByToken } from '../../hooks/request/worksHooks';
 import EmployeeCard from './employee-card';
 import richAxios from '../../database/axios/axios-client';
@@ -12,7 +12,7 @@ export default function CompanyEmployeesList() {
   const [works,, loading, error] = useFetchWorksByToken();
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  useMemo(() => works.forEach((work) => {
+  useEffect(() => works.forEach((work) => {
     const { workerId } = work;
     richAxios
       .get<Worker>(`/workers/${workerId}`)
@@ -25,7 +25,7 @@ export default function CompanyEmployeesList() {
         };
         newEmployee.startingDate = new Date(newEmployee.startingDate);
         newEmployee.endDate = new Date(newEmployee.endDate);
-        setEmployees([...employees, newEmployee]);
+        setEmployees((currEmployees) => [...currEmployees, newEmployee]);
       })
       .catch((err) => {
         setError(err);
@@ -37,15 +37,12 @@ export default function CompanyEmployeesList() {
   }
 
   if (error) {
-    return <Typography>{error.message}</Typography>;
+    setError(error);
   }
 
   return (
-    <Stack>
-      {
-      // TODO: fetch and use real workers
-      employees.map((employee) => <EmployeeCard employee={employee} />)
-      }
+    <Stack spacing={3}>
+      { employees.map((employee) => <EmployeeCard key={employee.workId} employee={employee} />)}
     </Stack>
   );
 }
