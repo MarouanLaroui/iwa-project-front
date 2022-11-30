@@ -36,6 +36,7 @@ export default function WorkerSignupForm(props:{
     birthDate: worker ? worker.birthDate : new Date(),
     hasDrivingLicense: worker ? worker.hasDrivingLicense : false,
     cvToUpload: undefined,
+    pictureToUpload: undefined,
   };
 
   const onSubmit = async (workerToCreate: WorkerCreateDTOFileUploadDTO) => {
@@ -140,7 +141,9 @@ export default function WorkerSignupForm(props:{
                   <Typography variant="caption">{t('attached-files')}</Typography>
                 </Stack>
                 <UploadField text="Upload new CV" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
+                <UploadField text="Upload new picture" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} name="pictureToUpload" />
               </Stack>
+              <pre>{JSON.stringify(formik)}</pre>
 
             </Stack>
 
