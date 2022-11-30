@@ -31,20 +31,13 @@ import WorkerProtectedRoute from './worker-route';
 import MyOfferDetailsPage from '../my-offer-details-page';
 import WorkerApplicationPage from '../worker-application-page';
 import CompanyEmployeesList from '../../components/works/company-employees-list';
-import LandingPageWorker from '../landing/landing-page-worker';
-// import LandingPageWorker from '../landing/landing-page-worker';
+import LandingWrapper from '../landing/landing-wrapper';
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path={HOME_ROUTE} element={<App />}>
       {/* Keep this route above the public */}
-      {/* <Route
-        path={HOME_ROUTE}
-        element={
-          <WorkerProtectedRoute><LandingPageWorker /></WorkerProtectedRoute>
-        }
-      /> */}
-      <Route path={HOME_ROUTE} element={<LandingPageWorker />} />
+      <Route path={HOME_ROUTE} element={<LandingWrapper />} />
 
       {/* Auth */}
       <Route path={WORKER_LOGIN_ROUTE} element={<WorkerLoginRegisterPage />} />
