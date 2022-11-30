@@ -9,9 +9,8 @@ import { useFetchWorker, useUpdateWorker } from '../hooks/request/workerHooks';
 import AlertContext from '../context/alert-context';
 import { WorkerUpdateDTO } from '../types/worker/WorkerUpdateDTO';
 import useAuth from '../hooks/context/useAuth';
-import FeedbackCard from '../components/feedback/feedback-card';
-import mockFeedback from '../database/mock/mockFeedback';
 import CriteriaPage from './criteria-page';
+import MyFeedbacksWorkerPage from './my-feedbacks-worker-page';
 
 export default function WorkerProfilePage() {
   const { t } = useTranslation();
@@ -58,7 +57,7 @@ export default function WorkerProfilePage() {
             </Box>
             {value === 0 && <WorkerProfileForm worker={worker!} onSubmit={onUpdateWorkerSubmit} />}
             {value === 1 && <CriteriaPage />}
-            {value === 2 && <FeedbackCard feedback={mockFeedback} />}
+            {value === 2 && <MyFeedbacksWorkerPage />}
           </>
           )}
       {loading && <CircularProgress />}
