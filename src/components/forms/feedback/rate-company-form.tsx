@@ -10,11 +10,13 @@ import FeedbackGenericForm from './feedback-generic-form';
 type RateCompanyFormProps = {
   employer: Employer
   setIsVisibleRatingModal: React.Dispatch<React.SetStateAction<boolean>>
+  setEmployer: React.Dispatch<React.SetStateAction<Employer>>
 };
 
 export default function RateCompanyForm({
   employer,
   setIsVisibleRatingModal,
+  setEmployer,
 }:RateCompanyFormProps) {
   const { setError, setSuccessMessage } = useAlert();
   const { t } = useTranslation();
@@ -25,10 +27,13 @@ export default function RateCompanyForm({
       message,
       jobLabelRated: employer.jobLabel,
       rate,
-    })
+    }, employer.workId)
       .then(() => {
         setSuccessMessage(t('thanks-feedback'));
         setIsVisibleRatingModal(false);
+        const newEmployer = employer;
+        newEmployer.isRatedByEmployee = true;
+        setEmployer(newEmployer);
       })
       .catch((err) => setError(err));
   };

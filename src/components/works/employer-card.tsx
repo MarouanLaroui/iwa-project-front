@@ -12,13 +12,14 @@ import RateCompanyForm from '../forms/feedback/rate-company-form';
 import TypographyWithIcon from '../typography-with-icon';
 
 type EmployerCardProps = {
-  employer: Employer
+  employerProp: Employer
 };
 
-export default function EmployerCard({ employer }: EmployerCardProps) {
+export default function EmployerCard({ employerProp }: EmployerCardProps) {
   const { t } = useTranslation();
 
   const [isVisibleRatingModal, setIsVisibleRatingModal] = useState<boolean>(false);
+  const [employer, setEmployer] = useState<Employer>(employerProp);
 
   const { company } = employer;
   const { endDate } = employer;
@@ -37,7 +38,11 @@ export default function EmployerCard({ employer }: EmployerCardProps) {
   return (
     <>
       <Dialog onClose={handleDialogClose} open={isVisibleRatingModal} fullWidth>
-        <RateCompanyForm employer={employer} setIsVisibleRatingModal={setIsVisibleRatingModal} />
+        <RateCompanyForm
+          employer={employer}
+          setIsVisibleRatingModal={setIsVisibleRatingModal}
+          setEmployer={setEmployer}
+        />
       </Dialog>
       <Box
         component={Paper}
@@ -61,7 +66,7 @@ export default function EmployerCard({ employer }: EmployerCardProps) {
             icon={<CalendarMonth />}
           />
           {today <= endDate && <TypographyWithIcon text={t('currently-working-for-employer')} icon={<MoreHoriz />} />}
-          {!employer.isRatedByCompany
+          {!employer.isRatedByEmployee
             ? <Button onClick={handleRateButtonClick}>{t('rate-employer')}</Button>
             : <TypographyWithIcon text={t('employer-already-rated')} icon={<CheckCircle />} />}
         </Stack>
