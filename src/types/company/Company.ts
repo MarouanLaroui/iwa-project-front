@@ -21,6 +21,7 @@ export type Company = {
   name: string;
   email: string;
   employeesNumber: number;
+  slogan: string;
   description: string;
   sector: SectorType;
   pictureUrl?: string;

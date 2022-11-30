@@ -6,6 +6,7 @@ const companySchema = yup.object({
   email: yup.string().required(mandarotyField).email(),
   password: yup.string().required(mandarotyField).min(8),
   employeesNumber: yup.number().required(mandarotyField).min(1),
+  slogan: yup.string().required(mandarotyField),
   description: yup.string().min(50).required(mandarotyField),
   sector: yup.string().min(2).required(mandarotyField),
 });
