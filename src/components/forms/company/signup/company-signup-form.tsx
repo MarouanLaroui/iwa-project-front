@@ -109,7 +109,7 @@ export default function CompanySignupForm(
 
               <InputField
                 label={t('number-of-employees')}
-                name="nbOfEmployees"
+                name="employeesNumber"
                 type="number"
                 fullWidth
               />
