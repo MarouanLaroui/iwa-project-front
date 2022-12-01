@@ -4,6 +4,7 @@ import {
 import React from 'react';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
 import { useFetchCompany } from '../../hooks/request/companyHooks';
 import useAlert from '../../hooks/context/useAlert';
 import Application from '../../types/application/Application';
@@ -56,7 +57,7 @@ export default function ApplicationCardWorker(props:{
                 )
               }
               <Typography fontSize={{ xs: '20px', md: '23px' }}>
-                Chez
+                {t('for')}
                 {' '}
                 {company.name}
               </Typography>
@@ -65,7 +66,7 @@ export default function ApplicationCardWorker(props:{
             <Stack direction="row" spacing={5}>
               {
                 application.isValidatedByCompany && application.isValidatedByWorker && (
-                  <Typography>Job already accepted</Typography>
+                  <Typography>{t('job-already-accepted')}</Typography>
                 )
               }
 
@@ -73,14 +74,14 @@ export default function ApplicationCardWorker(props:{
                 application.isValidatedByCompany && !application.isValidatedByWorker && (
                   <>
                     <Button variant="outlined">Decline offer</Button>
-                    <Button variant="contained" onClick={acceptOffer}>Accept offer</Button>
+                    <Button variant="contained" onClick={acceptOffer}>{t('accept-offer')}</Button>
                   </>
                 )
               }
 
               {
                 !application.isValidatedByCompany && !application.isValidatedByWorker && (
-                  <TypographyWithIcon text="The company is currently reviewing your application" icon={<AutorenewIcon />} />
+                  <TypographyWithIcon text={t('application-under-review')} icon={<AutorenewIcon />} />
                 )
               }
             </Stack>

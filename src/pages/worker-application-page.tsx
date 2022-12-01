@@ -30,7 +30,13 @@ export default function WorkerApplicationPage() {
   }
   return (
     <Stack>
-      <Typography>{t('your-applications')}</Typography>
+      {
+        applications.length > 0
+        && <Typography variant="h3">{t('your-applications')}</Typography>
+      }
+      {
+        applications.length === 0 && <Typography>{t('no-applications-yet')}</Typography>
+      }
       {
         applications && (
           applications.map(
