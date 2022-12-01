@@ -1,5 +1,5 @@
 import { InsertEmoticon } from '@mui/icons-material';
-import { Button, Rating } from '@mui/material';
+import { Button, Rating, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import { Formik } from 'formik';
 import React from 'react';
@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { Form } from 'react-router-dom';
 import FeedbackFormData from '../../../types/feedback/FeedbackFormData';
 import InputField from '../../form-fields/input-field';
-import TypographyWithIcon from '../../typography-with-icon';
 import feedbackSchema from './feedback-schema';
 
 type FeedbackGenericFormProps = {
@@ -40,7 +39,10 @@ export default function FeedbackGenericForm({ onSubmit, receiver }: FeedbackGene
             spacing={3}
             width="100%"
           >
-            <TypographyWithIcon text={t('currently-giving-feedback', { receiver })} icon={<InsertEmoticon />} />
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Typography fontSize="30px">{t('currently-giving-feedback', { receiver }) }</Typography>
+              <InsertEmoticon />
+            </Stack>
             <InputField
               label={t('feedback-title')}
               name="title"
