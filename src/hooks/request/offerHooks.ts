@@ -11,7 +11,7 @@ const useFetchOffers = () => useFetchMany<Offer>('offers/');
 
 const useFetchOffersByCompany = (companyData: Pick<Company, 'id'>) => useFetchMany<Offer>(`offers/findByCompanyId/${companyData.id}`);
 
-const useFetchRecommendedOffers = () => useFetchMany<Offer>('offers/recommendations');
+const useFetchRecommendedOffers = () => useFetchMany<Offer>('offers/recommendations/');
 
 const createOffer = (offerToPost:OfferDTO) => usePost<OfferDTO, Offer>('offers/', offerToPost);
 
