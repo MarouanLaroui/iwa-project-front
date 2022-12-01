@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import {
-  Box, Button, MenuItem, Stack,
+  Box, Button, Divider, MenuItem, Stack, Typography,
 } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -56,14 +56,36 @@ export default function CompanySignupForm(
       {(formik) => (
         <Box component={Form}>
           <Stack
-            alignItems="center"
             direction="column"
             spacing="10px"
             gap="10px"
             maxWidth="40rem"
             minWidth="300px"
           >
-            <Stack direction="row" spacing="30px" width="100%">
+
+            <Typography variant="caption" align="left">{t('credentials')}</Typography>
+
+            <Stack direction="column" width="100%" gap="20px">
+              <InputField
+                label="email"
+                name="email"
+                placeholder="abc@gmail.com"
+                type="email"
+                inputMode="email"
+                fullWidth
+              />
+              <InputField
+                label={t('password')}
+                name="password"
+                placeholder="Ac6Qj@v"
+                type="password"
+                fullWidth
+              />
+            </Stack>
+
+            <Divider sx={{ width: '90%' }} />
+            <Typography variant="caption" align="left">{t('general-infos')}</Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing="30px" width="100%">
 
               <InputField
                 label={t('name')}
@@ -87,26 +109,6 @@ export default function CompanySignupForm(
                 }
               </SelectField>
 
-            </Stack>
-
-            <InputField
-              label="email"
-              name="email"
-              placeholder="abc@gmail.com"
-              type="email"
-              inputMode="email"
-              fullWidth
-            />
-
-            <Stack direction="row" spacing="30px" width="100%">
-              <InputField
-                label={t('password')}
-                name="password"
-                placeholder="Ac6Qj@v"
-                type="password"
-                fullWidth
-              />
-
               <InputField
                 label={t('number-of-employees')}
                 name="employeesNumber"
@@ -114,6 +116,7 @@ export default function CompanySignupForm(
                 fullWidth
               />
             </Stack>
+
             <InputField
               label="Slogan"
               name="slogan"
