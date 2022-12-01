@@ -7,6 +7,6 @@ const useGetFeedbacksBySenderId = (senderId: string) => useFetchMany<Feedback>(`
 
 const useGetFeedbacksByReceiverId = (receiverId: string) => useFetchMany<Feedback>(`/feedbacks/byReceiverId/${receiverId}`);
 
-const useCreate = (feedbackCreateDTO: FeedbackCreateDTO) => usePost<FeedbackCreateDTO, Feedback>('/feedbacks/', feedbackCreateDTO);
+const useCreate = (feedbackCreateDTO: FeedbackCreateDTO, workId: string) => usePost<FeedbackCreateDTO, Feedback>(`/feedbacks/${workId}`, feedbackCreateDTO);
 
 export { useGetFeedbacksBySenderId, useGetFeedbacksByReceiverId, useCreate };
