@@ -6,7 +6,7 @@ type Worker = {
   birthDate: Date
   cvLink?: string
   hasDrivingLicense: boolean
-  pictureUrl?: string;
+  pictureUrl?: string
 };
 
 export default Worker;
