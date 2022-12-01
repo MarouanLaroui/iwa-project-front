@@ -55,7 +55,7 @@ export default function CompanyCard(
           )}
           <Stack direction="column" alignItems="flex-start">
             <Typography variant="h3" fontWeight="bold">{company.name}</Typography>
-            <Typography variant="caption" fontWeight="bold">Science for a better life !</Typography>
+            <Typography variant="caption" fontWeight="bold">{company.slogan}</Typography>
           </Stack>
 
         </Stack>
