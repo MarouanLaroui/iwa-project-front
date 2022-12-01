@@ -1,5 +1,6 @@
-import { CircularProgress, Stack } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useFetchWorksByToken } from '../../hooks/request/worksHooks';
 import richAxios from '../../database/axios/axios-client';
 import useAlert from '../../hooks/context/useAlert';
@@ -9,6 +10,7 @@ import EmployerCard from './employer-card';
 
 export default function WorkerEmployersList() {
   const { setError } = useAlert();
+  const { t } = useTranslation();
   const [works,, loading, error] = useFetchWorksByToken();
   const [employers, setEmployers] = useState<Employer[]>([]);
 
@@ -41,7 +43,18 @@ export default function WorkerEmployersList() {
 
   return (
     <Stack spacing={3}>
-      { employers.map((employer) => <EmployerCard key={employer.workId} employerProp={employer} />)}
+      {employers.length === 0 && <Typography>{t('no-employers')}</Typography>}
+      {employers.length > 0
+       && (
+       <>
+         <Typography variant="h3">Your employers</Typography>
+         {
+          employers.map(
+            (employer) => <EmployerCard key={employer.workId} employerProp={employer} />,
+          )
+       }
+       </>
+       ) }
     </Stack>
   );
 }

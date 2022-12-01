@@ -143,7 +143,6 @@ export default function WorkerSignupForm(props:{
                 <UploadField text="Upload new CV" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
                 <UploadField text="Upload new picture" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} name="pictureToUpload" />
               </Stack>
-              <pre>{JSON.stringify(formik)}</pre>
 
             </Stack>
 

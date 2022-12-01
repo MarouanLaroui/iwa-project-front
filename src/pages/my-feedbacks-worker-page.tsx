@@ -9,9 +9,9 @@ export default function MyFeedbacksWorkerPage() {
   const { t } = useTranslation();
   const { workerId } = useAuth();
 
-  const [feedbacks, ,feedbacksLoading, feedbacksError] = useGetFeedbacksByReceiverId(workerId!);
+  const [feedbacks, ,feedbacksLoading] = useGetFeedbacksByReceiverId(workerId!);
 
-  if (feedbacksError || feedbacksLoading) {
+  if (feedbacksLoading) {
     return <CircularProgress />;
   }
 
