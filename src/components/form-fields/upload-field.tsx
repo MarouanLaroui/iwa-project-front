@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Button, Typography } from '@mui/material';
-import { Box, Stack } from '@mui/system';
+import { Stack } from '@mui/system';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
@@ -19,7 +19,7 @@ export default function UploadField(props:{
     setFieldValue(name, event?.target.files?.item(0) ? event?.target.files?.item(0) : undefined);
   };
   return (
-    <Box>
+    <Stack>
       {
         !currentFile && (
           <Button variant="contained" component="label" startIcon={<AddOutlinedIcon />}>
@@ -45,7 +45,7 @@ export default function UploadField(props:{
 
         )
       }
-    </Box>
+    </Stack>
 
   );
 }

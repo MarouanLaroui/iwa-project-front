@@ -124,7 +124,17 @@ export default function WorkerSignupForm(props:{
 
             <Divider variant="middle" style={{ width: '100%' }} />
 
-            <Typography variant="caption">{t('your-job-info')}</Typography>
+            <Stack direction="column" width="100%" spacing="10px">
+              <Stack direction="row" alignItems="center">
+                <AttachFileOutlinedIcon />
+                <Typography variant="caption">{t('attached-files')}</Typography>
+              </Stack>
+              <Stack direction="row" spacing={3}>
+                <UploadField text="Upload new CV" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
+                <UploadField text="Upload picture" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} name="pictureToUpload" />
+              </Stack>
+
+            </Stack>
 
             <Stack direction="row" spacing="20px" width="100%">
               <Stack direction="column" width="50%">
@@ -133,15 +143,6 @@ export default function WorkerSignupForm(props:{
                   <Typography variant="caption">{t('vehicle-details')}</Typography>
                 </Stack>
                 <CheckboxField name="hasDrivingLicense" label="I have my driving licence" disabled={readonly} />
-              </Stack>
-
-              <Stack direction="column" width="50%" spacing="10px">
-                <Stack direction="row" alignItems="center">
-                  <AttachFileOutlinedIcon />
-                  <Typography variant="caption">{t('attached-files')}</Typography>
-                </Stack>
-                <UploadField text="Upload new CV" currentFile={formik.values.cvToUpload} setFieldValue={formik.setFieldValue} name="cvToUpload" />
-                <UploadField text="Upload new picture" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} name="pictureToUpload" />
               </Stack>
 
             </Stack>
