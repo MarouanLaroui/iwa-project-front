@@ -1,6 +1,7 @@
 import { Button, LinearProgress, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ContractType, JobType, Offer } from '../../../types/offer/Offer';
 import OfferDTO from '../../../types/offer/OfferDTO';
 import JobOfferFormFirstStep from './step1/job-offer-form';
@@ -10,6 +11,7 @@ export default function MultiStepJobOfferForm(props:{
   onOfferCreation: (offerCreated:Offer)=>void,
 }) {
   const [step, setStep] = useState<number>(1);
+  const { t } = useTranslation();
   const { onOfferCreation } = props;
   const [offerToCreate, setOfferToCreate] = useState<OfferDTO>(
     {
@@ -63,9 +65,9 @@ export default function MultiStepJobOfferForm(props:{
     }
 
       <Stack width="100%" direction="row" justifyContent="flex-end" spacing={3} paddingTop={3}>
-        {(step === 2) && <Button onClick={goToPreviousStep}>Précédent</Button>}
-        {(step === 1) && <Button type="submit" form="create-offer-form" variant="contained">Suivant</Button>}
-        {step === 2 && <Button variant="contained" type="submit" form="create-offer-form">Candidater</Button>}
+        {(step === 2) && <Button onClick={goToPreviousStep}>{t('previous')}</Button>}
+        {(step === 1) && <Button type="submit" form="create-offer-form" variant="contained">{t('next')}</Button>}
+        {step === 2 && <Button variant="contained" type="submit" form="create-offer-form">{t('create')}</Button>}
       </Stack>
     </Stack>
   );
