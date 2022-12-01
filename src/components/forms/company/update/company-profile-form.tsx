@@ -31,6 +31,7 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
     name: company.name,
     email: company.email,
     employeesNumber: company.employeesNumber,
+    slogan: company.slogan,
     description: company.description,
     password: '',
     sector: company.sector,
@@ -118,6 +119,14 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
                   fullWidth
                 />
               </Stack>
+
+              <InputField
+                label="Slogan"
+                name="slogan"
+                type="text"
+                disabled={!editMode}
+                fullWidth
+              />
 
               <InputField
                 label="description"

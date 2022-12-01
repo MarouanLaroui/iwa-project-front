@@ -41,6 +41,7 @@ export default function CompanySignupForm(
         email: '',
         password: '',
         employeesNumber: 1,
+        slogan: '',
         description: '',
         sector: SectorType.AGRICULTURE_PECHE,
         picturToUpload: undefined,
@@ -113,11 +114,16 @@ export default function CompanySignupForm(
                 fullWidth
               />
             </Stack>
-
+            <InputField
+              label="Slogan"
+              name="slogan"
+              type="text"
+              fullWidth
+            />
             <InputField
               label="description"
               name="description"
-              placeholder="Enter a message you would like the company to see"
+              placeholder="Explain how amazing your company is!"
               multiline
               fullWidth
               rows={4}
