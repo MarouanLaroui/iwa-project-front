@@ -39,7 +39,7 @@ export default function UploadField(props:{
             </Typography>
             <Button variant="contained" component="label" startIcon={<EditOutlinedIcon />}>
               Change file
-              <input hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
+              <input name={name} hidden accept="image/*" type="file" multiple={false} onChange={selectFile} />
             </Button>
           </Stack>
 
