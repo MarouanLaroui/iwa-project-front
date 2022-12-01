@@ -27,7 +27,7 @@ export default function ApplicationList({ applications }: ApplicationListProps) 
               key={application.applicationId}
               applicationFull={application}
             />
-            {index !== (applications.length - 1) && <Divider sx={{ marginY: 1 }} />}
+            {index !== (applications.length - 1) && <Divider sx={{ marginY: 1, width: '90%' }} />}
           </>
         ))}
       </Stack>

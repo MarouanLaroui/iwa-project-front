@@ -3,32 +3,19 @@ import {
 } from '@mui/material';
 import React from 'react';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { useNavigate } from 'react-router-dom';
 import { t } from 'i18next';
 import { useFetchCompany } from '../../hooks/request/companyHooks';
 import useAlert from '../../hooks/context/useAlert';
 import Application from '../../types/application/Application';
 import TypographyWithIcon from '../typography-with-icon';
-import { acceptApplicationByWorker } from '../../hooks/request/applicationHooks';
 
 export default function ApplicationCardWorker(props:{
   application: Application;
+  acceptOffer: ()=>void
 }) {
-  const { setError, setSuccessMessage } = useAlert();
-  const { application } = props;
-  const navigate = useNavigate();
+  const { setError } = useAlert();
+  const { application, acceptOffer } = props;
   const [company, , error] = useFetchCompany(application.offer.companyId);
-
-  const acceptOffer = () => {
-    acceptApplicationByWorker(application.applicationId).then(
-      () => {
-        setSuccessMessage('Offer accepted with success');
-        // reload the page
-        navigate('');
-      },
-      (err) => setError(err),
-    );
-  };
 
   if (error) {
     setError(error);

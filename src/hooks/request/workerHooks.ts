@@ -18,8 +18,8 @@ const registerWorker = async (workerToCreate: WorkerCreateDTOFileUploadDTO) => {
     ? uploadFile(workerToCreate.cvToUpload)
     : undefined;
 
-  const pictureUrlPromise = workerToCreate.cvToUpload
-    ? uploadFile(workerToCreate.cvToUpload)
+  const pictureUrlPromise = workerToCreate.pictureToUpload
+    ? uploadFile(workerToCreate.pictureToUpload)
     : undefined;
 
   const result = await Promise.all([cvUrlPromise, pictureUrlPromise]);
@@ -34,6 +34,7 @@ const registerWorker = async (workerToCreate: WorkerCreateDTOFileUploadDTO) => {
 const useLoginWorker = (loginDTO: LoginDTO) => usePost<LoginDTO, WorkerAuthenticated>('workers/login', loginDTO);
 
 const useUpdateWorker = async (workerUpdateDTO: WorkerUpdateFileUploadDTO) => {
+  /* change with pictureToUpload */
   const cvUrlPromise = workerUpdateDTO.cvToUpload
     ? uploadFile(workerUpdateDTO.cvToUpload)
     : undefined;
@@ -43,7 +44,6 @@ const useUpdateWorker = async (workerUpdateDTO: WorkerUpdateFileUploadDTO) => {
     : undefined;
 
   const result = await Promise.all([cvUrlPromise, pictureUrlPromise]);
-
   const worker: WorkerUpdateDTO = {
     ...workerUpdateDTO,
     cvLink: result[0]?.data.url,
