@@ -2,6 +2,7 @@ import React, { Key } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Box, Stack } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 import { useFetchCompanies } from '../../hooks/request/companyHooks';
 import Loading from '../../components/loading';
 import CompanyCard from '../../components/company/company-card';
@@ -13,6 +14,7 @@ import useAlert from '../../hooks/context/useAlert';
 export default function LandingPageWorker() {
   const { t } = useTranslation();
   const { setError } = useAlert();
+  const navigate = useNavigate();
   const [companies, , loading] = useFetchCompanies();
   const [offers, , offersLoading, offersError] = useFetchOffers();
   const [
@@ -57,10 +59,15 @@ export default function LandingPageWorker() {
         <Stack spacing={3} direction="row" width="100%" sx={{ overflow: 'scroll' }} paddingY={2} paddingX={1}>
           {
             (recommendedOffers.length > 0 ? recommendedOffers : offers).map((offer) => (
-              <Box width={550} height={270} key={offer.offerId as Key}>
+              <Box
+                width={550}
+                height={270}
+                onClick={() => { navigate(`offer/details/${offer.offerId}`); }}
+                key={offer.offerId as Key}
+              >
                 <OfferDetailsCard
                   offer={offer}
-                  onClick={() => { }}
+                  onClick={() => {}}
                 />
               </Box>
             ))
