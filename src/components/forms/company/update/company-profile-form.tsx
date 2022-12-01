@@ -140,11 +140,11 @@ export default function CompanyProfileForm({ company, onSubmit }: Props) {
               <Stack width="100%" direction="row" justifyContent="flex-start">
                 {
                   !editMode && company.pictureUrl && (
-                    <Button variant="contained" onClick={() => setCvPrevModal(true)} startIcon={<CameraAltOutlinedIcon />}>Your CV</Button>
+                    <Button variant="contained" onClick={() => setCvPrevModal(true)} startIcon={<CameraAltOutlinedIcon />}>{t('your-logo')}</Button>
                   )
                 }
                 {editMode && (
-                  <UploadField text="Upload new logo" name="pictureToUpload" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} />
+                  <UploadField text={t('upload-new-logo')} name="pictureToUpload" currentFile={formik.values.pictureToUpload} setFieldValue={formik.setFieldValue} />
                 )}
               </Stack>
             </Stack>
