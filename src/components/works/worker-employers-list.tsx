@@ -41,7 +41,7 @@ export default function WorkerEmployersList() {
 
   return (
     <Stack spacing={3}>
-      { employers.map((employer) => <EmployerCard key={employer.workId} employer={employer} />)}
+      { employers.map((employer) => <EmployerCard key={employer.workId} employerProp={employer} />)}
     </Stack>
   );
 }
