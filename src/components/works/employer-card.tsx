@@ -1,9 +1,8 @@
 import {
-  ApartmentOutlined,
   CalendarMonth, CheckCircle, MoreHoriz, WorkOutlineOutlined,
 } from '@mui/icons-material';
 import {
-  Box, Button, Dialog, Paper, Stack,
+  Box, Button, Dialog, Paper, Stack, Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -49,6 +48,8 @@ export default function EmployerCard({ employerProp }: EmployerCardProps) {
         elevation={2}
         width="100%"
         borderRadius="5px"
+        paddingX={4}
+        paddingY={1}
       >
         <Stack
           direction="column"
@@ -56,7 +57,12 @@ export default function EmployerCard({ employerProp }: EmployerCardProps) {
           padding="20px"
           spacing={2}
         >
-          <TypographyWithIcon text={company.name} icon={<ApartmentOutlined />} />
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <Box sx={{ width: '70px', height: '70px' }}>
+              <img src={company.pictureUrl} alt="logo" style={{ width: '100%', height: '100%' }} />
+            </Box>
+            <Typography fontSize="30px">{company.name}</Typography>
+          </Stack>
           <TypographyWithIcon text={employer.jobLabel} icon={<WorkOutlineOutlined />} />
           <TypographyWithIcon
             text={t('from-to', {

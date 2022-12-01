@@ -8,11 +8,13 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { Alert } from '@mui/material';
 import { DefaultTFuncReturn } from 'i18next';
 import { AxiosError } from 'axios';
+import { ThemeProvider } from '@mui/material/styles';
 import Navbar from './components/navbar/navbar';
 import AlertContext, { AlertContextType } from './context/alert-context';
 import UserContext, { UserContextType } from './context/user-context';
 import { refreshUserInfoFromStorage, removeAuthFromStorage } from './helpers/user-helper';
 import CloudinaryContext, { CloudinaryContextType } from './context/cloudinary-context';
+import theme from './theme/theme';
 
 function App() {
   const [companyId, setCompanyId] = useState<string | null>(null);
@@ -60,44 +62,46 @@ function App() {
   }, []);
 
   return (
-    <CloudinaryContext.Provider value={cloudinaryContext}>
-      <AlertContext.Provider value={alertContext}>
-        <UserContext.Provider value={userContext}>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <div className="App">
-              <header>
-                <Navbar />
-              </header>
-              <Box marginTop="3rem" paddingBottom={10}>
-                {successMessage && (
-                  <Alert
-                    severity="success"
-                    sx={{ marginBottom: 2 }}
-                    onClose={() => {
-                      setSuccessMessage('');
-                    }}
-                  >
-                    {successMessage}
-                  </Alert>
-                )}
-                {errorMessage && (
-                  <Alert
-                    severity="error"
-                    sx={{ marginBottom: 2 }}
-                    onClose={() => {
-                      setErrorMessage('');
-                    }}
-                  >
-                    {errorMessage}
-                  </Alert>
-                )}
-                <Outlet />
-              </Box>
-            </div>
-          </LocalizationProvider>
-        </UserContext.Provider>
-      </AlertContext.Provider>
-    </CloudinaryContext.Provider>
+    <ThemeProvider theme={theme}>
+      <CloudinaryContext.Provider value={cloudinaryContext}>
+        <AlertContext.Provider value={alertContext}>
+          <UserContext.Provider value={userContext}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              <div className="App">
+                <header>
+                  <Navbar />
+                </header>
+                <Box marginTop="3rem" paddingBottom={10}>
+                  {successMessage && (
+                    <Alert
+                      severity="success"
+                      sx={{ marginBottom: 2 }}
+                      onClose={() => {
+                        setSuccessMessage('');
+                      }}
+                    >
+                      {successMessage}
+                    </Alert>
+                  )}
+                  {errorMessage && (
+                    <Alert
+                      severity="error"
+                      sx={{ marginBottom: 2 }}
+                      onClose={() => {
+                        setErrorMessage('');
+                      }}
+                    >
+                      {errorMessage}
+                    </Alert>
+                  )}
+                  <Outlet />
+                </Box>
+              </div>
+            </LocalizationProvider>
+          </UserContext.Provider>
+        </AlertContext.Provider>
+      </CloudinaryContext.Provider>
+    </ThemeProvider>
 
   );
 }
