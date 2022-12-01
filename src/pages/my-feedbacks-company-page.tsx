@@ -1,15 +1,15 @@
 import { Box, CircularProgress, Stack } from '@mui/material';
-import React, {} from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/context/useAuth';
 import FeedbackCardWorker from '../components/feedback/feedback-card-worker';
 import { useGetFeedbacksByReceiverId } from '../hooks/request/feedbackHooks';
 
-export default function MyFeedbacksWorkerPage() {
+export default function MyFeedbacksCompanyPage() {
   const { t } = useTranslation();
-  const { workerId } = useAuth();
+  const { companyId } = useAuth();
 
-  const [feedbacks, ,feedbacksLoading, feedbacksError] = useGetFeedbacksByReceiverId(workerId!);
+  const [feedbacks, ,feedbacksLoading, feedbacksError] = useGetFeedbacksByReceiverId(companyId!);
 
   if (feedbacksError || feedbacksLoading) {
     return <CircularProgress />;
